@@ -1,0 +1,13 @@
+#billboard {
+	width: 650px;
+	height: 650px;
+	overflow: hidden;
+	margin: 0 auto;
+	position: relative;
+}
+
+#billboard > div {
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+}
