@@ -6,10 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -17,11 +17,16 @@
 </jsp:include>
 <div id="billboard">
 	<div>
-		<img src="${pageContext.request.contextPath}/resources/img/slogan1.png" alt="solgun1" width="650px" height="650px">
-		<img src="${pageContext.request.contextPath}/resources/img/league.png" alt="league" width="650px" height="650px">
-		<img src="${pageContext.request.contextPath}/resources/img/slogan2.png" alt="slogun2" width="650px" height="650px">
-		<img src="${pageContext.request.contextPath}/resources/img/event.png" alt="event" width="650px" height="650px">
-		<img src="${pageContext.request.contextPath}/resources/img/slogan1.png" alt="solgun1" width="650px" height="650px">
+		<img src="${pageContext.request.contextPath}/resources/img/match2.png" alt="match2" width="1024px" height="346px">
+		<img src="${pageContext.request.contextPath}/resources/img/slogan1.png" alt="slogan1" width="1024px" height="346px">
+		<img src="${pageContext.request.contextPath}/resources/img/event.png" alt="event" width="1024px" height="346px">
+		<img src="${pageContext.request.contextPath}/resources/img/slogan3.png" alt="slogan3" width="1024px" height="346px">
+		<img src="${pageContext.request.contextPath}/resources/img/join.png" alt="join" width="1024px" height="346px">
+		<img src="${pageContext.request.contextPath}/resources/img/slogan4.png" alt="slogan4" width="1024px" height="346px">
+		<img src="${pageContext.request.contextPath}/resources/img/league.png" alt="league" width="1024px" height="346px">
+		<img src="${pageContext.request.contextPath}/resources/img/match1.png" alt="match1" width="1024px" height="346px">
+		<img src="${pageContext.request.contextPath}/resources/img/slogan2.png" alt="slogan2" width="1024px" height="346px">
+		<img src="${pageContext.request.contextPath}/resources/img/match2.png" alt="match2" width="1024px" height="346px">
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

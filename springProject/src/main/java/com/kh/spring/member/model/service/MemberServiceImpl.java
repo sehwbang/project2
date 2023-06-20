@@ -17,7 +17,7 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-
+	
 	@Autowired
 	private MemberDao memberDao;
 
@@ -47,6 +47,11 @@ public class MemberServiceImpl implements MemberService {
 	        System.out.println(e.getCode());
 	      }
 	    
+	}
+
+	@Override
+	public Member selectOneMember(String userId) {
+		return memberDao.selectOneMember(userId);
 	}
 
 

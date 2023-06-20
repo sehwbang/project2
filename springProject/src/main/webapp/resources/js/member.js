@@ -1,5 +1,7 @@
 $(function(){
+
 //휴대폰 번호 인증var code2 = "";
+
 $("#phoneChk").click(function(){
     alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
 	var phone = $("#phone").val();
@@ -35,4 +37,8 @@ $("#phoneChk2").click(function(){
 	}
 });
 
+
+  
+
 });
+

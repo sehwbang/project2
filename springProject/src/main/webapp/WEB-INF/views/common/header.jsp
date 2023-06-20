@@ -15,7 +15,6 @@
 	<div id="left"></div>
 	<div id="logo"><a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="logo" width="200px" height="90px"></a></div>
 	<div id="member"><a href="${pageContext.request.contextPath}/member/GoLoginPage.me"><img src="${pageContext.request.contextPath}/resources/img/member.png" alt="member" width="40px" height="40px"></a></div>
-	<div id="search"><input placeholder="&emsp;장소/선수를 검색하세요"></div>
 </div>
 <div id="nav2">
 	<div id="matching"><a href="#">매칭</a></div>
