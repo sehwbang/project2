@@ -1,5 +1,6 @@
 package com.kh.spring.member.model.vo;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -17,16 +18,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Member {
-	private String id;
-	private String pw;
-	private String name;
-	private String gender;
-	private int birth;
-	private String phone;
-	private String email;
-	private int zipcode;
-	private String address;
-	private String detailaddress;
-	private String usertype;
-	private String status;
+	private String userId;
+	private String userPw;
+	private int userRnn;
+	private String userName;
+	private String userGender;
+	private String userEmail;
+	private String userPhone;
+	private String userZipcode;
+	private String userAddr;
+	private String userDetailaddr;
+	private String userType;
+	private int userStatus;
+	private int userCon;
+	private Date userRegdate;
 }

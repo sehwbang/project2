@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/support")
 public class SupportController {
 
-	@GetMapping("/support.su")
+	@GetMapping("/support.vcr")
 	public String support() {
+		
 		return "/support/vincero";
 	}
 }
