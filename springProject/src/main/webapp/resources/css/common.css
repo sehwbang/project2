@@ -46,3 +46,12 @@ body {
 	width: 25%;
 	text-align: center;	
 }
+
+#gym:hover {
+	background-color: skyblue;
+}
+
+#gym {
+	width: 25%;
+	text-align: center;	
+}

@@ -8,27 +8,13 @@
 	<resultMap type="member" id="memberMap"></resultMap>
 	
 	<insert id="insertMember">
-		insert into member
-		values (
-			#{id},
-			#{pw},
-			#{name},
-			#{gender},
-			#{birth},
-			#{phone},
-			#{email},
-			#{zipcode},
-			#{address},
-			#{detailaddress},
-			#{usertype},
-			#{status}
-		  )
+	
 	</insert>
 	
 	<select id="selectOneMember" resultMap = "memberMap">
 		select *
 		from member
-		where id = #{id}
+		where user_id = #{userId}
 	</select>
 	
 	
