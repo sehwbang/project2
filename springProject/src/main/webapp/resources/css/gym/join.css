@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'EF_watermelonSalad';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#describe {
+	font-family: 'EF_watermelonSalad';
+	margin-top: 60px;
+}
+
+table {
+	width: 600px;
+	margin-top: 220px;
+	font-family: 'EF_watermelonSalad';
+	font-size: 16px;
+}
+
+input {
+	font-family: 'EF_watermelonSalad';
+	font-size: 16px;
+}
+
+select {
+	font-family: 'EF_watermelonSalad';
+	font-size: 16px;
+}
+
+th {
+	width: 350px;
+	height: 40px;
+	text-align: right;
+	font-weight: normal;
+}
+
+td {
+	width: 500px;
+	text-align: left;
+}
+
+#button {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 30px;
+	margin-right: 50px;
+}
+
+#join {
+	display: flex;
+	flex-direction: row;
+	margin-top: 30px;
+}
+
+#describe {
+	text-align: center;
+}
+
+input::placeholder {
+	font-size: 12px;
+}
+
+#image {
+	margin-left: 80px;
+}
+
+#addressButton, #submitButton, #resetButton {
+	color: white;
+	background-color: rgb(100,80,170);
+	border: 0 solid white;
+	padding: 5px 5px;
+}
+
+#submitButton {
+	margin-right: 30px;
+}

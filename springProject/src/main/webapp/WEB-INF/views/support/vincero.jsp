@@ -62,7 +62,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+	<a href="${pageContext.request.contextPath}/gym/joinPage.gy">체육관등록</a>
     <div class="logo">
         <div style="margin-left: 450px;">
             <img src="${pageContext.request.contextPath}/resources/img/icon.png" width="300px" height="300px">

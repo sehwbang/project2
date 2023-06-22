@@ -84,17 +84,5 @@ public class MemberController {
 		
 		return "jsonView";
 	}
-
-
-			
 	
 }
-
-
-
-
-
-
-
-
-
