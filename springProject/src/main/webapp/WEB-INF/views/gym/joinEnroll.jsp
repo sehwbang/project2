@@ -23,7 +23,7 @@
 		<div id="image">
 			<img src="${pageContext.request.contextPath}/resources/img/gym/taekwon.jpg" alt="taekwondo" width="800px" height="800px">
 		</div>
-		<form action="${pageContext.request.contextPath}/gym/joinEnroll.gy" method="post">
+		<form action="${pageContext.request.contextPath}/gym/joinEnroll.gym" method="post">
 			<table>
 				<tr>
 					<th>

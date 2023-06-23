@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="nav1">
-	<div id="left"><a href="${pageContext.request.contextPath}/coach/coachMainPage.co">관장님</a></div>
+	<div id="left"><a href="${pageContext.request.contextPath}/gym/gymMainPage.gym">관장님</a></div>
 	<div id="logo"><a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="logo" width="200px" height="90px"></a></div>
 	<div id="member"><a href="${pageContext.request.contextPath}/member/GoLoginPage.me"><img src="${pageContext.request.contextPath}/resources/img/member.png" alt="member" width="40px" height="40px"></a></div>
 </div>

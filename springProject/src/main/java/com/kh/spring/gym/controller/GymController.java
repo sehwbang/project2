@@ -20,15 +20,28 @@ public class GymController {
 	@Autowired
 	private GymDao gymDao;
 	
-	@GetMapping("/joinPage.gy")
+	@GetMapping("/joinPage.gym")
 	public String joinPage() {
 		return "/gym/joinEnroll";
 	}
 	
-	@PostMapping("/joinEnroll.gy")
+	@PostMapping("/joinEnroll.gym")
 	public String joinEnroll(Gym gym) {
 		System.out.println(gym);
 		int result = gymService.insertJoin(gym);
 		return "redirect:/";
 	}
+
+	@GetMapping("/gymMainPage.gym")
+	public void gymMainPage() {}
+	
+	@GetMapping("/gymUpdateForm.gym")
+	public void gymUpdateForm() {}
+	
+	@GetMapping("/gymCalendar.gym")
+	public void gymCalendar() {}
+	
+	@GetMapping("/gymView.gym")
+	public void gymView() {}
+
 }
