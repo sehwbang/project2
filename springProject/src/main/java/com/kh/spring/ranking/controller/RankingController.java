@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/ranking")
 public class RankingController {
 	
-	@GetMapping("/rankingList.vcr")
+	@GetMapping("/rankingList.ra")
 	public void rankingList() {
 		
 	}

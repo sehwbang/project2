@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/league")
 public class LeagueController {
 	
-	@GetMapping("/leagueList.vcr")
+	@GetMapping("/leagueList.le")
 	public void leagueList() {
 		
 	}

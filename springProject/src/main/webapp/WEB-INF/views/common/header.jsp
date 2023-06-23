@@ -17,10 +17,10 @@
 	<div id="member"><a href="${pageContext.request.contextPath}/member/GoLoginPage.me"><img src="${pageContext.request.contextPath}/resources/img/member.png" alt="member" width="40px" height="40px"></a></div>
 </div>
 <div id="nav2">
-	<div id="matching"><a href="${pageContext.request.contextPath}/match/matchList.vcr">매칭</a></div>
-	<div id="ranking"><a href="${pageContext.request.contextPath}/ranking/rankingList.vcr">랭킹</a></div>
-	<div id="league"><a href="${pageContext.request.contextPath}/league/leagueList.vcr">대회</a></div>
-	<div id="vincero"><a href="${pageContext.request.contextPath}/support/support.vcr">고객지원</a></div>
+	<div id="matching"><a href="${pageContext.request.contextPath}/match/matchList.ma">매칭</a></div>
+	<div id="ranking"><a href="${pageContext.request.contextPath}/ranking/rankingList.ra">랭킹</a></div>
+	<div id="league"><a href="${pageContext.request.contextPath}/league/leagueList.le">대회</a></div>
+	<div id="vincero"><a href="${pageContext.request.contextPath}/support/support.su">고객지원</a></div>
 </div>
 </body>
 </html>
