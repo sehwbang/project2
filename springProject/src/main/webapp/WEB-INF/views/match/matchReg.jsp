@@ -8,7 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1a1baddfc194b964c714fcbe3f6d1aa"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1a1baddfc194b964c714fcbe3f6d1aa&libraries=services"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/matchReg.css?v=<%=System.currentTimeMillis()%>">
 
 </head>
@@ -25,68 +26,270 @@
 <div>
 	<table>
 		<tr>
-	        <td>${gym.gymName}</td>
+			<th>아아</th>
 		</tr>
+		<c:forEach items="${gymList}" var="gym">
+			<tr>
+		        <td>${gym.gymName}</td>
+			</tr>
+		</c:forEach>
 	</table>
 </div>
 
 
 <!-- 지도를 표시할 div 입니다 -->
-<div id="map" style="width:100%;height:350px;"></div>
-	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = { 
-		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };
+<div id="map" style="width:70%; height:350px; float:left;"></div>
+<div style="width:30%; height:350px; float:left;">
+	<form>
+		<table>
+			<thead></thead>
+			<tbody id="register">
+			</tbody>
+			<tfoot>
+				<tr>
+					<td><button type="button" onclick="registerMatch();">등록하기</button></td>
+				</tr>
+			</tfoot>
+		</table>
+	</form>
+</div>
+<script type="text/javascript">
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = { 
+	    center: new kakao.maps.LatLng(37.5231462, 126.9096533), // 지도의 중심좌표
+	    level: 5 // 지도의 확대 레벨
+	};
+	
+	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+
+		var address = "서울 영등포구 선유동2로 57";
+		console.log(address);	
 		
-		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+	
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch(address, function(result, status) {
 		
-		// 지도에 마커를 표시합니다 
-		var marker = new kakao.maps.Marker({
-		    map: map, 
-		    position: new kakao.maps.LatLng(33.450701, 126.570667)
-		});
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+		
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		        
+		        var marker = new kakao.maps.Marker({
+			        map: map,
+			        position: coords
+			    });
+			    
+			    var overlay = new kakao.maps.CustomOverlay({		
+			        yAnchor: 3,
+			        position: marker.getPosition()
+			    });
+				console.log("overlay밑");
+	
+				var wrap = document.createElement('div');
+				wrap.className = "wrap";
+				
+				var info = document.createElement('div');
+				info.className = "info";
+				
+				wrap.appendChild(info);
+				
+				var title = document.createElement('div');
+				title.className = "title";
+				sometext = document.createTextNode("용인대리더태권도");
+				
+				title.appendChild(sometext);
+				info.appendChild(title);
+				
+				var close = document.createElement('div');
+				close.className = "close";
+				close.title = "닫기";
+				
+				title.appendChild(close);
+				
+				var body = document.createElement('div');
+				body.className = "body";
+				info.appendChild(body);
+				
+				var imgDiv = document.createElement('div');
+				imgDiv.className="img";
+				body.appendChild(imgDiv);
+				
+				var img = document.createElement('img');
+				img.className = "img";
+				img.src = "/spring/resources/img/member.png";
+				img.width = "73";
+				img.height = "70";
+				imgDiv.appendChild(img);
+				
+				var desc = document.createElement('div');
+				desc.className = "desc";
+				body.appendChild(desc);
+				
+				var ellipsis = document.createElement('div');
+				ellipsis.className = "ellipsis";
+				
+				var text = document.createTextNode("서울 영등포구 선유동2로 57 103호");
+				
+				ellipsis.appendChild(text);
+				
+				desc.appendChild(ellipsis);
+				
+				/////////////////////////////////////////////////////////////////
+				var jibun = document.createElement('div');
+				jibun.className = "jibun-ellipsis";
+				
+				var text2 = document.createTextNode("(우) 63309 (지번) 영평동 2181");
+				console.log("text2까지 옴");
+				
+				jibun.appendChild(text2);
+				
+				desc.appendChild(jibun);
+				
+				/////////////////////////////////////////////////////////////////
+				var footerDev = document.createElement('div');
+				desc.appendChild(footerDev);
+				
+				var link = document.createElement('a');
+				link.className = "link";
+				
+				var text3 = document.createTextNode("09:00 ");
+				//link.target = "_blank";
+				link.href = "javascript:alertTest('1', '용인대리더태권도', 'user01,20230625,0900')";
+				
+				link.appendChild(text3);
+				
+				footerDev.appendChild(link);
+				
+				
+				///////////////////////////////////////////////////////////////////
+				
+				var link2 = document.createElement('a');
+				link2.className = "link";
+				
+				var text4 = document.createTextNode("10:00");
+				//link.target = "_blank";
+				link2.href = "javascript:alertTest('2', '용인대유도', 'user01,20230625,1000')";
+				
+				link2.appendChild(text4);
+				
+				footerDev.appendChild(link2);
+				
+				
+				overlay.setContent(wrap);
+				
+				console.log("커스텀오버레이 다 그림");
+		
+				kakao.maps.event.addListener(marker, 'click', function() {
+			        overlay.setMap(map);
+			    });
+	
+				console.log("오버레이 띄워줘");
+				
+				close.onclick = function() {
+					overlay.setMap(null);
+				} 
 
-		// 커스텀 오버레이에 표시할 컨텐츠 입니다
-		// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-		// 별도의 이벤트 메소드를 제공하지 않습니다 
-		var content = '<div class="wrap">' + 
-		            '    <div class="info">' + 
-		            '        <div class="title">' + 
-		            '            ${gym.gymName}' + 
-		            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-		            '        </div>' + 
-		            '        <div class="body">' + 
-		            '            <div class="img">' +
-		            '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-		            '           </div>' + 
-		            '            <div class="desc">' + 
-		            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' + 
-		            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-		            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-		            '            </div>' + 
-		            '        </div>' + 
-		            '    </div>' +    
-		            '</div>';
+			}
+		}); 
+		
+	////////////////////////////////////////////////////////////////////////	
+		
+		var matchList = [];
+		
+		function alertTest(gymNo, gymName, code) {	
+			//if문으로 담았는지 조건 체크해야 함
+			//없으면 담아주고, 화면에 띄우기
+			//있으면 alert창 경고
+	
+			if(matchList.includes(code)) {
+				alert("이미 담겨있습니다.");
+			} else {
+				//let sum = gymNo + "," + gymName + "," + code;
+				//console.log(code);
+				
+				let dt = code.slice(-12, -4);
+				console.log("8글자 : " + dt);
+				
+				let year = dt.slice(0, 4);
+				console.log("년 : " + year);
 
-		// 마커 위에 커스텀오버레이를 표시합니다
-		// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-		var overlay = new kakao.maps.CustomOverlay({
-		    content: content,
-		    map: map,
-		    position: marker.getPosition()       
-		});
+				let month = dt.slice(4, 6);
+				console.log("월 : " + month);
+				
+				let day = dt.slice(6, 8);
+				console.log("일 : " + day);
+	
+				let fulldate = year + "/" + month + "/" + day;
+				console.log(fulldate);
+								
+				function getDayOfWeek(fulldate){ //ex) getDayOfWeek('2022-06-13')
+				    const week = ['일', '월', '화', '수', '목', '금', '토'];
+				    const dayOfWeek = week[new Date(fulldate).getDay()];
+				    console.log("요일 : " + dayOfWeek);
+				    
+				    return dayOfWeek;
+				}
+				
+				let yoil = getDayOfWeek(fulldate);
+				
+				let tm = code.slice(-4);
+				console.log(tm);
+				
+				let si = tm.slice(0, 2);
+				console.log(si);
+				
+				let bun = tm.slice(2, 4);
+				console.log(bun);
+				
+				let sum = month + "월" + day + "일" + "(" + yoil + ")" + si + ":" + bun;
+					
+				let content = $("#register").html();
+					content += "<tr id='"+ code + "'>"
+							+ 	"<td>" + sum + "</td>"
+							+ 	"<td><button type='button' style='align:right;' onclick='deleteTime(`"+ code +"`);'>삭제</button></td>"
+							+  "</tr>";
+								
+				console.log("content에 있는 내용 : " + content);
+				
+				//document.getElementById("register").value = content;
+				$("#register").html(content);
+				
+				console.log("table안에 들어갈 내용 : " + content);
+				
+				matchList.push(code);
+				
+				console.log("matchList에 담겨 있는 리스트 : " + matchList);
+			
+			}
+			/* matchList.put(ddd);
+			matchList.put(ddd); */
+		}
+		
+		function deleteTime(code) {
+			alert('code=' + code);
+			$("#"+code).remove();
+		}
 
-		// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-		kakao.maps.event.addListener(marker, 'click', function() {
-		    overlay.setMap(map);
-		});
-
-		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-		function closeOverlay() {
-		    overlay.setMap(null);     
+		function registerMatch() {
+			console.log(matchList);
+			//alert('hoho~~2');
+ 			$.ajax({
+				url: "${pageContext.request.contextPath}/match/register.do",
+				type: "post",
+				data:  JSON.stringify(matchList),
+				dataType: "JSON",
+		        contentType : "application/json",
+				susscess(data) {
+					console.log(data);
+				},
+				error : function() {
+					console.log("ajax 통신 실패!")
+				}
+			});
 		}
 	</script>
 

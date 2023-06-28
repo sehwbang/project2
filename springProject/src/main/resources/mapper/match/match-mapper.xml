@@ -7,8 +7,8 @@
 	<resultMap type="gym" id="matchMap"></resultMap>
 
 	<select id="selectGymList" resultMap="matchMap">
-		SELECT GYM_NAME, GYM_ADDRESS, GYM_DETAILADDRESS
+		SELECT *
 		FROM GYM
-		WHERE GYM_NO = #{gymNo}	
+		WHERE ROWNUM = 1
 	</select>
 </mapper>
