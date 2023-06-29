@@ -5,6 +5,7 @@
 
 <mapper namespace="com.kh.spring.gym.model.dao.GymDao">
 	<resultMap type="gym" id="gymMap"></resultMap>
+	<resultMap type="schedule" id="scheduleMap"></resultMap>
 	
 	<insert id="insertJoin">
 		insert into gym
@@ -28,4 +29,26 @@
 			#{reason}
 		  )
 	</insert>
+	
+	<insert id="insertSchedule">
+		insert into schedule
+		values (
+			seq_schedule.nextval,
+			#{code},
+			#{realDate},
+			#{time},
+			#{userId}
+		)
+	</insert>
+	
+	<select id="selectCodeList" resultMap="scheduleMap">
+		select *
+		  from schedule
+		 where user_id = #{userId}
+	</select>
+	
+	<delete id="deleteSchedule">
+		delete from schedule
+		where code = #{code}
+	</delete>
 </mapper>

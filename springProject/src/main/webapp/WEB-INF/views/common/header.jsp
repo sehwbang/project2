@@ -9,6 +9,11 @@
 <meta charset="UTF-8">
 <title>${param.title}</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<c:if test="${not empty msg}">
+	<script type="text/javascript">
+		alert('${msg}');
+	</script>
+</c:if>
 </head>
 <body>
 <div id="nav1">
