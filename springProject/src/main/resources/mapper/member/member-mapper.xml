@@ -3,20 +3,51 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- <mapper namespace="member"> -->
 <mapper namespace="com.kh.spring.member.model.dao.MemberDao">
 	<resultMap type="member" id="memberMap"></resultMap>
-	
+
 	<insert id="insertMember">
-	
+		insert into member
+		values (
+		#{userId},
+		#{userPw},
+		#{userRnn},
+		#{userName},
+		#{userGender},
+		#{userEmail},
+		#{phone},
+		#{zipcode},
+		#{address},
+		#{detailAddress},
+		default,
+		default,
+		default,
+		default
+		)
 	</insert>
-	
-	<select id="selectOneMember" resultMap = "memberMap">
-		select *
+
+
+	<select id="selectOneMember" resultMap="memberMap">
+		select user_id, user_pw, substr(user_rnn,1,8)||'******' as user_rnn, user_name, user_email, phone, zipcode, address, detailaddress
 		from member
-		where user_id = #{userId}
+		where
+		user_id = #{userId}
 	</select>
-	
-	
+
+	<update id="updateMember">
+		update member
+		set
+		user_id = #{userId},
+		user_pw =#{userPw},
+		user_name =#{userName},
+		user_rnn =#{userRnn},
+		phone = #{phone},
+		user_email = #{userEmail},
+		zipcode = #{zipcode},
+		address = #{address},
+		detailAddress = #{detailAddress},
+		where user_id = #{userId}
+	</update>
+
 
 </mapper>

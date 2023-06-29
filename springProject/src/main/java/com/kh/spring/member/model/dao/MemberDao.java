@@ -16,5 +16,5 @@ public interface MemberDao {
 
 	Member selectOneMember(String userId);
 
-	
+	int updateMember(Member member);
 }

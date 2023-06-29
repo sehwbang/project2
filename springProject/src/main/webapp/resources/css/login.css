@@ -1,0 +1,109 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #fdfffd;
+}
+
+.container {
+	height: 80px;
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+h1 {
+	text-align: center;
+	font-size: 40px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.Logoutbtn {
+	display: inline-block;
+	width: 120px;
+	height: 50px;
+	padding: 10px 20px;
+	background-color: #c8220f;
+	color: white;
+	text-decoration: none;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.myPagebtn {
+	display: inline-block;
+	width: 120px;
+	height: 50px;
+	padding: 10px 20px;
+	background-color: #c8220f;
+	color: white;
+	text-decoration: none;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+input[type="text"], input[type="password"] {
+	width: 220px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.btn {
+	display: inline-block;
+	width: 80px;
+	height: 100px;
+	padding: 10px 20px;
+	background-color: #c8220f;
+	color: white;
+	text-decoration: none;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background-color: #c1120f;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+th {
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	color: rgb(31, 9, 9);
+}
+
+td {
+	padding: 10px;
+	text-align: right;
+	border-bottom: 1px solid #ddd;
+	color: rgb(31, 9, 9);
+}
+
+.footer {
+	background-color: #ffffff;
+	color: rgb(26, 17, 17);
+	padding: 10px;
+	text-align: center;
+}
+
+.header {
+	background-color: #ffffff;;
+	color: rgb(32, 24, 24);
+	padding: 10px;
+	text-align: center;
+}
