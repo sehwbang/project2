@@ -7,25 +7,6 @@
 	<resultMap type="gym" id="gymMap"></resultMap>
 	
 	<insert id="insertJoin">
-		insert into gym
-		values (
-			seq_gym_no.nextval,
-			#{gymName},
-			#{gymType},
-			#{gymBoss},
-			#{gymCoach},
-			#{coachPhone},
-			#{gymPhone},
-			#{gymZipcode},
-			#{gymAddress},
-			#{gymDetailaddress},
-			#{matchCount},
-			#{gymBank},
-			#{gymAccount},
-			#{businessNo},
-			#{gymRegdate},
-			#{gymStatus},
-			#{reason}
-		  )
+
 	</insert>
 </mapper>

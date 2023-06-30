@@ -54,8 +54,6 @@
 	</form>
 </div>
 <script type="text/javascript">
-	var clickedOverlay = null;
-	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = { 
 	    center: new kakao.maps.LatLng(37.5231462, 126.9096533), // 지도의 중심좌표
@@ -65,20 +63,19 @@
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
- 	<c:forEach items="${scheduleList}" var="schedule">
-		var address = "${schedule.gymAddress}";
-		console.log(address);
+
+		var address = "서울 영등포구 선유동2로 57";
+		console.log(address);	
 		
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
-		console.log("주소-좌표 변환 객체 생성");
 	
 		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch("${schedule.gymAddress}", function(result, status) {
-		console.log("주소-좌표 검색 함수");	
+		geocoder.addressSearch(address, function(result, status) {
+		
 		    // 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {
-				console.log("검색 완료됐으면");
+		
 		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 		        
 		        var marker = new kakao.maps.Marker({
@@ -91,7 +88,6 @@
 			        position: marker.getPosition()
 			    });
 				console.log("overlay밑");
-					
 	
 				var wrap = document.createElement('div');
 				wrap.className = "wrap";
@@ -103,7 +99,7 @@
 				
 				var title = document.createElement('div');
 				title.className = "title";
-				sometext = document.createTextNode("${schedule.gymName}");
+				sometext = document.createTextNode("용인대리더태권도");
 				
 				title.appendChild(sometext);
 				info.appendChild(title);
@@ -136,7 +132,7 @@
 				var ellipsis = document.createElement('div');
 				ellipsis.className = "ellipsis";
 				
-				var text = document.createTextNode("${schedule.gymAddress}");
+				var text = document.createTextNode("서울 영등포구 선유동2로 57 103호");
 				
 				ellipsis.appendChild(text);
 				
@@ -146,7 +142,7 @@
 				var jibun = document.createElement('div');
 				jibun.className = "jibun-ellipsis";
 				
-				var text2 = document.createTextNode("${schedule.gymDetailAddress}");
+				var text2 = document.createTextNode("(우) 63309 (지번) 영평동 2181");
 				console.log("text2까지 옴");
 				
 				jibun.appendChild(text2);
@@ -154,80 +150,106 @@
 				desc.appendChild(jibun);
 				
 				/////////////////////////////////////////////////////////////////
-				
 				var footerDev = document.createElement('div');
 				desc.appendChild(footerDev);
-				<c:forEach items="${schedule.matchtime}" var="time" varStatus="status">
-					<c:forEach items="${code[status.index]}" var="code">
-					var link${status.index} = document.createElement('a');
-					link${status.index}.className = "link";
-					
-					var text${status.index} = document.createTextNode("${time} ");
-					//link.target = "_blank";
-					link${status.index}.href = "javascript:setSchedule('${schedule.gymNo}', '${schedule.gymName}', '${code[status.index]}', '${schedule.matchdate}', '${time}')";
-					
-					link${status.index}.appendChild(text${status.index});
-					
-					footerDev.appendChild(link${status.index});		
-					</c:forEach>
-				</c:forEach>
-
+				
+				var link = document.createElement('a');
+				link.className = "link";
+				
+				var text3 = document.createTextNode("09:00 ");
+				//link.target = "_blank";
+				link.href = "javascript:alertTest('1', '용인대리더태권도', 'user01,20230625,0900')";
+				
+				link.appendChild(text3);
+				
+				footerDev.appendChild(link);
 				
 				
 				///////////////////////////////////////////////////////////////////
 				
-				//var link2 = document.createElement('a');
-				//link2.className = "link";
+				var link2 = document.createElement('a');
+				link2.className = "link";
 				
-				//var text4 = document.createTextNode("1000");
+				var text4 = document.createTextNode("10:00");
 				//link.target = "_blank";
-				//link2.href = "javascript:alertTest('2', '용인대유도', 'user01,20230625,1000')";
+				link2.href = "javascript:alertTest('2', '용인대유도', 'user01,20230625,1000')";
 				
-				//link2.appendChild(text4);
+				link2.appendChild(text4);
 				
-				//footerDev.appendChild(link2);
+				footerDev.appendChild(link2);
 				
-				
-
-				
-				console.log("커스텀오버레이 다 그림");
-		
-
-	
-				console.log("오버레이 띄워줘");
 				
 				overlay.setContent(wrap);
 				
+				console.log("커스텀오버레이 다 그림");
+		
 				kakao.maps.event.addListener(marker, 'click', function() {
-					if(clickedOverlay) {
-						clickedOverlay.setMap(null);
-					}
 			        overlay.setMap(map);
-			        clickedOverlay = overlay;
 			    });
+	
+				console.log("오버레이 띄워줘");
 				
 				close.onclick = function() {
 					overlay.setMap(null);
-				}
+				} 
+
 			}
 		}); 
-	</c:forEach>
 		
 	////////////////////////////////////////////////////////////////////////	
 		
 		var matchList = [];
 		
-		function setSchedule(gymNo, gymName, code, matchdate, time) {
+		function alertTest(gymNo, gymName, code) {	
 			//if문으로 담았는지 조건 체크해야 함
 			//없으면 담아주고, 화면에 띄우기
 			//있으면 alert창 경고
 	
 			if(matchList.includes(code)) {
 				alert("이미 담겨있습니다.");
-			} else {									
+			} else {
+				//let sum = gymNo + "," + gymName + "," + code;
+				//console.log(code);
+				
+				let dt = code.slice(-12, -4);
+				console.log("8글자 : " + dt);
+				
+				let year = dt.slice(0, 4);
+				console.log("년 : " + year);
+
+				let month = dt.slice(4, 6);
+				console.log("월 : " + month);
+				
+				let day = dt.slice(6, 8);
+				console.log("일 : " + day);
+	
+				let fulldate = year + "/" + month + "/" + day;
+				console.log(fulldate);
+								
+				function getDayOfWeek(fulldate){ //ex) getDayOfWeek('2022-06-13')
+				    const week = ['일', '월', '화', '수', '목', '금', '토'];
+				    const dayOfWeek = week[new Date(fulldate).getDay()];
+				    console.log("요일 : " + dayOfWeek);
+				    
+				    return dayOfWeek;
+				}
+				
+				let yoil = getDayOfWeek(fulldate);
+				
+				let tm = code.slice(-4);
+				console.log(tm);
+				
+				let si = tm.slice(0, 2);
+				console.log(si);
+				
+				let bun = tm.slice(2, 4);
+				console.log(bun);
+				
+				let sum = month + "월" + day + "일" + "(" + yoil + ")" + si + ":" + bun;
+					
 				let content = $("#register").html();
 					content += "<tr id='"+ code + "'>"
-							+ 	"<td>" + gymName + " " + matchdate + " " + time + "</td>"
+							+ 	"<td>" + sum + "</td>"
 							+ 	"<td><button type='button' style='align:right;' onclick='deleteTime(`"+ code +"`);'>삭제</button></td>"
 							+  "</tr>";
 								
@@ -239,7 +261,6 @@
 				console.log("table안에 들어갈 내용 : " + content);
 				
 				matchList.push(code);
-				console.log(matchList);
 				
 				console.log("matchList에 담겨 있는 리스트 : " + matchList);
 			
@@ -249,11 +270,8 @@
 		}
 		
 		function deleteTime(code) {
-			let idx = matchList.indexOf(code);
-			if(idx > -1) {
-				matchList.splice(idx, 1);				
-				$("#"+code).remove();
-			}
+			alert('code=' + code);
+			$("#"+code).remove();
 		}
 
 		function registerMatch() {

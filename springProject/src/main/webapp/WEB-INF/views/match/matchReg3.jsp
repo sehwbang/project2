@@ -54,8 +54,6 @@
 	</form>
 </div>
 <script type="text/javascript">
-	var clickedOverlay = null;
-	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = { 
 	    center: new kakao.maps.LatLng(37.5231462, 126.9096533), // 지도의 중심좌표
@@ -155,23 +153,22 @@
 				
 				/////////////////////////////////////////////////////////////////
 				
-				var footerDev = document.createElement('div');
-				desc.appendChild(footerDev);
-				<c:forEach items="${schedule.matchtime}" var="time" varStatus="status">
-					<c:forEach items="${code[status.index]}" var="code">
+					var footerDev = document.createElement('div');
+					desc.appendChild(footerDev);
+				<c:forEach items="${schedule.matchTimeList}" var="time" varStatus="status">
+					console.log(${time});
+					
 					var link${status.index} = document.createElement('a');
 					link${status.index}.className = "link";
 					
 					var text${status.index} = document.createTextNode("${time} ");
 					//link.target = "_blank";
-					link${status.index}.href = "javascript:setSchedule('${schedule.gymNo}', '${schedule.gymName}', '${code[status.index]}', '${schedule.matchdate}', '${time}')";
+					link${status.index}.href = "javascript:setSchedule('${schedule.gymNo}', '${schedule.code}', '${schedule.matchdate}', '${time}')";
 					
 					link${status.index}.appendChild(text${status.index});
 					
-					footerDev.appendChild(link${status.index});		
-					</c:forEach>
+					footerDev.appendChild(link${status.index});					
 				</c:forEach>
-
 				
 				
 				///////////////////////////////////////////////////////////////////
@@ -199,11 +196,7 @@
 				overlay.setContent(wrap);
 				
 				kakao.maps.event.addListener(marker, 'click', function() {
-					if(clickedOverlay) {
-						clickedOverlay.setMap(null);
-					}
 			        overlay.setMap(map);
-			        clickedOverlay = overlay;
 			    });
 				
 				close.onclick = function() {
@@ -217,17 +210,56 @@
 		
 		var matchList = [];
 		
-		function setSchedule(gymNo, gymName, code, matchdate, time) {
+		function setSchedule(gymNo, code, matchdate, time) {
 			//if문으로 담았는지 조건 체크해야 함
 			//없으면 담아주고, 화면에 띄우기
 			//있으면 alert창 경고
 	
 			if(matchList.includes(code)) {
 				alert("이미 담겨있습니다.");
-			} else {									
+			} else {
+				//let sum = gymNo + "," + gymName + "," + code;
+				//console.log(code);
+				
+				let dt = code.slice(-12, -4);
+				console.log("8글자 : " + dt);
+				
+				let year = dt.slice(0, 4);
+				console.log("년 : " + year);
+
+				let month = dt.slice(4, 6);
+				console.log("월 : " + month);
+				
+				let day = dt.slice(6, 8);
+				console.log("일 : " + day);
+	
+				let fulldate = year + "/" + month + "/" + day;
+				console.log(fulldate);
+								
+				function getDayOfWeek(fulldate){ //ex) getDayOfWeek('2022-06-13')
+				    const week = ['일', '월', '화', '수', '목', '금', '토'];
+				    const dayOfWeek = week[new Date(fulldate).getDay()];
+				    console.log("요일 : " + dayOfWeek);
+				    
+				    return dayOfWeek;
+				}
+				
+				let yoil = getDayOfWeek(fulldate);
+				
+				let tm = code.slice(-4);
+				console.log(tm);
+				
+				let si = tm.slice(0, 2);
+				console.log(si);
+				
+				let bun = tm.slice(2, 4);
+				console.log(bun);
+				
+				let sum = month + "월" + day + "일" + "(" + yoil + ")" + si + ":" + bun;
+					
 				let content = $("#register").html();
 					content += "<tr id='"+ code + "'>"
-							+ 	"<td>" + gymName + " " + matchdate + " " + time + "</td>"
+							+ 	"<td>" + sum + "</td>"
 							+ 	"<td><button type='button' style='align:right;' onclick='deleteTime(`"+ code +"`);'>삭제</button></td>"
 							+  "</tr>";
 								
@@ -239,7 +271,6 @@
 				console.log("table안에 들어갈 내용 : " + content);
 				
 				matchList.push(code);
-				console.log(matchList);
 				
 				console.log("matchList에 담겨 있는 리스트 : " + matchList);
 			
@@ -249,11 +280,8 @@
 		}
 		
 		function deleteTime(code) {
-			let idx = matchList.indexOf(code);
-			if(idx > -1) {
-				matchList.splice(idx, 1);				
-				$("#"+code).remove();
-			}
+			alert('code=' + code);
+			$("#"+code).remove();
 		}
 
 		function registerMatch() {

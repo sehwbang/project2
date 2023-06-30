@@ -5,10 +5,20 @@
   
 <mapper namespace="com.kh.spring.match.model.dao.MatchDao">
 	<resultMap type="gym" id="matchMap"></resultMap>
+	<resultMap type="MatchInfo" id="scheduleInfoMap">
+	
+	</resultMap>
 
 	<select id="selectGymList" resultMap="matchMap">
 		SELECT *
 		FROM GYM
 		WHERE ROWNUM = 1
+	</select>
+	
+	<select id="selectScheduleList" resultMap="scheduleInfoMap">
+		SELECT S.GYM_NO, G.GYM_NAME, G.GYM_ADDRESS, G.GYM_DETAILADDRESS, S.MATCHDATE, S.MATCHTIME, S.CODE
+		FROM SCHEDULE S
+		JOIN GYM G ON S.GYM_NO = G.GYM_NO
+		ORDER BY S.GYM_NO, S.MATCHDATE, S.MATCHTIME
 	</select>
 </mapper>

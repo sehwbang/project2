@@ -27,7 +27,7 @@ public class Gym {
 	private String gymDetailAddress;
 	private int matchCount;
 	private String gymBank;
-	private long gymAccount;
+	private String gymAccount;
 	private String businessNo;
 	private Date gymRegdate;
 	private int gymStatus;
