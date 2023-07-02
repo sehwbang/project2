@@ -8,28 +8,40 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.gym.model.vo.Gym;
 import com.kh.spring.gym.model.vo.Schedule;
 import com.kh.spring.match.model.dao.MatchDao;
+import com.kh.spring.match.model.vo.Match;
 import com.kh.spring.match.model.vo.MatchInfo;
 import com.kh.spring.match.model.vo.MatchInfoView;
+import com.kh.spring.match.model.vo.MatchRegInfo;
 
 @Service
 public class MatchServiceImpl implements MatchService{
 
 	@Autowired
 	private MatchDao matchDao;
-	
-//	@Override
-//	public Gym selectGymList(int gymNo) {
-//		return matchDao.selectGymList(gymNo);
-//	}
-
-	@Override
-	public List<Gym> selectGymList() {
-		return matchDao.selectGymList();
-	}
 
 	@Override
 	public List<MatchInfo> selectScheduleList() {
 		return matchDao.selectScheduleList();
+	}
+
+	@Override
+	public int registerMatch(Match match) {
+		return matchDao.registerMatch(match);
+	}
+
+	@Override
+	public Match selectMatch(Match match) {
+		return matchDao.selectMatch(match);
+	}
+
+	@Override
+	public int updateMatch(Match match) {
+		return matchDao.updateMatch(match);
+	}
+
+	@Override
+	public List<MatchInfo> selectMatchList(String userId1) {
+		return matchDao.selectMatchList(userId1);
 	}
 
 }
