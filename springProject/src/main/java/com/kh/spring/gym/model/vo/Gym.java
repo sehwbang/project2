@@ -27,10 +27,11 @@ public class Gym {
 	private String gymDetailaddress;
 	private int matchCount;
 	private String gymBank;
-	private int gymAccount;
+	private String gymAccount;
 	private String businessNo;
 	private Date gymRegdate;
 	private int gymStatus;
 	private String reason;
+	private String userId;
 
 }

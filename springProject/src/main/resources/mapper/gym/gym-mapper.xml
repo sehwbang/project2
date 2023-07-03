@@ -26,7 +26,8 @@
 			#{businessNo},
 			#{gymRegdate},
 			#{gymStatus},
-			#{reason}
+			#{reason},
+			#{userId}
 		  )
 	</insert>
 	
@@ -35,8 +36,8 @@
 		values (
 			seq_schedule.nextval,
 			#{code},
-			#{realDate},
-			#{time},
+			#{MatchDate},
+			#{MatchTime},
 			#{userId}
 		)
 	</insert>

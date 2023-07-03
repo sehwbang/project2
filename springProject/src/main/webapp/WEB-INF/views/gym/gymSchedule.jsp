@@ -51,7 +51,7 @@ function removeBoxId(boxId) {
 function getSelectedBoxIds() {
   const totalCodes = [];
   console.log(${ymd});
-  const userId = "user01";
+  const userId = "${loginMember.userId}";
   const ymd = ${ymd};
   console.log(ymd);
   console.log(selectedBoxes);
@@ -77,7 +77,7 @@ $(function () {
 function delSelectedBoxIds() {
 	  const totalCodes = [];
 	  console.log(${ymd});
-	  const userId = "user01";
+	  const userId = "${loginMember.userId}";
 	  const ymd = ${ymd};
 	  console.log(ymd);
 	  console.log(selectedBoxes);

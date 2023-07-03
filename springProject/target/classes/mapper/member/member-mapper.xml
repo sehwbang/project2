@@ -26,9 +26,8 @@
 		)
 	</insert>
 
-
 	<select id="selectOneMember" resultMap="memberMap">
-		select user_id, user_pw, substr(user_rnn,1,8)||'******' as user_rnn, user_name, user_email, phone, zipcode, address, detailaddress
+		select user_id, user_pw, substr(user_rnn,1,8)||'******' as user_rnn, user_gender, user_name, user_email, phone, zipcode, address, detailaddress, user_type, user_status, user_control, user_regdate
 		from member
 		where
 		user_id = #{userId}

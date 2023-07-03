@@ -11,8 +11,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-매치페이지입니다.
-
+매치게시판입니다.
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

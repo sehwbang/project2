@@ -1,0 +1,106 @@
+@font-face {
+    font-family: 'EF_watermelonSalad';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: 'EF_watermelonSalad';
+}
+
+h1 {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+h2 {
+	margin-top: 50px;
+}
+
+#noticeTable th {
+	text-align: right;
+	height: 50px;
+}
+
+#noticeButton {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+#noticeButton button {
+	width: 100px;
+	height: 70px;
+	border-width: 0px;
+	border-radius: 30px;
+	font-family: 'EF_watermelonSalad';
+}
+
+#noticeButton button:hover {
+	background-color: black;
+	color: rgb(239,239,239);
+}
+
+#listTable {
+	display: flex;
+	justify-content: center;
+}
+
+#listTable th {
+	width: 150px;
+	font-family: 'EF_watermelonSalad';
+	font-size: 20px;
+	font-weight: normal;
+	height: 100px;
+}
+
+#listTable td {
+	text-align: center;
+	height: 30px;
+}
+
+#listTable a {
+	text-decoration: none;
+	color: black;
+}
+
+nav {
+	margin-top: 50px;
+	
+}
+
+nav a {
+	color: black;
+	text-decoration: none;
+	
+}
+
+nav li {
+	text-decoration: none;
+	list-style: none;
+
+	float: left;
+}
+
+#listButton button {
+	width: 100px;
+	height: 70px;
+	border-width: 0px;
+	border-radius: 30px;
+	font-family: 'EF_watermelonSalad';
+}
+
+#listButton button:hover {
+	background-color: black;
+	color: rgb(239,239,239);
+}
+
+#listButton {
+	margin-right: 200px;
+	float: right;
+}

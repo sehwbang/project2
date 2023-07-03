@@ -16,7 +16,7 @@ import lombok.ToString;
 public class Schedule {
 	int num;
 	String code;
-	Date realDate;
-	String time;
+	Date MatchDate;
+	String MatchTime;
     String userId;
 }

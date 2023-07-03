@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/match")
 public class MatchController {
 	
-	@GetMapping("/matchList.vcr")
-	public void matchList() {
-		
-	}
-	
+	@GetMapping("/matchList.ma")
+	public void matchList() {}
 }

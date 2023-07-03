@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,19 +35,23 @@ public class GymController {
 	@Autowired
 	private GymDao gymDao;
 	
-	@GetMapping("/joinEnrollPage.gym")
-	public String joinEnrollPage() {
+	@GetMapping("/joinEnroll.gym")
+	public String joinEnroll() {
 		return "/gym/joinEnroll";
 	}
 	
 	@PostMapping("/joinEnrollForm.gym")
 	public String joinEnrollForm(Gym gym, Model model) {
-		int result = gymService.insertJoin(gym);
-		if(result==1) {
-			model.addAttribute("msg", "가맹신청이 등록되었습니다.");
-		} else {
-			model.addAttribute("msg", "가맹신청 등록이 실패하였습니다.");
-		}
+		int result = 0;
+			try {
+				result = gymService.insertJoin(gym);
+				System.out.println(result);
+				model.addAttribute("msg", "가맹신청이 등록되었습니다.");
+			} catch (Exception e) {
+				System.out.println(result);
+				model.addAttribute("msg", "이미 가맹신청이 된 id인지, 전화번호와 사업자번호가 이미 등록된 것인지 확인하세요.");
+			}
+	
 		return "/support/vincero";
 	}
 
@@ -104,21 +109,30 @@ public class GymController {
 			dateStr = totalCodes[i].substring(totalCodes[i].length()-12, totalCodes[i].length());
 			dateTime = totalCodes[i].substring(totalCodes[i].length()-4, totalCodes[i].length());
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm");
+			int result = 0;
 			try {
 				date = formatter.parse(dateStr);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			schedule.setRealDate(date);
-			schedule.setTime(dateTime);
-			int result = gymService.insertSchedule(schedule);
-			sum += result;
+			schedule.setMatchDate(date);
+			schedule.setMatchTime(dateTime);
+			
+			try {
+				result = gymService.insertSchedule(schedule);
+				sum += result;
+			} catch (Exception e) {
+				sum += result;
+				
+			}
 		}
 		
 		if(sum==totalCodes.length) {
 			model.addAttribute("msg", "일정이 등록되었습니다.");
+		} else if(sum==0) {
+			model.addAttribute("msg", "관장 id로 로그인이 되었는지, 이미 등록된 날이 아닌지 확인하세요.");
 		} else {
-			model.addAttribute("msg", "일정 등록에 실패했습니다. 이미 등록된 일정이 있는지 확인하세요.");
+			model.addAttribute("msg", "일정이 등록되었습니다.");
 		}
 		
 		System.out.println(sum);

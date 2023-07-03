@@ -6,7 +6,6 @@
 <%@ page import="java.util.Calendar" %>
 <%
     request.setCharacterEncoding("utf-8");
-	String id = "aaa";
 
     Calendar cal = Calendar.getInstance();
     int y = cal.get(Calendar.YEAR);
@@ -35,11 +34,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/gym/calendar.css?v=<%=System.currentTimeMillis()%>">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<%-- <c:if test="${not empty msg}">
-	<script type="text/javascript">
-		alert('${msg}');
-	</script>
-</c:if> --%>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -101,6 +95,7 @@
                 }
             %>
         </table>
+       
 </div>
 <jsp:include page="/WEB-INF/views/gym/gymSchedule.jsp"/>
 </div>
@@ -117,7 +112,8 @@
 	function dayPage(d) {
 	    const y = document.getElementById("y").value;
 	    const m = document.getElementById("m").value;
-	    const userId = "user01";
+	    const userId = "${loginMember.userId}";
+	    console.log(userId);
 	    const url = "${pageContext.request.contextPath}/gym/dayPage.gym?userId=" + userId + "&y=" + y + "&m=" + m + "&d=" + d;
 	    location.href = url;
 	}
