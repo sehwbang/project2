@@ -17,4 +17,10 @@ public interface MemberDao {
 	Member selectOneMember(String userId);
 
 	int updateMember(Member member);
+	
+	int pwupdateMember(Member member);
+
+	Member selectTwoMember(String userEmail);
+
+	int deleteMember(String userId);
 }

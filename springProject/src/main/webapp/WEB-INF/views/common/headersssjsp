@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>${param.title}</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<!-- DB에 저장이 잘 되었다면 alert창 띄우기 -->
 <c:if test="${not empty msg}">
 	<script type="text/javascript">
 		alert('${msg}');
@@ -17,9 +18,10 @@
 </head>
 <body>
 <div id="nav1">
-	<div id="left"><a href="${pageContext.request.contextPath}/gym/gymMainPage.gym">관장님</a></div>
+	<div id="left"><a href="${pageContext.request.contextPath}/gym/gymMainPage.gym"><img src="${pageContext.request.contextPath}/resources/img/gymBoss.png" alt="gymBoss" width="80px" height="40px"></a></div>
+	<div id="left"><a href="${pageContext.request.contextPath}/manager/mnMainPage.mn"><img src="${pageContext.request.contextPath}/resources/img/manager.png" alt="manager" width="80px" height="40px"></a></div>
 	<div id="logo"><a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="logo" width="200px" height="90px"></a></div>
-	<div id="member"><a href="${pageContext.request.contextPath}/member/GoLoginPage.me"><img src="${pageContext.request.contextPath}/resources/img/member.png" alt="member" width="40px" height="40px"></a>&emsp;${loginMember.userName}</div>
+	<div id="member"><a href="${pageContext.request.contextPath}/member/GoLoginPage.me"><img src="${pageContext.request.contextPath}/resources/img/member.png" alt="member" width="40px" height="40px"></a></div>
 </div>
 <div id="nav2">
 	<div id="matching"><a href="${pageContext.request.contextPath}/match/matchList.vcr">매칭</a></div>
@@ -27,7 +29,5 @@
 	<div id="league"><a href="${pageContext.request.contextPath}/league/leagueList.vcr">대회</a></div>
 	<div id="vincero"><a href="${pageContext.request.contextPath}/support/support.vcr">고객지원</a></div>
 </div>
-
-
 </body>
-</html> 
+</html>
