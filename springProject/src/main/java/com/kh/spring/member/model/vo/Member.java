@@ -28,4 +28,5 @@ public class Member {
 	   private int userStatus;
 	   private int userCon;
 	   private Date userRegdate;
+	   private int userInfo;
 	}

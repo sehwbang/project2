@@ -1,7 +1,9 @@
 package com.kh.spring.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.member.model.dao.MemberDao;
@@ -57,7 +60,24 @@ public class MemberController {
 		String rawPassword = member.getUserPw();
 		String encodedPassword = passwordEncoder.encode(rawPassword);
 		member.setUserPw(encodedPassword);
-		System.out.println("changePass = " + member);
+//		System.out.println("changePass = " + member);
+
+		int result = memberService.insertMember(member);
+		return "redirect:/";
+	}
+	@GetMapping("/memberNewpw.me")
+	public void memberNewpw() {
+	} 
+	@PostMapping("/memberNewpw.me")
+	
+	public String memberNewpw(Member member) {
+//		System.out.println("userPass = " + member);
+
+		// 비밀번호 암호화
+		String rawPassword = member.getUserPw();
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		member.setUserPw(encodedPassword);
+//		System.out.println("changePass = " + member);
 
 		int result = memberService.insertMember(member);
 		return "redirect:/";
@@ -105,11 +125,11 @@ public class MemberController {
 
 	@PostMapping("/memberLogin.me")
 	public String memberLogin(String userId, String userPw, Model model, RedirectAttributes redirectAtt) {
-		System.out.println("userId = " + userId);
-		System.out.println("userPw = " + userPw);
+//		System.out.println("userId = " + userId);
+//		System.out.println("userPw = " + userPw);
 
 		Member member = memberService.selectOneMember(userId);
-		System.out.println("member = " + member);
+//		System.out.println("member = " + member);
 //		if(member != null) 
 //			model.addAttribute("loginMember", member);
 
@@ -151,11 +171,87 @@ public class MemberController {
 
 		return "redirect:/member/memberInfo.me?userId=" + member.getUserId();
 	}
+	
+	@PostMapping("/memberNewUpdate.me")
+	public String memberNewUpdate(Member member, Model model, RedirectAttributes redirectAtt) {
+		// pw암호화해서 member.userPwd에 넣기
+		String rawPassword = member.getUserPw();
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		member.setUserPw(encodedPassword);
 
+		int result = memberService.pwupdateMember(member);
+
+		if (result > 0) {
+			redirectAtt.addFlashAttribute("msg", "회원정보 수정 성공");
+		} else {
+			redirectAtt.addFlashAttribute("msg", "회원정보 수정 실패");
+		}
+
+		return "redirect:/member/memberIdInfo.me?userEmail=" + member.getUserEmail();
+	}
 	@GetMapping("/memberInfo.me")
 	public String memberInfo(String userId, Model model) {
 		model.addAttribute("loginMember", memberService.selectOneMember(userId));
 		return "redirect:/";
 	}
+	@GetMapping("/memberSearchId.me")
+	public void memberSearchId() {                 
+	}
+	@GetMapping("/checkEmail.do")
+	public String checkEmail(@RequestParam String userEmail, Model model) {
+		Member member = memberService.selectTwoMember(userEmail);
+		boolean available = member == null;
 
+		model.addAttribute("userEmail", userEmail);
+		model.addAttribute("available", available);
+		
+		return "jsonView";
+	}
+	@GetMapping("/memberidInfo.me")
+	public String memberidInfo(String userEmail, Model model) {
+		model.addAttribute("loginMember", memberService.selectTwoMember(userEmail));
+		return "redirect:/";
+	}
+	@GetMapping("/memberPersonalInfo.me")
+	public void memberPersonalInfo() {                 
+	}
+	
+	@GetMapping("/deleteMember.me")
+	// 버튼을 통해 넘어왔기에 무조건 get post는 폼에서 post를 지정해줘야만 가능하다
+	public ModelAndView removeMember(HttpSession session, ModelAndView mv) {
+
+		Member member = (Member) session.getAttribute("loginMember");
+		String userId = member.getUserId();
+		System.out.println(userId);
+			int result = memberService.deleteMember(userId);
+
+			if (result == 1) {
+				 session.invalidate();
+				mv.setViewName("redirect:/");
+			}
+		return mv;
+	}
+	
+	/*
+	@GetMapping("/removeMember.me")
+	public String removeMember(HttpSession session) {
+	    Member member = (Member) session.getAttribute("loginMember");
+	    String userId = member.getUserId();
+	    System.out.println(userId);
+
+	    try {
+	        int result = memberService.removeMember(userId);
+
+	        if (result == 1) {
+	            session.invalidate(); // 세션 무효화
+	            return "redirect:/";
+	        }
+	    } catch (Exception e) {
+	        // 에러 처리
+	        e.printStackTrace();
+	    }
+
+	    return "common/error";
+	}
+*/
 }

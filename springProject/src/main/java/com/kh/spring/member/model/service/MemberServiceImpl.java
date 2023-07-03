@@ -2,6 +2,7 @@ package com.kh.spring.member.model.service;
 
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,6 @@ import com.kh.spring.member.model.vo.Member;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
-
-
-
-
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -33,8 +30,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public Member selectTwoMember(String userEmail) {
+		return memberDao.selectTwoMember(userEmail);
+	}
+
+	@Override
 	public int updateMember(Member member) {
 		return memberDao.updateMember(member);
+	}
+	@Override
+	public int pwupdateMember(Member member) {
+		return memberDao.pwupdateMember(member);
 	}
 	public static void certifiedPhoneNumber(String userPhoneNumber, int randomNumber) {
 		String api_key = "NCS0J517ENTAJPCL";
@@ -52,8 +58,19 @@ public class MemberServiceImpl implements MemberService {
 			try {
 			JSONObject obj = (JSONObject) coolsms.send(params);
 			System.out.println(obj.toString());
+			System.out.println(1);
 			} catch (CoolsmsException e) {
-	    	  
+				System.out.println(2);
 			}	    
 	}
+	
+	@Override
+	public int deleteMember(String userId) {
+		return memberDao.deleteMember(userId);
+	}
+
+	   @Override
+	   public int statusUpdate(String userId) {
+	      return memberDao.statusUpdate(userId);
+	   }
 }

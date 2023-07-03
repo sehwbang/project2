@@ -104,7 +104,7 @@ input[type="button"]:hover {
 	transition: border-color 0.3s;
 }
 
-button[type="submit"], button[type="reset"] {
+button[type="submit"], button[type="button"], button[type="reset"] {
 	padding: 10px 20px;
 	background-color: #c8220f;
 	color: #fff;
@@ -135,6 +135,6 @@ button[type="submit"], button[type="reset"] {
 	width: 430px;
 }
 
-button[type="submit"]:hover, button[type="reset"]:hover {
+button[type="submit"]:hover, button[type="reset"]:hover, button[type="button"]:hover {
 	background-color: #c8220f;
 }
