@@ -27,6 +27,7 @@ import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.common.template.Pagination;
 import com.kh.spring.support.model.service.SupportService;
 import com.kh.spring.support.model.vo.Notice;
+import com.kh.spring.support.model.vo.Question;
 
 @Controller
 @RequestMapping("/support")
@@ -64,7 +65,7 @@ public class SupportController {
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pi", pi);
 	}
-
+	
 	@PostMapping("/noticeEnroll.su")
 	public String noticeEnroll(Notice notice, @RequestParam MultipartFile upFile, Model model) {
 		String saveDirectory = application.getRealPath("/resources/upload/notice");
@@ -92,17 +93,16 @@ public class SupportController {
 			model.addAttribute("msg", "공지게시판 등록 실패.");
 		}
 		
-		return "redirect:/support/noticeList.su";
+		return "redirect:/support/noticeList.su?noticeNo=" + 1 + "&msg=" + model.getAttribute("msg");
 	}
 	
 	@GetMapping("/noticeDetail.su")
 	public String noticeDetail(@RequestParam int noticeNo, Model model) {
 		int result = supportService.updateCountNotice(noticeNo);
-		
 		Notice notice = supportService.selectOneNotice(noticeNo);
 		
 		model.addAttribute("notice", notice);
-		
+		System.out.println(notice.getNoticeNo());
 		return "/support/noticeDetail";
 	}
 	
@@ -115,20 +115,85 @@ public class SupportController {
 		String cFilename = notice.getChangeFilename();
 		
 		try {
-			oFilename = new String(oFilename.getBytes("utf-8"), "iso-8859-1");		//톰캣기본인코딩 변환처리
+			oFilename = new String(oFilename.getBytes("utf-8"), "iso-8859-1");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}	
 		
-		String saveDirectory = application.getRealPath("/resources/upload/board");
+		String saveDirectory = application.getRealPath("/resources/upload/notice");
 		File downFile = new File(saveDirectory, cFilename);
 		
-		// FileSystemResource에서 파일을 받을 때 - file:경로사용
-		String location = "file:" + downFile;		// downfile절대경로
+		String location = "file:" + downFile;
 		Resource resource = resourceLoader.getResource(location);
 		
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.addHeader("Content-Disposition", "attachment; filename=" + oFilename);
 		return resource;
+	}
+	
+	@PostMapping("/noticeUpdate.su")
+	public String noticeUpdate(Notice notice, @RequestParam MultipartFile upFile, Model model) {
+		String saveDirectory = application.getRealPath("/resources/upload/notice");
+		System.out.println(saveDirectory);
+		int result = 0;
+		if(upFile.getSize() > 0) {
+			String originalFilename = upFile.getOriginalFilename();
+			String changeFilename = SpringUtils.changeMultipartFile(upFile);
+			
+			File destFile = new File(saveDirectory, changeFilename);
+			
+			try {
+				upFile.transferTo(destFile);	
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+			
+			notice.setOriginalFilename(originalFilename);
+			notice.setChangeFilename(changeFilename);
+		}
+		
+		System.out.println(notice.getNoticeNo());
+		try {
+			result = supportService.updateNotice(notice);
+			System.out.println(result);
+			model.addAttribute("msg", "공지게시글이 수정되었습니다.");
+		} catch (Exception e) {
+			model.addAttribute("msg", "공지게시판 수정 실패.");
+		}
+		return "/support/noticeList";
+	}
+	
+	@GetMapping("/noticeDelete.su")
+	public String noticeDelete(@RequestParam int noticeNo, Model model) {
+		int result = 0;
+		System.out.println(result);
+		try {
+			result = supportService.deleteNotice(noticeNo);
+			model.addAttribute("msg", "공지게시글이 삭제되었습니다.");
+			System.out.println(result);
+		} catch (Exception e) {
+			model.addAttribute("msg", "공지게시판 삭제 실패.");
+		}
+		
+		return "redirect:/support/noticeList.su?noticeNo=" + 1;
+	}
+	
+	@GetMapping("/cusCenter.su")
+	public String cusCenter() {
+		return "/support/cusCenter";
+	}
+	
+	@GetMapping("/questionList.su")
+	public void questionList(@RequestParam(defaultValue="1") int nowPage, Model model) {
+		int totalRecord = supportService.selectTotalRecord();
+		int limit = 10;
+		int offset = (nowPage - 1) * limit; 
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		PageInfo pi = Pagination.getPageInfo(totalRecord, nowPage, limit, 3);
+		
+		List<Question> questionList = supportService.selectQuestionList(rowBounds);
+		model.addAttribute("questionList", questionList);
+		model.addAttribute("pi", pi);
 	}
 }

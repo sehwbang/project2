@@ -11,7 +11,15 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-매치게시판입니다.
+<div id="nav2">
+	<div id="matching"></div>
+	<div id="matching"></div>
+	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchReg.ma">매치 등록</a></div>
+	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchList.ma">상대방 찾기</a></div>
+</div>
+
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.spring.match.model.dao.MatchDao">
+	<resultMap type="gym" id="matchMap"></resultMap>
+	<resultMap type="MatchInfo" id="scheduleInfoMap"></resultMap>
+	<resultMap type="MatchInfo" id="scheduleIfvMap">
+		<result property="code" column="match_no" />
+	</resultMap>
+	<resultMap type="Match" id="MatchMap"></resultMap>
+	
+	<select id="selectScheduleList" resultMap="scheduleInfoMap">
+		SELECT S.GYM_NO, G.GYM_NAME, G.GYM_ADDRESS, G.GYM_DETAILADDRESS, S.MATCHDATE, S.MATCHTIME, S.CODE
+		FROM SCHEDULE S
+		JOIN GYM G ON S.GYM_NO = G.GYM_NO
+		ORDER BY S.GYM_NO, S.MATCHDATE, S.MATCHTIME
+	</select>
+	
+	<insert id="registerMatch">
+		INSERT INTO MATCH
+		(NO, MATCH_NO, GYM_NO, USER_ID1, MATCHDATE, MATCHTIME, MATCH_STATUS, DEL_YN)
+		VALUES(
+			SEQ_NO.NEXTVAL,
+			#{matchNo},
+			#{gymNo},
+			#{userId1},
+			#{matchdate},
+			#{matchtime},
+			#{matchStatus},
+			#{delYn}
+		)		
+	</insert>
+	
+	<select id="selectMatch" resultMap="MatchMap">
+		SELECT MATCH_NO, GYM_NO, USER_ID1, DEL_YN
+		FROM MATCH
+		WHERE MATCH_NO = #{matchNo}
+		AND GYM_NO     = #{gymNo}
+		AND USER_ID1   = #{userId1}
+	</select>
+	
+	<update id="updateMatch">
+		UPDATE MATCH
+		<set>
+			<if test="userId1     != null">USER_ID1       = #{userId1},    </if>
+			<if test="userId2     != null">USER_ID2       = #{userId2},    </if>
+			<if test="matchdate   != null">MATCHDATE      = #{matchdate},  </if>
+			<if test="matchtime   != null">MATCHTIME      = #{matchtime},  </if>
+			<if test="score1      != null">SCORE1         = #{score1},     </if>
+			<if test="score2      != null">SCORE2         = #{score2},     </if>
+			<if test="matchStatus != null">MATCH_STATUS   = #{matchStatus},</if>
+			<if test="delYn       != null">DEL_YN         = #{delYn}       </if>
+		</set>
+		WHERE MATCH_NO = #{matchNo}
+		AND USER_ID1   = #{userId1}
+	</update>
+	
+	<select id="selectMatchList" resultMap="scheduleIfvMap">
+		SELECT M.NO, M.MATCH_NO, G.GYM_NO, G.GYM_NAME, M.MATCHDATE, M.MATCHTIME
+		FROM MATCH M
+		JOIN GYM G ON M.GYM_NO = G.GYM_NO
+		WHERE M.USER_ID1 = #{userId1}
+		AND M.DEL_YN     = 'N'
+		AND M.MATCHDATE >= SYSDATE
+		ORDER BY M.MATCHDATE, M.MATCHTIME
+	</select>
+</mapper>

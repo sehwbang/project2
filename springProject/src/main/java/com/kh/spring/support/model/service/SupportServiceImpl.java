@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.support.model.dao.SupportDao;
 import com.kh.spring.support.model.vo.Notice;
+import com.kh.spring.support.model.vo.Question;
 
 @Service
 public class SupportServiceImpl implements SupportService{
@@ -38,5 +39,20 @@ public class SupportServiceImpl implements SupportService{
 	@Override
 	public Notice selectOneNotice(int noticeNo) {
 		return supportDao.selectOneNotice(noticeNo);
+	}
+
+	@Override
+	public int updateNotice(Notice notice) {
+		return supportDao.updateNotice(notice);
+	}
+
+	@Override
+	public int deleteNotice(int noticeNo) {
+		return supportDao.deleteNotice(noticeNo);
+	}
+
+	@Override
+	public List<Question> selectQuestionList(RowBounds rowBounds) {
+		return supportDao.selectQuestionList(rowBounds);
 	}
 }
