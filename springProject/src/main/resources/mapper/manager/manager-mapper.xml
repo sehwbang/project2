@@ -146,8 +146,8 @@
 		   	   warn3 = #{warn3},
 		   	   warn4 = #{warn4}
 		 where user_id = #{userId}
-	</update>
-  
-  
-  
+	</update>	
+	
+
+
 </mapper>
