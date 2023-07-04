@@ -5,69 +5,63 @@
     font-style: normal;
 }
 
-* {
-	margin: 0;
-	padding: 0;
+#container {
+	font-family: 'EF_watermelonSalad';
+	font-size: 16px;
 }
 
 #describe {
-	font-family: 'EF_watermelonSalad';
 	margin-top: 60px;
+	text-align: center;
 }
 
-table {
-	width: 600px;
-	margin-top: 220px;
-	font-family: 'EF_watermelonSalad';
-	font-size: 16px;
+#join {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+#image {
+	margin-left: 30px;
+}
+
+#table {
+	margin-left: 50px;
+}
+
+
+h1 {
+	color: blue;
+}
+
+h2 {
+	color: red;
+}
+
+th {
+	height: 40px;
+	font-weight: normal;
 }
 
 input {
 	font-family: 'EF_watermelonSalad';
-	font-size: 16px;
-}
-
-select {
-	font-family: 'EF_watermelonSalad';
-	font-size: 16px;
-}
-
-th {
-	width: 350px;
-	height: 40px;
-	text-align: right;
-	font-weight: normal;
-}
-
-td {
-	width: 500px;
-	text-align: left;
+	width: 200px;
+	height: 25px;
 }
 
 #button {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	margin-top: 30px;
-	margin-right: 50px;
-}
-
-#join {
-	display: flex;
-	flex-direction: row;
-	margin-top: 30px;
-}
-
-#describe {
-	text-align: center;
 }
 
 input::placeholder {
+	font-family: 'EF_watermelonSalad';
 	font-size: 12px;
 }
 
-#image {
-	margin-left: 80px;
+#gymAddress, #gymDetailaddress {
+	width: 400px;
 }
 
 #addressButton, #submitButton, #resetButton {
@@ -75,8 +69,10 @@ input::placeholder {
 	background-color: rgb(100,80,170);
 	border: 0 solid white;
 	padding: 5px 5px;
+	width: 70px;
+	height: 30px;
 }
 
 #submitButton {
-	margin-right: 30px;
+	margin-right: 10px;
 }

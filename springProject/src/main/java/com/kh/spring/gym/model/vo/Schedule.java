@@ -1,6 +1,6 @@
 package com.kh.spring.gym.model.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,10 +14,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Schedule {
-	private int num;
-	private String code;
-	private Date matchdate;
-	private String matchtime;
-	private String userId;
-	private int gymNo;
+	int num;
+	String code;
+	Date MatchDate;
+	String MatchTime;
+    String userId;
+    int gymNo;
 }

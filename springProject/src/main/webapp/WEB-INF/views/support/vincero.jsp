@@ -62,7 +62,10 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<a href="${pageContext.request.contextPath}/gym/joinPage.gym">체육관등록</a>
+	<a href="${pageContext.request.contextPath}/support/support.su">빈체로소개</a>
+	<a href="${pageContext.request.contextPath}/gym/joinEnroll.gym">가맹점신청</a>
+	<a href="${pageContext.request.contextPath}/support/noticeList.su">공지게시판</a>
+	<a href="${pageContext.request.contextPath}/support/cusCenter.su">고객센터</a>
     <div class="logo">
         <div style="margin-left: 450px;">
             <img src="${pageContext.request.contextPath}/resources/img/icon.png" width="300px" height="300px">

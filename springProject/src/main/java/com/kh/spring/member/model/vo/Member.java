@@ -26,6 +26,7 @@ public class Member {
 	   private String detailAddress;
 	   private String userType;
 	   private int userStatus;
-	   private int userControl;
+	   private int userCon;
 	   private Date userRegdate;
+	   private int userInfo;
 	}
