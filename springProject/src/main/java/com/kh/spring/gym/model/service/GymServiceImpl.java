@@ -34,4 +34,9 @@ public class GymServiceImpl implements GymService {
 		return gymDao.deleteSchedule(schedule);
 	}
 
+	@Override
+	public Gym selectGymNo(String userId) {
+		return gymDao.selectGymNo(userId);
+	}
+
 }

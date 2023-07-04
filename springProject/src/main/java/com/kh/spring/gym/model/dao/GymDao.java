@@ -17,4 +17,6 @@ public interface GymDao {
 	List<Schedule> selectCodeList(String userId);
 
 	int deleteSchedule(Schedule schedule);
+
+	Gym selectGymNo(String userId);
 }

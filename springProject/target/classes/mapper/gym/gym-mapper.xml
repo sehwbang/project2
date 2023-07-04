@@ -37,9 +37,9 @@
 		values (
 			seq_schedule.nextval,
 			#{code},
-			#{MatchDate},
-			#{MatchTime},
-			#{userId}
+			#{matchDate},
+			#{matchTime},
+			#{userId},
 			#{gymNo}
 		)
 	</insert>
@@ -54,4 +54,10 @@
 		delete from schedule
 		where code = #{code}
 	</delete>
+	
+	<select id="selectGymNo" resultMap="gymMap">
+		select gym_no
+		  from gym
+		 where user_id = #{userId}
+	</select>
 </mapper>
