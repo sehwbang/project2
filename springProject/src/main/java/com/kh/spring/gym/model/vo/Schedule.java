@@ -14,10 +14,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Schedule {
-	int num;
-	String code;
-	Date matchDate;
-	String matchTime;
-    String userId;
-    int gymNo;
+	private int num;
+	private String code;
+	private Date matchDate;
+	private String matchTime;
+    private String userId;
+    private int gymNo;
 }
