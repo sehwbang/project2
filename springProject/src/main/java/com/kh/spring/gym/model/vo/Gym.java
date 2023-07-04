@@ -12,9 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
 public class Gym {
-	
 	private int gymNo;
 	private String gymName;
 	private String gymType;
@@ -24,7 +22,7 @@ public class Gym {
 	private String gymPhone;
 	private String gymZipcode;
 	private String gymAddress;
-	private String gymDetailAddress;
+	private String gymDetailaddress;
 	private int matchCount;
 	private String gymBank;
 	private String gymAccount;
@@ -33,5 +31,4 @@ public class Gym {
 	private int gymStatus;
 	private String reason;
 	private String userId;
-
 }

@@ -18,7 +18,7 @@
 		#{phone},
 		#{zipcode},
 		#{address},
-		#{detailAddress},
+		#{detailaddress},
 		default,
 		default,
 		default,
@@ -39,18 +39,15 @@
 	<update id="updateMember">
 		update member
 		set
-		user_id = #{userId},
-		user_pw
-		=#{userPw},
-		user_name =#{userName},
-		user_rnn =#{userRnn},
-		phone =
-		#{phone},
-		user_email = #{userEmail},
-		zipcode = #{zipcode},
-		address =
-		#{address},
-		detailAddress = #{detailAddress}
+		user_id       = #{userId},
+		user_pw       = #{userPw},
+		user_name     = #{userName},
+		user_rnn      = #{userRnn},
+		phone         = #{phone},
+		user_email    = #{userEmail},
+		zipcode       = #{zipcode},
+		address       = #{address},
+		detailaddress = #{detailaddress}
 		where user_id = #{userId}
 	</update>
 
@@ -58,15 +55,14 @@
 		update member
 		set
 		user_pw = #{userPw}
-		where user_id =
-		#{userId}
+		where user_id = #{userId}
 	</update>
 
 	<select id="selectTwoMember" resultMap="memberMap">
 		select *
 		from member
 		where
-		user_Email = #{userEmail}
+		user_email = #{userEmail}
 	</select>
 
 	<!--<delete id="deleteMember" parameterType="String"> delete from member 
@@ -79,7 +75,7 @@
 		where user_id = #{userId}
 	</delete>
 	
-	   <update id="statusUpdate">
+   <update id="statusUpdate">
       update member
          set
          user_status = 2

@@ -64,7 +64,7 @@
 					<input type="text" id="addr" name="address" value="${member.address}" readonly>
 				</td>
 				<td>
-					<input id="detailAddr" name="detailAddress" style="width:220px;" value="${member.detailAddress}">
+					<input id="detailAddr" name="detailAddress" style="width:220px;" value="${member.detailaddress}">
 				</td>
 				<td>
 					<select name="userType" style="width:75px;">

@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 
 import com.kh.spring.gym.model.vo.Gym;
-import com.kh.spring.manager.model.vo.Criteria;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.profile.model.vo.Profile;
 
@@ -33,9 +32,4 @@ public interface ManagerService {
 	Profile selectOneProfile(String userId);
 
 	int mnProfileUpdate(Profile profile);
-
-	List<Criteria> mnMemberSearch(String searchType, String keyword);
-
-
-
 }

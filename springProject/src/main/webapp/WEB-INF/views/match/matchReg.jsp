@@ -11,6 +11,29 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1a1baddfc194b964c714fcbe3f6d1aa&libraries=services"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/matchReg.css?v=<%=System.currentTimeMillis()%>">
+<style>
+	table {
+		width: 100%;
+	}
+	td {
+		width: 14%;
+		height: 60px;
+		text-align: center;
+	}
+</style>
+<script>
+	function getDayOfWeek(){ //ex) getDayOfWeek('2022-06-13')	
+	    const week = ['일', '월', '화', '수', '목', '금', '토'];
+	    const dayOfWeek = week[new Date().getDay()];
+	
+	    return dayOfWeek;
+	}
+	
+	let today = new Date();
+	console.log(today);
+	
+	getDayOfWeek(today);
+</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -23,15 +46,19 @@
 </div>
 
 <div>
-	<table>
-		<tr>
-			<th>아아</th>
-		</tr>
-		<c:forEach items="${gymList}" var="gym">
-			<tr>
-		        <td>${gym.gymName}</td>
-			</tr>
+	<table border="1">
+ 		<tr>
+		<c:forEach items="${dateFilter}" var="item" varStatus = "d">
+			<td>
+				<span>${item.yoil}</span>
+				<p>${item.date}</p>
+			</td>
+			<c:if test="${d.index eq 6}">
+				</tr>
+				<tr>
+			</c:if>
 		</c:forEach>
+		</tr>
 	</table>
 </div>
 

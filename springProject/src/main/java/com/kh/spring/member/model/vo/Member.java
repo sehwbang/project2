@@ -23,10 +23,10 @@ public class Member {
 	   private String phone;
 	   private String zipcode;
 	   private String address;
-	   private String detailAddress;
+	   private String detailaddress;
 	   private String userType;
 	   private int userStatus;
-	   private int userCon;
+	   private int userControl;
 	   private Date userRegdate;
 	   private int userInfo;
 	}
