@@ -24,7 +24,7 @@ public class Gym {
 	private String gymPhone;
 	private String gymZipcode;
 	private String gymAddress;
-	private String gymDetailaddress;
+	private String gymDetailAddress;
 	private int matchCount;
 	private String gymBank;
 	private String gymAccount;

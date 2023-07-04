@@ -41,7 +41,7 @@ public class SupportController {
 	
 	@Autowired
 	private ResourceLoader resourceLoader;
-
+	
 	@GetMapping("/support.su")
 	public String support() {
 		return "support/vincero";

@@ -196,6 +196,7 @@
 			<version>${org.springframework.security-version}</version>
 		</dependency>
 	
+
 	<!--  #9. jsonView관련 의존 -->
 	<dependency>
 		<groupId>net.sf.json-lib</groupId>
@@ -219,6 +220,7 @@
 	  <version>2.8.7</version>
 	</dependency>
 	</dependencies>
+    
     <build>
         <plugins>
             <plugin>

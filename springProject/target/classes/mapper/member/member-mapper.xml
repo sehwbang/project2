@@ -23,6 +23,7 @@
 		#{userStatus},
 		default,
 		default,
+		#{userStatus},
 		#{userInfo}
 		)
 	</insert>

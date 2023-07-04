@@ -33,7 +33,7 @@ import com.kh.spring.match.model.vo.MatchRegInfo;
 @Controller
 @RequestMapping("/match")
 public class MatchController {
-	
+		
 	@Autowired
 	private MatchService matchService;
 	

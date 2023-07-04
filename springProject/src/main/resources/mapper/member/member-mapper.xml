@@ -23,10 +23,10 @@
 		#{userStatus},
 		default,
 		default,
+		#{userStatus},
 		#{userInfo}
 		)
 	</insert>
-
 
 	<select id="selectOneMember" resultMap="memberMap">
 		select user_id, user_pw, substr(user_rnn,1,8)||'******' as user_rnn, user_name, user_email,
