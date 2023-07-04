@@ -3,87 +3,151 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kh.spring.member.model.dao.MemberDao">
-	<resultMap type="member" id="memberMap"></resultMap>
-
-	<insert id="insertMember">
-		insert into member
-		values (
-		#{userId},
-		#{userPw},
-		#{userRnn},
-		#{userName},
-		#{userGender},
-		#{userEmail},
-		#{phone},
-		#{zipcode},
-		#{address},
-		#{detailAddress},
-		#{userInfo},
-		default,
-		default,
-		default,
-		#{userStatus}
-		)
-	</insert>
-
-
-	<select id="selectOneMember" resultMap="memberMap">
-		select user_id, user_pw,substr(user_rnn,1,8)||'******' as user_rnn, user_name, user_email,
-		phone, zipcode, address, detailaddress, user_status
-		from member
-		where
-		user_id=#{userId}
-	</select>
-
-	<update id="updateMember">
-		update member
-		set
-		user_id = #{userId},
-		user_pw
-		=#{userPw},
-		user_name =#{userName},
-		user_rnn =#{userRnn},
-		phone =
-		#{phone},
-		user_email = #{userEmail},
-		zipcode = #{zipcode},
-		address =
-		#{address},
-		detailAddress = #{detailAddress}
-		where user_id = #{userId}
-	</update>
-
-	<update id="pwupdateMember">
-		update member
-		set
-		user_pw = #{userPw}
-		where user_id =
-		#{userId}
-	</update>
-
-	<select id="selectTwoMember" resultMap="memberMap">
-		select *
-		from member
-		where
-		user_Email = #{userEmail}
-	</select>
-
-	<!--<delete id="deleteMember" parameterType="String"> delete from member 
-		where user_id=#{userId} update member set m_status = '0' where user_id=#{userId} 
-		</delete> -->
-
-	<delete id="deleteMember">
-		delete 
-		from member
-		where user_id = #{userId}
-	</delete>
+<mapper namespace="com.kh.spring.manager.model.dao.ManagerDao">
+	<resultMap type="gym" id="managerMap"></resultMap>
 	
-	   <update id="statusUpdate">
-      update member
-         set
-         user_status = 2
-      where user_id = #{userId}
-   </update>
+	<select id="coachId" resultType="String">
+		select m.user_id
+		from gym g
+		join member m on (m.phone = g.coach_phone)
+		order by gym_no desc
+	</select>
+	
+	<select id="selectGymList" resultMap="managerMap">
+		select *
+		  from gym
+		 order by gym_no desc
+	</select>
+
+	
+	<select id="selectTotalRecord" resultType="_int">
+		select count(*)
+		  from gym
+	</select>
+	
+	<select id="selectOneGym" resultMap="managerMap">
+		select *
+		  from gym
+		 where gym_no = #{gymNo}
+	</select>
+	
+	<update id="mnGymUpdate">
+		update gym
+		   set gym_name = #{gymName},
+		   	   gym_type = #{gymType},
+		   	   gym_boss = #{gymBoss},
+		   	   gym_coach = #{gymCoach},
+		   	   coach_phone = #{coachPhone},
+		   	   gym_phone = #{gymPhone},
+		   	   gym_zipcode = #{gymZipcode},
+		   	   gym_address = #{gymAddress},
+		   	   gym_detailaddress = #{gymDetailaddress},
+		   	   match_count = #{matchCount},
+		   	   gym_bank = #{gymBank},
+		   	   gym_account = #{gymAccount},
+		   	   business_no = #{businessNo},
+		   	   gym_regdate = #{gymRegdate},
+		   	   gym_status = #{gymStatus},
+		   	   reason = #{reason},
+		   	   user_id = #{userId}
+		 where gym_no = #{gymNo}
+	</update>
+
+
+	<resultMap type="member" id="mnMemberMap"></resultMap>
+	
+	<select id="selectMemberList" resultMap="mnMemberMap">
+		select *
+		  from member
+		 order by user_id desc 
+	</select>
+	
+	<select id="selectTotalRecordMember" resultType="_int">
+		select count(*)
+		  from member
+	</select>
+	
+	<select id="selectOneMember" resultMap="mnMemberMap">
+		select *
+		  from member
+		 where user_id = #{userId}
+	</select>
+	
+	<update id="mnMemberUpdate">
+		update member
+		   set user_id = #{userId},
+		   	   user_pw = #{userPw},
+		   	   user_name = #{userName},
+		   	   user_gender = #{userGender},
+		   	   user_email = #{userEmail},
+		   	   phone = #{phone},
+		   	   zipcode = #{zipcode},
+		   	   address = #{address},
+		   	   detailaddress = #{detailAddress},
+		   	   user_type = #{userType},
+		   	   user_status = #{userStatus},
+		   	   user_control = #{userControl},
+		   	   user_regdate = #{userRegdate}
+		 where user_id = #{userId}
+	</update>	
+<!--	
+	<select id="mnMemberSearch" resultMap="mnMemberMap">
+	 	select *
+	 	  where #{searchType} Like '%'||#{keyword}||'%'
+ 	 <if test='searchType.equals("userId")'>
+	 	 WHERE user_id LIKE '%'||#{keyword}||'%'
+	 </if>
+	 <if test='searchType.equals("email")'>
+	  	WHERE user_email LIKE '%'||#{keyword}||'%'
+	 </if>
+	 <if test='searchType.equals("userName")'>
+	  WHERE user_name LIKE '%'||#{keyword}||'%'
+	 </if>
+	 <if test='searchType.equals("gender")'>
+	  WHERE user_gender LIKE '%'||#{keyword}||'%'
+	 </if>
+	 <if test='searchType.equals("userType")'>
+	  WHERE user_type LIKE '%'||#{keyword}||'%'
+	 </if>
+	 <if test='searchType.equals("userStatus")'>
+	  WHERE user_status LIKE '%'||#{keyword}||'%'
+	 </if>
+	 <if test='searchType.equals("userRegdate")'>
+	  WHERE user_regdate LIKE '%'||#{keyword}||'%'
+	 </if> 
+	 order by user_id desc
+	</select> 
+-->	
+	
+	<resultMap type="profile" id="mnProfileMap"></resultMap>
+	
+	<select id="selectOneProfile" resultMap="mnMemberMap">
+		select *
+		  from profile
+		 where user_id = #{userId}
+	</select>
+	
+	<update id="mnProfileUpdate">
+		update profile
+		   set user_id = #{userId},
+		   	   pro_nick = #{proNick},
+		   	   pro_photo = #{proPhoto},
+		   	   pro_major = #{proMajor},
+		   	   level = #{proLevel},
+		   	   pro_heighth = #{proHeight},
+		   	   pro_weight = #{proWeight},
+		   	   win = #{win},
+		   	   lose = #{lose},
+		   	   official = #{official},
+		   	   personal = #{personal},
+		   	   note = #{note},
+		   	   warn1 = #{warn1},
+		   	   warn2 = #{warn2},
+		   	   warn3 = #{warn3},
+		   	   warn4 = #{warn4}
+		 where user_id = #{userId}
+	</update>	
+	
+
 	
 </mapper>

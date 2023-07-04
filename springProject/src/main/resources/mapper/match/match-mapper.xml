@@ -12,10 +12,10 @@
 	<resultMap type="Match" id="MatchMap"></resultMap>
 	
 	<select id="selectScheduleList" resultMap="scheduleInfoMap">
-		SELECT S.GYM_NO, G.GYM_NAME, G.GYM_ADDRESS, G.GYM_DETAILADDRESS, S.MATCHDATE, S.MATCHTIME, S.CODE
+		SELECT S.GYM_NO, G.GYM_NAME, G.GYM_ADDRESS, G.GYM_DETAILADDRESS, S.MATCH_DATE, S.MATCH_TIME, S.CODE
 		FROM SCHEDULE S
 		JOIN GYM G ON S.GYM_NO = G.GYM_NO
-		ORDER BY S.GYM_NO, S.MATCHDATE, S.MATCHTIME
+		ORDER BY S.GYM_NO, S.MATCH_DATE, S.MATCH_TIME
 	</select>
 	
 	<insert id="registerMatch">

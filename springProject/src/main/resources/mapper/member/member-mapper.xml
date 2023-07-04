@@ -19,11 +19,11 @@
 		#{zipcode},
 		#{address},
 		#{detailAddress},
-		#{userInfo},
 		default,
 		default,
 		default,
-		#{userStatus}
+		#{userStatus},
+		#{userInfo}
 		)
 	</insert>
 
