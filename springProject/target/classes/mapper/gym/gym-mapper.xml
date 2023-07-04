@@ -4,9 +4,5 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kh.spring.gym.model.dao.GymDao">
-	<resultMap type="gym" id="gymMap"></resultMap>
-	
-	<insert id="insertJoin">
 
-	</insert>
 </mapper>

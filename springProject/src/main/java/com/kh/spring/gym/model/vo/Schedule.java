@@ -18,5 +18,6 @@ public class Schedule {
 	private String code;
 	private Date matchdate;
 	private String matchtime;
-	private String user_id;
+	private String userId;
+	private int gymNo;
 }

@@ -32,5 +32,6 @@ public class Gym {
 	private Date gymRegdate;
 	private int gymStatus;
 	private String reason;
+	private String userId;
 
 }

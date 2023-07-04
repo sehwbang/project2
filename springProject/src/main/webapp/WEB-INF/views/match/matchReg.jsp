@@ -9,9 +9,91 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1a1baddfc194b964c714fcbe3f6d1aa&libraries=services"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/matchReg.css?v=<%=System.currentTimeMillis()%>">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
+<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <script>
+      $(document).ready( function() {
+        $('.slider').slick( {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 3,
+                arrows: false,
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 1,
+                arrows: false,
+              }
+            }
+          ]
+        });
+      });
+      
+      const clickOrDragDetection = () => {
+    		const items = document.querySelectorAll('.slick-slide .item');
+
+    		let moved;		//moved는 클릭 후, 움직일 때 true, 클릭만 할 때 false
+    		let downListener = () => {
+    	  		moved = false;
+    	  	}
+
+    	    let moveListener = () => {
+    	      moved = true;
+    	    }
+    	  
+    	  	let upListener = () => {	//moved 여부로 판단
+    	      if (moved) {
+    	          console.log('moved');
+    	      } else {
+    	          console.log('not moved');
+    	      }
+    	  	}
+    	  
+    	    // 이벤트 등록
+    	    for(const item of items) {
+    	      	item.addEventListener('mousedown', downListener);
+    	      	item.addEventListener('mousemove', moveListener)
+    	      	item.addEventListener('mouseup', upListener);
+    	    }
+
+    		// 이벤트 해제
+    		return () => {
+    	      for(const item of items) 
+    			item.removeEventListener('mousedown', downListener)
+    				.removeEventListener('mousemove', moveListener)
+    	            .removeEventListener('mouseup', upListener);
+    		}
+    	}
+    </script>
+    <style>
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      .slider {
+        width: 80%;
+        margin: 0px auto;
+      }
+      .slider .slick-slide {
+        margin: 10px;
+      }
+      .slick-prev:before, .slick-next:before {
+        color: #444444;
+      }
+      h3 {
+      	text-align: center;	
+      }
+    </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -22,20 +104,6 @@
 	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchReg.ma">매치 등록</a></div>
 	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchList.ma">상대방 찾기</a></div>
 </div>
-
-<div>
-	<table>
-		<tr>
-			<th>아아</th>
-		</tr>
-		<c:forEach items="${gymList}" var="gym">
-			<tr>
-		        <td>${gym.gymName}</td>
-			</tr>
-		</c:forEach>
-	</table>
-</div>
-
 
 <!-- 지도를 표시할 div 입니다 -->
 <div id="map" style="width:70%; height:350px; float:left;"></div>
@@ -201,101 +269,99 @@
 		
 	////////////////////////////////////////////////////////////////////////	
 		
-		var matchList = [];
-	
-		<c:forEach items="${inSchedList}" var="inSchedule">
-			var codeValue = {};
-			
-			codeValue.code = '${inSchedule.code}';
-			codeValue.value = 'N';	
-			codeValue.gymNo = '${inSchedule.gymNo}';
-			codeValue.matchday = '${inSchedule.matchday}';
-			codeValue.matchtime = '${inSchedule.time}';
-			
-			matchList.push(codeValue);
-		</c:forEach>
-		
-		console.log("matchList....");
-		console.log(matchList);
-		
-		function setMarkerOverlay(gymNo, gymName, code, matchdate, matchday, time) {
-			console.log(gymNo, gymName, code, matchdate, matchday, time);
-			//if문으로 담았는지 조건 체크해야 함
-			//없으면 담아주고, 화면에 띄우기
-			//있으면 alert창 경고
-	
-			//matchList에 코드가 있고 vlaue가 N이면 이미 담겨 있는 모양이니까 담겨있다고 alert. 
-			if(matchList.some(data => data.code == code && data.value == "N")) {
-				alert("이미 담겨있습니다.");
-			} else {									
-				let content = $("#register").html();
-					content += "<tr id='"+ code + "'>"
-							+ 	"<td>" + gymName + "</td>"
-							+   "<td>" + matchdate + "</td>"
-							+   "<td>" + time + "</td>"
-							+ 	"<td><button type='button' style='align:right;' onclick='deleteTime(`"+ code +"`);'>삭제</button></td>"
-							+  "</tr>";
-								
-				console.log("content에 있는 내용 : " + content);
-				
-				//document.getElementById("register").value = content;
-				$("#register").html(content);
-				
-				console.log("table안에 들어갈 내용 : " + content);
-				
-				//matchList에 이미 담겨있는 코드이면
-				if(matchList.some(data => data.code == code)) {
-					//코드 찾아서(ex."user01202306250900"   elementIndex 변수에 담고
-					elementIndex = matchList.findIndex((obj => obj.code == code));
-					//ex)"user01202306250900"의 value가 Y인 거를 N으로 바꾸기 --> 다시 담기
-					matchList[elementIndex].value = "N";
-				//matchList에 담겨있지 않은 코드면
-				} else {
-					// 새로 만들어
-					var codeValue = {};
-					codeValue.code = code;
-					codeValue.value = "N";	
-					codeValue.gymNo = gymNo;
-					codeValue.matchday = matchday;
-					codeValue.matchtime = time;
-					matchList.push(codeValue);
-				}
-				console.log(matchList);
-			}
-		}
-		
-		function deleteTime(code) {
-			alert("아아");
-			console.log(code);
-			$("#"+code).remove();
-			//matchList.map((item) => item.code === code ? { ...item, value: "Y"} : item);
-			
-			elementIndex = matchList.findIndex((obj => obj.code == code));	
-			console.log("Before update: ", matchList[elementIndex]);
-			matchList[elementIndex].value = "Y";
-			
-			console.log(matchList);
-		}
+	var matchList = [];
 
-		function registerMatch() {
+	<c:forEach items="${inSchedList}" var="inSchedule">
+		var codeValue = {};
+		
+		codeValue.code = '${inSchedule.code}';
+		codeValue.value = 'N';	
+		codeValue.gymNo = '${inSchedule.gymNo}';
+		codeValue.matchday = '${inSchedule.matchday}';
+		codeValue.matchtime = '${inSchedule.time}';
+		
+		matchList.push(codeValue);
+	</c:forEach>
+	
+	console.log("matchList....");
+	console.log(matchList);
+	
+	function setMarkerOverlay(gymNo, gymName, code, matchdate, matchday, time) {
+		console.log(gymNo, gymName, code, matchdate, matchday, time);
+		//if문으로 담았는지 조건 체크해야 함
+		//없으면 담아주고, 화면에 띄우기
+		//있으면 alert창 경고
+
+		//matchList에 코드가 있고 vlaue가 N이면 이미 담겨 있는 모양이니까 담겨있다고 alert. 
+		if(matchList.some(data => data.code == code && data.value == "N")) {
+			alert("이미 담겨있습니다.");
+		} else {									
+			let content = $("#register").html();
+				content += "<tr id='"+ code + "'>"
+						+ 	"<td>" + gymName + "</td>"
+						+   "<td>" + matchdate + "</td>"
+						+   "<td>" + time + "</td>"
+						+ 	"<td><button type='button' style='align:right;' onclick='deleteTime(`"+ code +"`);'>삭제</button></td>"
+						+  "</tr>";
+							
+			console.log("content에 있는 내용 : " + content);
+	
+			$("#register").html(content);
+		
+			console.log("table안에 들어갈 내용 : " + content);
+			
+			//matchList에 이미 담겨있는 코드이면
+			if(matchList.some(data => data.code == code)) {
+				//코드 찾아서(ex."user01202306250900"   elementIndex 변수에 담고
+				elementIndex = matchList.findIndex((obj => obj.code == code));
+				//ex)"user01202306250900"의 value가 Y인 거를 N으로 바꾸기 --> 다시 담기
+				matchList[elementIndex].value = "N";
+			//matchList에 담겨있지 않은 코드면
+			} else {
+				// 새로 만들어
+				var codeValue = {};
+				codeValue.code = code;
+				codeValue.value = "N";	
+				codeValue.gymNo = gymNo;
+				codeValue.matchday = matchday;
+				codeValue.matchtime = time;
+				matchList.push(codeValue);
+			}
 			console.log(matchList);
-			//alert('hoho~~2');
- 			$.ajax({
-				url: "${pageContext.request.contextPath}/match/register.do",
-				type: "post",
-				data:  JSON.stringify(matchList),
-				dataType: "JSON",
-		        contentType : "application/json",
-				success : function(data, status, xhr) {
-					console.log(data);
-					alert(data.msg);
-				},
-				error : function(xhr, status, error) {
-					alert(status);
-				}
-			});
 		}
-	</script>
+	}
+	
+	function deleteTime(code) {
+		console.log(code);
+		$("#"+code).remove();
+		matchList.map((item) => item.code === code ? { ...item, value: "Y"} : item);
+		
+		elementIndex = matchList.findIndex((obj => obj.code == code));	
+		console.log("Before update: ", matchList[elementIndex]);
+		matchList[elementIndex].value = "Y";
+		
+		console.log(matchList);
+	}
+
+	function registerMatch() {
+		console.log(matchList);
+		//alert('hoho~~2');
+			$.ajax({
+			url: "${pageContext.request.contextPath}/match/register.do",
+			type: "post",
+			data:  JSON.stringify(matchList),
+			dataType: "JSON",
+	        contentType : "application/json",
+			success : function(data, status, xhr) {
+				console.log(data);
+				alert(data.msg);
+			},
+			error : function(xhr, status, error) {
+				alert(status);
+			}
+		});
+	}
+</script>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

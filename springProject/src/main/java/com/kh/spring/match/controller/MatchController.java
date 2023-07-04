@@ -82,7 +82,7 @@ public class MatchController {
 		
 		
 		List<MatchInfo> scheduleList = matchService.selectScheduleList();
-		System.out.println("스케줄 : " + scheduleList.get(0));
+		//System.out.println("스케줄 : " + scheduleList.get(0));
 		
 		String tempGymNo = "0";
 		String matchdate1 = "";
