@@ -31,6 +31,7 @@ import com.kh.spring.support.model.vo.Question;
 
 @Controller
 @RequestMapping("/support")
+@SessionAttributes({ "loginMember" })
 public class SupportController {
 	
 	@Autowired

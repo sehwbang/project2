@@ -24,7 +24,7 @@ import com.kh.spring.gym.model.vo.Gym;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.profile.model.vo.Profile;
 import com.kh.spring.manager.model.service.ManagerService;
-import com.kh.spring.manager.model.vo.Criteria;
+
 
 
 @Controller
@@ -122,23 +122,7 @@ public class ManagerController {
 		return "redirect:/manager/mnMemberList.mn";
 	}
 	
-	// 회원 검색
-	@RequestMapping("/mnMemberList.mn")
-	public void mnMemberSearch(
-			@RequestParam(defaultValue="1") int startPage, 
-			@RequestParam(defaultValue="userName") String searchType, 
-			@RequestParam(defaultValue="") String keyword,
-			Model model
-			) throws Exception {
-		 int count = 1000;
-		
-		Criteria criteria = new Criteria(searchType, keyword);
-		
-        
-        List<Criteria> mnMemberSearch = managerService.mnMemberSearch(searchType,keyword);
-        
-		model.addAttribute("mnMemberSearch", mnMemberSearch);
-    }
+	
 	
 }
 

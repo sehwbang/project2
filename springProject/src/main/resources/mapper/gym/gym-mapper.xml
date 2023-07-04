@@ -40,6 +40,7 @@
 			#{MatchDate},
 			#{MatchTime},
 			#{userId}
+			#{gymNo}
 		)
 	</insert>
 	
