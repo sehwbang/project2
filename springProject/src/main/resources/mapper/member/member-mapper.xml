@@ -20,6 +20,7 @@
 		#{address},
 		#{detailAddress},
 		default,
+		#{userStatus},
 		default,
 		default,
 		#{userStatus},
@@ -27,9 +28,8 @@
 		)
 	</insert>
 
-
 	<select id="selectOneMember" resultMap="memberMap">
-		select user_id, user_pw,substr(user_rnn,1,8)||'******' as user_rnn, user_name, user_email,
+		select user_id, user_pw, substr(user_rnn,1,8)||'******' as user_rnn, user_name, user_email,
 		phone, zipcode, address, detailaddress, user_status
 		from member
 		where
@@ -66,7 +66,7 @@
 		select *
 		from member
 		where
-		user_Email = #{userEmail}
+		user_email = #{userEmail}
 	</select>
 
 	<!--<delete id="deleteMember" parameterType="String"> delete from member 
@@ -79,7 +79,7 @@
 		where user_id = #{userId}
 	</delete>
 	
-	   <update id="statusUpdate">
+	 <update id="statusUpdate">
       update member
          set
          user_status = 2
