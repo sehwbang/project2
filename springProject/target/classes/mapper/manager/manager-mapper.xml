@@ -126,7 +126,7 @@
 		  from profile
 		 where user_id = #{userId}
 	</select>
-	
+
 	<update id="mnProfileUpdate">
 		update profile
 		   set user_id = #{userId},
@@ -147,7 +147,5 @@
 		   	   warn4 = #{warn4}
 		 where user_id = #{userId}
 	</update>	
-	
 
-	
 </mapper>

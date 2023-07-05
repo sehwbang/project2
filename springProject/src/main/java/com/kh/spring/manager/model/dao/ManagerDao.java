@@ -12,7 +12,6 @@ import com.kh.spring.profile.model.vo.Profile;
 @Mapper
 public interface ManagerDao {
 
-	
 	// 체육관테이블
 	int selectTotalRecord();
 
@@ -37,4 +36,5 @@ public interface ManagerDao {
 	Profile selectOneProfile(String userId);
 
 	int mnProfileUpdate(Profile profile);
+
 }

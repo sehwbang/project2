@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.gym.model.vo.Gym;
 import com.kh.spring.manager.model.dao.ManagerDao;
+
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.profile.model.vo.Profile;
 
@@ -66,4 +67,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public int mnProfileUpdate(Profile profile) {
 		return managerDao.mnProfileUpdate(profile);
 	}
+
+	
+
 }

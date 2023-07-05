@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.gym.model.dao.GymDao;
@@ -27,6 +28,7 @@ import com.kh.spring.gym.model.vo.Schedule;
 
 @Controller
 @RequestMapping("/gym")
+
 public class GymController {
 	
 	@Autowired
@@ -96,12 +98,15 @@ public class GymController {
 	
 	@GetMapping("/scheduleReg.gym")
 	public String scheduleReg(@RequestParam String userId, @RequestParam String[] totalCodes, Model model) {
-		System.out.println(Arrays.toString(totalCodes));
 		System.out.println(userId);
 		String dateStr = "";
 		String dateTime = "";
 		Date date = new Date();
 		int sum = 0;
+		
+		Gym gym = gymService.selectGymNo(userId);
+		System.out.println(gym.getGymNo());
+		int gymNo = gym.getGymNo();
 		for(int i=0; i<totalCodes.length; i++) {
 			Schedule schedule = new Schedule();
 			schedule.setUserId(userId);
@@ -117,6 +122,7 @@ public class GymController {
 			}
 			schedule.setMatchDate(date);
 			schedule.setMatchTime(dateTime);
+			schedule.setGymNo(gymNo);
 			
 			try {
 				result = gymService.insertSchedule(schedule);

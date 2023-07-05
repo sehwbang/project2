@@ -26,6 +26,7 @@ import com.kh.spring.profile.model.vo.Profile;
 import com.kh.spring.manager.model.service.ManagerService;
 
 
+
 @Controller
 @RequestMapping("/manager")
 public class ManagerController {
@@ -120,5 +121,6 @@ public class ManagerController {
 		redirectAttr.addFlashAttribute("msg", "프로필 정보수정 완료");
 		return "redirect:/manager/mnMemberList.mn";
 	}
+	
 	
 }

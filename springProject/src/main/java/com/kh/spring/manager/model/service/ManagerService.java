@@ -32,4 +32,8 @@ public interface ManagerService {
 	Profile selectOneProfile(String userId);
 
 	int mnProfileUpdate(Profile profile);
+
+
+
+
 }

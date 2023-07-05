@@ -15,4 +15,6 @@ public interface GymService {
 
 	int deleteSchedule(Schedule schedule);
 
+	Gym selectGymNo(String userId);
+
 }
