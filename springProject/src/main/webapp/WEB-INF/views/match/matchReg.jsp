@@ -22,17 +22,25 @@
 	}
 </style>
 <script>
-	function getDayOfWeek(){ //ex) getDayOfWeek('2022-06-13')	
-	    const week = ['일', '월', '화', '수', '목', '금', '토'];
-	    const dayOfWeek = week[new Date().getDay()];
-	
-	    return dayOfWeek;
+	function dateFilter(day) {
+		console.log(day);
+		
+		let sendData = {"day" : day};
+		console.log(sendData);
+		
+		$.ajax({
+			url: "matchReg.ma",
+			type: "get",
+			data: sendData,
+			contentType : "application/json",
+			success : function(data) {
+				console.log("성공");
+			},
+			error : function(data) {
+				console.log("ajax 통신 에러");
+			}
+		});
 	}
-	
-	let today = new Date();
-	console.log(today);
-	
-	getDayOfWeek(today);
 </script>
 </head>
 <body>
@@ -49,7 +57,7 @@
 	<table border="1">
  		<tr>
 		<c:forEach items="${dateFilter}" var="item" varStatus = "d">
-			<td>
+			<td id="dateFilter" onclick="dateFilter('${item.day}');">
 				<span>${item.yoil}</span>
 				<p>${item.date}</p>
 			</td>

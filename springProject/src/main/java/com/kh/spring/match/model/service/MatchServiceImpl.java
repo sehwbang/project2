@@ -20,8 +20,9 @@ public class MatchServiceImpl implements MatchService{
 	private MatchDao matchDao;
 
 	@Override
-	public List<MatchInfo> selectScheduleList() {
-		return matchDao.selectScheduleList();
+	public List<MatchInfo> selectScheduleList(String matchDate) {
+		System.out.println("ServiceImpl = selectScheduleList : " + matchDate);
+		return matchDao.selectScheduleList(matchDate);
 	}
 
 	@Override
@@ -40,8 +41,8 @@ public class MatchServiceImpl implements MatchService{
 	}
 
 	@Override
-	public List<MatchInfo> selectMatchList(String userId1) {
-		return matchDao.selectMatchList(userId1);
+	public List<MatchInfo> selectMatchList(String userId1, String matchDate) {
+		return matchDao.selectMatchList(userId1, matchDate);
 	}
 
 }

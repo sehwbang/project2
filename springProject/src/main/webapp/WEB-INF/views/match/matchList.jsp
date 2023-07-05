@@ -20,6 +20,28 @@
 	}
 </style>
 <script>
+	function redirectToToday() {
+		var today = new Date();
+		var year = today.getFullYear();
+		var month = today.getMonth() + 1;
+		var day = today.getDate();
+		
+		var url = "${pageContext.request.contextPath}/match/matchReg.ma?day=" + year + "-" + month + "-" + day;
+		
+		window.location.href = url;
+	}
+/* $(document).ready(function check_today(indexs, weeks, dates){
+    if(dates > today_days){
+        //인덱스가 오늘의 날짜보다 크다면(미래: 일정 추가 가능)
+        weeks[indexs].style.backgroundColor = '#FFEFD5'; //CSS 불러오기
+    } else if(dates == today_days){
+         //인덱스가 오늘의 날짜와 같다면(현재: 일정 추가 가능)
+         weeks[indexs].style.backgroundColor = '#DB7093'; //CSS 불러오기
+    } else if(dates < today_days){
+        //인덱스가 오늘의 날짜보다 작다면(지나온 날: 일정 추가 불가)
+        weeks[indexs].style.backgroundColor = 'gray'; //CSS 불러오기
+    }
+} */
 /*	$(document).ready(function getDayOfWeek(){ //ex) getDayOfWeek('2022-06-13')	
   		const sunday = new Date('2023-07-02');
  		const sunday2 = new Date('2023-07-02');
@@ -107,49 +129,10 @@
 <div id="nav2">
 	<div id="matching"></div>
 	<div id="matching"></div>
-	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchReg.ma">매치 등록</a></div>
+	<div id="gym"><a onclick="redirectToToday();">매치 등록</a></div>
 	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchList.ma">상대방 찾기</a></div>
 </div>
 
-<div>
-	<table border="1">
-<!-- 		<tr>
-			<td>
-				<p>일</p>
-				<span id="sun"></span>
-			</td>
-			<td>
-				<p>월</p>
-				<span id="mon"></span>
-			</td>
-			<td>
-				<p>화</p>
-				<span id="tue"></span>
-			</td>
-			<td>
-				<p>수</p>
-				<span id="wed"></span>
-			</td>
-			<td>
-				<p>목</p>
-				<span id="thu"></span>
-			</td>
-			<td>
-				<p>금</p>
-				<span id="fri"></span>
-			</td>
-			<td>
-				<p>토</p>
-				<span id="sat"></span>
-			</td>
-		</tr> -->
-		<c:forEach items="dateFilter" var="dates" varStatus = "d">
-	 		<tr>
-				<td>${d.index}</td>
-			</tr>
-		</c:forEach>
-	</table>
-</div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
