@@ -20,26 +20,15 @@
 		height: 60px;
 		text-align: center;
 	}
+	.pre {
+		background-color: grey;
+	}
 </style>
 <script>
 	function dateFilter(day) {
-		console.log(day);
+		var url = "${pageContext.request.contextPath}/match/matchReg.ma?day="+day;
 		
-		let sendData = {"day" : day};
-		console.log(sendData);
-		
-		$.ajax({
-			url: "matchReg.ma",
-			type: "get",
-			data: sendData,
-			contentType : "application/json",
-			success : function(data) {
-				console.log("성공");
-			},
-			error : function(data) {
-				console.log("ajax 통신 에러");
-			}
-		});
+		window.location.href = url;
 	}
 </script>
 </head>
@@ -49,7 +38,7 @@
 <div id="nav2">
 	<div id="matching"></div>
 	<div id="matching"></div>
-	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchReg.ma">매치 등록</a></div>
+	<div id="gym"><a onclick="dateFilter('');">매치 등록</a></div>
 	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchList.ma">상대방 찾기</a></div>
 </div>
 
@@ -57,10 +46,20 @@
 	<table border="1">
  		<tr>
 		<c:forEach items="${dateFilter}" var="item" varStatus = "d">
-			<td id="dateFilter" onclick="dateFilter('${item.day}');">
-				<span>${item.yoil}</span>
-				<p>${item.date}</p>
-			</td>
+			<c:if test="${item.day lt item.today}">
+				<td class="pre">
+					<span>${item.yoil}</span>
+					<p>${item.date}</p>
+				</td>
+			</c:if>
+			
+			<c:if test="${item.day ge item.today}">
+				<td id="dateFilter" onclick="dateFilter('${item.day}');">
+					<span>${item.yoil}</span>
+					<p>${item.date}</p>
+				</td>
+			</c:if>
+			
 			<c:if test="${d.index eq 6}">
 				</tr>
 				<tr>

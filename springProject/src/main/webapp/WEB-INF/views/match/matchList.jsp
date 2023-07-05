@@ -21,12 +21,7 @@
 </style>
 <script>
 	function redirectToToday() {
-		var today = new Date();
-		var year = today.getFullYear();
-		var month = today.getMonth() + 1;
-		var day = today.getDate();
-		
-		var url = "${pageContext.request.contextPath}/match/matchReg.ma?day=" + year + "-" + month + "-" + day;
+		var url = "${pageContext.request.contextPath}/match/matchReg.ma?day=";
 		
 		window.location.href = url;
 	}

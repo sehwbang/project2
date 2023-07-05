@@ -53,16 +53,12 @@ public class MatchController {
 	@RequestMapping(value="/matchReg.ma", method = RequestMethod.GET)
 	public String matchReg(HttpServletRequest request, Model model) {	
 		String matchDate = request.getParameter("day");
-		System.out.println(matchDate);
-		
-//		SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-//		System.out.println(formatter2);
-//		try {
-//			Date date = formatter2.parse(matchDate);
-//			System.out.println(date);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
+		if(matchDate == null || "".equals(matchDate)) {
+			LocalDateTime today = LocalDateTime.now();
+			System.out.println(today);
+			matchDate = today.toLocalDate().toString();
+		}
+		System.out.println("matchDate : " + matchDate);
 		
 		//matchdateList포맷용 ex.2023/07/05
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d(E)");
@@ -277,6 +273,7 @@ public class MatchController {
 		List<HashMap<String, String>> result = new ArrayList<>();
 		//오늘 날짜(요일) 구하기
 		LocalDateTime today = LocalDateTime.now();
+		String today2 = today.toLocalDate().toString();
 		//System.out.println(today);
 		DayOfWeek yoil = today.getDayOfWeek();
 		//System.out.println(yoil);
@@ -315,6 +312,7 @@ public class MatchController {
 			yoilTemp.put("date", dateTemp);
 			yoilTemp.put("day", dayTemp);
 			yoilTemp.put("yoil", yoil3);
+			yoilTemp.put("today", today2);
 
 			result.add(yoilTemp);
 		}		
