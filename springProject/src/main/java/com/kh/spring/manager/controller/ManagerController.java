@@ -137,35 +137,6 @@ public class ManagerController {
 		redirectAttr.addFlashAttribute("msg", profile.getUserId() + "회원 프로필수정 완료");
 		return "redirect:/manager/mnMemberList.mn";
 	}
-	
-	// 회원 검색
-	/*
-	 * @RequestMapping("/mnMemberList.mn") public void mnMemberSearch(
-	 * 
-	 * @RequestParam(defaultValue="1") int startPage,
-	 * 
-	 * @RequestParam(defaultValue="userName") String searchType,
-	 * 
-	 * @RequestParam(defaultValue="") String keyword, Model model ) throws Exception
-	 * { int count = 1000;
-	 * 
-	 * Criteria criteria = new Criteria(searchType, keyword);
-	 * 
-	 * 
-	 * List<Criteria> mnMemberSearch =
-	 * managerService.mnMemberSearch(searchType,keyword);
-	 * 
-	 * model.addAttribute("mnMemberSearch", mnMemberSearch); }
-	 */
+
 	
 }
-
-
-
-
-
-
-
-
-
-

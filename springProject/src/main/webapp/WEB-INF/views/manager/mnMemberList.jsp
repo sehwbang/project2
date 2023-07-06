@@ -59,6 +59,16 @@
 				<td>${member.userEmail}<hr>${member.phone}</td>
 				<td>${member.userGender}<hr>${member.zipcode}</td>
 				<td>${member.address}<hr>${member.detailaddress}</td>
+			<tr align="center">
+				<td>${member.userId}<br><br><button onclick="mnMemberUpdate('${member.userId}');">수정하기</button></td>
+				<td>${member.userRnn}</td>
+				<td>${member.userName}</td>
+				<td>${member.userGender}</td>
+				<td>${member.userEmail}</td>
+				<td>${member.phone}</td>
+				<td>${member.zipcode}</td>
+				<td>${member.address}</td>
+				<td>${member.detailaddress}</td>
 				<td>
 					<c:if test="${member.userType eq 'admin'}">
 						관리자

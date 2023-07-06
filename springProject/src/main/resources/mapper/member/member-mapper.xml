@@ -24,6 +24,7 @@
 		default,
 		default,
 		default
+		#{userInfo}
 		)
 	</insert>
 

@@ -11,6 +11,26 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1a1baddfc194b964c714fcbe3f6d1aa&libraries=services"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/matchReg.css?v=<%=System.currentTimeMillis()%>">
+<style>
+	table {
+		width: 100%;
+	}
+	td {
+		width: 14%;
+		height: 60px;
+		text-align: center;
+	}
+	.pre {
+		background-color: grey;
+	}
+</style>
+<script>
+	function dateFilter(day) {
+		var url = "${pageContext.request.contextPath}/match/matchReg.ma?day="+day;
+		
+		window.location.href = url;
+	}
+</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -18,20 +38,34 @@
 <div id="nav2">
 	<div id="matching"></div>
 	<div id="matching"></div>
-	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchReg.ma">매치 등록</a></div>
+	<div id="gym"><a onclick="dateFilter('');">매치 등록</a></div>
 	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchList.ma">상대방 찾기</a></div>
 </div>
 
 <div>
-	<table>
-		<tr>
-			<th>아아</th>
-		</tr>
-		<c:forEach items="${gymList}" var="gym">
-			<tr>
-		        <td>${gym.gymName}</td>
-			</tr>
+	<table border="1">
+ 		<tr>
+		<c:forEach items="${dateFilter}" var="item" varStatus = "d">
+			<c:if test="${item.day lt item.today}">
+				<td class="pre">
+					<span>${item.yoil}</span>
+					<p>${item.date}</p>
+				</td>
+			</c:if>
+			
+			<c:if test="${item.day ge item.today}">
+				<td id="dateFilter" onclick="dateFilter('${item.day}');">
+					<span>${item.yoil}</span>
+					<p>${item.date}</p>
+				</td>
+			</c:if>
+			
+			<c:if test="${d.index eq 6}">
+				</tr>
+				<tr>
+			</c:if>
 		</c:forEach>
+		</tr>
 	</table>
 </div>
 
