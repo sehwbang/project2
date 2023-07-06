@@ -30,7 +30,7 @@
 
 	<select id="selectOneMember" resultMap="memberMap">
 		select user_id, user_pw, substr(user_rnn,1,8)||'******' as user_rnn, user_name, user_email,
-		phone, zipcode, address, detailaddress, user_status
+		phone, zipcode, address, detailaddress, user_status, user_type
 		from member
 		where
 		user_id=#{userId}
