@@ -83,7 +83,7 @@
 								<!-- 유저타입에 맞게 버튼을 보여주는 조건문 -->
 								<tr>
 									<c:choose>
-										<c:when test="${loginMember.userType eq 'manager'}">
+										<c:when test="${loginMember.userType eq 'admin'}">
 											<td><button class="managerbtn" type="button"
 													onclick="location.href='${pageContext.request.contextPath}/manager/mnMainPage.mn'">관리자</button></td>
 										</c:when>

@@ -40,16 +40,13 @@
 		update member
 		set
 		user_id = #{userId},
-		user_pw
-		=#{userPw},
-		user_name =#{userName},
-		user_rnn =#{userRnn},
-		phone =
-		#{phone},
+		user_pw = #{userPw},
+		user_name = #{userName},
+		user_rnn = #{userRnn},
+		phone = #{phone},
 		user_email = #{userEmail},
 		zipcode = #{zipcode},
-		address =
-		#{address},
+		address = #{address},
 		detailaddress = #{detailaddress}
 		where user_id = #{userId}
 	</update>
@@ -58,8 +55,7 @@
 		update member
 		set
 		user_pw = #{userPw}
-		where user_id =
-		#{userId}
+		where user_id = #{userId}
 	</update>
 
 	<select id="selectTwoMember" resultMap="memberMap">
