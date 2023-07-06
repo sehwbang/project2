@@ -123,15 +123,4 @@ public class ManagerController {
 	}
 	
 	
-	
 }
-
-
-
-
-
-
-
-
-
-

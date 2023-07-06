@@ -83,7 +83,7 @@
 		   	   phone = #{phone},
 		   	   zipcode = #{zipcode},
 		   	   address = #{address},
-		   	   detailaddress = #{detailAddress},
+		   	   detailaddress = #{detailaddress},
 		   	   user_type = #{userType},
 		   	   user_status = #{userStatus},
 		   	   user_control = #{userControl},

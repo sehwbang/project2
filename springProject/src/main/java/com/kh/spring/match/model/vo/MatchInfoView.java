@@ -18,9 +18,9 @@ public class MatchInfoView {
 	private List<LocalDateTime> matchdayList;		//DB용 2023-06-25T00:00
 	private List<String> matchTimeList;
 	private List<String> codeList;
-	////////////////////
-	private String matchdate;
-	private LocalDateTime matchday;
+	////////////////////화면에 보여줄 거
+	private String matchdate;						//07/06(목)
+	private LocalDateTime matchday;					//2023-07-06T00:00
 	////////////////////
 	private String time;
 	private String code;

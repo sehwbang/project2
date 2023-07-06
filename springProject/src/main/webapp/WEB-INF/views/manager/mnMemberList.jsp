@@ -54,7 +54,7 @@
 				<td>${member.phone}</td>
 				<td>${member.zipcode}</td>
 				<td>${member.address}</td>
-				<td>${member.detailAddress}</td>
+				<td>${member.detailaddress}</td>
 				<td>
 					<c:if test="${member.userType eq 'admin'}">
 						관리자
@@ -116,7 +116,7 @@
 				<td>${member.phone}</td>
 				<td>${member.zipcode}</td>
 				<td>${member.address}</td>
-				<td>${member.detailAddress}</td>
+				<td>${member.detailaddress}</td>
 				<td>
 					<c:if test="${member.userType eq 'admin'}">
 						관리자

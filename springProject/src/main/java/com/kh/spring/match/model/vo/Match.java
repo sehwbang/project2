@@ -1,6 +1,5 @@
 package com.kh.spring.match.model.vo;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;

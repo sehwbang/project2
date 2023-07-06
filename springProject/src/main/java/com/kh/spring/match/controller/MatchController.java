@@ -1,12 +1,17 @@
 package com.kh.spring.match.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,12 +49,25 @@ public class MatchController {
 	@GetMapping("/matchList.ma")
 	public void matchList() { }
 	
-	@GetMapping("/matchReg.ma")
-	public String matchReg(Model model) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd(E)");
+
+	@RequestMapping(value="/matchReg.ma", method = RequestMethod.GET)
+	public String matchReg(HttpServletRequest request, Model model) {	
+		String matchDate = request.getParameter("day");
+		if(matchDate == null || "".equals(matchDate)) {
+			LocalDateTime today = LocalDateTime.now();
+			System.out.println(today);
+			matchDate = today.toLocalDate().toString();
+		}
+		System.out.println("matchDate : " + matchDate);
 		
+		//matchdateList포맷용 ex.2023/07/05
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d(E)");
+		
+		//user 하드코딩
 		String userId1 = "user_03";
-		List<MatchInfo> insertScheduleList = matchService.selectMatchList(userId1);
+		
+		//지도 옆에 보이는 매치 신청한 리스트 조회
+		List<MatchInfo> insertScheduleList = matchService.selectMatchList(userId1, matchDate);
 		System.out.println("화면에 보이는 등록된 스케줄 : " + insertScheduleList);
 
 		//MatchInfoView ifv = new MatchInfoView();
@@ -77,12 +95,19 @@ public class MatchController {
 		}
 		System.out.println(inSchedList);
 		
-		model.addAttribute("inSchedList", inSchedList);
+		model.addAttribute("inSchedList", inSchedList);		
+		
+		//////////////////////////////////////////////////////////////////////
 		
 		
 		
-		List<MatchInfo> scheduleList = matchService.selectScheduleList();
-		System.out.println("스케줄 : " + scheduleList.get(0));
+		 
+		
+		Match match = new Match();
+		//지도에 보여질 GYM, SCHEDULE 테이블 조인해서 조회하는 부분
+		List<MatchInfo> scheduleList = matchService.selectScheduleList(matchDate);
+		System.out.println(scheduleList);
+		//System.out.println("스케줄 : " + scheduleList.get(0));
 		
 		String tempGymNo = "0";
 		String matchdate1 = "";
@@ -156,7 +181,8 @@ public class MatchController {
 			markerOverlayList.add(infoView);
 			System.out.println(markerOverlayList);
 		}
-		
+
+		model.addAttribute("dateFilter", getDateList());
 		model.addAttribute("markerOverlayList", markerOverlayList);
 
 		return "/match/matchReg";
@@ -239,6 +265,60 @@ public class MatchController {
         System.out.println(jsonStr); // {"name":"anna","id":1}
 	
 		return jsonStr;
+	}
+	
+	
+	public List<HashMap<String, String>> getDateList() {
+		
+		List<HashMap<String, String>> result = new ArrayList<>();
+		//오늘 날짜(요일) 구하기
+		LocalDateTime today = LocalDateTime.now();
+		String today2 = today.toLocalDate().toString();
+		//System.out.println(today);
+		DayOfWeek yoil = today.getDayOfWeek();
+		//System.out.println(yoil);
+		
+		String[] yoils = new String[]{"일", "월", "화", "수", "목", "금", "토"};
+		
+		int yoilNum = yoil.getValue();
+		//System.out.println(yoilNum);
+		
+		
+		
+		//그 주의 일요일 구하기
+		LocalDateTime sunday = today.minusDays(yoilNum);
+		//System.out.println(sunday);
+		
+		//+14일치 구하기
+		for(int i=0; i<14; i++) {
+			LocalDateTime date = sunday.plusDays(i);
+			//System.out.println(date);
+			
+			DayOfWeek yoil2 = date.getDayOfWeek();
+			int yoilNum2 = yoil2.getValue();
+			//System.out.println(yoilNum2%7);
+			
+			String yoil3 = yoils[yoilNum2%7];
+			
+			LocalDate day = date.toLocalDate();
+			String dayTemp = day.toString();
+//			System.out.println(day);
+//			System.out.println(dayTemp);
+			
+			String dateTemp = date.format(DateTimeFormatter.ofPattern("M/d"));
+			//System.out.println(dateTemp);
+			
+			HashMap<String, String> yoilTemp = new HashMap<>();
+			yoilTemp.put("date", dateTemp);
+			yoilTemp.put("day", dayTemp);
+			yoilTemp.put("yoil", yoil3);
+			yoilTemp.put("today", today2);
+
+			result.add(yoilTemp);
+		}		
+		System.out.println(result);
+		
+		return result;
 	}
 	
 }

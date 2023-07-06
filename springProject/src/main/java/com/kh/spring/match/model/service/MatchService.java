@@ -11,7 +11,7 @@ import com.kh.spring.match.model.vo.MatchRegInfo;
 
 public interface MatchService {
 
-	List<MatchInfo> selectScheduleList();
+	List<MatchInfo> selectScheduleList(String matchDate);
 
 	int registerMatch(Match match);
 
@@ -19,5 +19,5 @@ public interface MatchService {
 
 	int updateMatch(Match match);
 
-	List<MatchInfo> selectMatchList(String userId1);
+	List<MatchInfo> selectMatchList(String userId1, String matchDate);
 }

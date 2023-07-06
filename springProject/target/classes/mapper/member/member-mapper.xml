@@ -18,12 +18,11 @@
 		#{phone},
 		#{zipcode},
 		#{address},
-		#{detailAddress},
+		#{detailaddress},
 		default,
 		#{userStatus},
 		default,
 		default,
-		#{userStatus},
 		#{userInfo}
 		)
 	</insert>
