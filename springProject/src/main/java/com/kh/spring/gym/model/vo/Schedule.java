@@ -1,5 +1,6 @@
 package com.kh.spring.gym.model.vo;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;

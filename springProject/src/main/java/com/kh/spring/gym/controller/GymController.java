@@ -2,6 +2,8 @@ package com.kh.spring.gym.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -173,6 +175,7 @@ public class GymController {
 			dateStr = totalCodes[i].substring(totalCodes[i].length()-12, totalCodes[i].length());
 			dateTime = totalCodes[i].substring(totalCodes[i].length()-4, totalCodes[i].length());
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm");
+	
 			int result = 0;
 			try {
 				date = formatter.parse(dateStr);

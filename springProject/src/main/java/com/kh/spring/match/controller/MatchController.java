@@ -283,8 +283,6 @@ public class MatchController {
 		int yoilNum = yoil.getValue();
 		//System.out.println(yoilNum);
 		
-		
-		
 		//그 주의 일요일 구하기
 		LocalDateTime sunday = today.minusDays(yoilNum);
 		//System.out.println(sunday);
