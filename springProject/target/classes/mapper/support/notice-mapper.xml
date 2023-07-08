@@ -52,8 +52,16 @@
 		 where notice_no = #{noticeNo}
 	</update>
 	
+	<update id="updateNoticeWithoutFile">
+		update notice
+		   set notice_title = #{noticeTitle},
+		   	   content = #{content}
+		 where notice_no = #{noticeNo}
+	</update>
+	
 	<delete id="deleteNotice">
 		delete from notice
 		 where notice_no = #{noticeNo}
 	</delete>
+	
 </mapper>

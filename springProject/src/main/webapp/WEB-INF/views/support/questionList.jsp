@@ -20,49 +20,91 @@
 		<tr>
 			<th>제목</th>
 			<th>작성자</th>
-			<th>첨부파일</th>
 			<th>작성일</th>
 			<th>조회수</th>
 			<th>답변여부</th>
 		</tr>
-		<c:forEach items="${questionList}" var="question">
-			<tr>
-				<c:if test="${question.depth == 0}">
-					<c:choose>
-						<c:when test="${loginMember.userId == question.questionWriter || loginMember.userType == 'admin'}">
-							<td width="500px"><a href="${pageContext.request.contextPath}/support/questionDetail.su?questionNo=${question.questionNo}">${question.questionTitle}</a></td>
-						</c:when>
-						<c:otherwise>
-							<td width="500px"><a id="titleLineFromOther" href="${pageContext.request.contextPath}/support/questionList.su">${question.questionTitle}</a></td>
-						</c:otherwise>
-					</c:choose>
-					<td>${question.questionWriter}</td>
-					<td>
-						<c:if test="${not empty question.originalFilename}">
-							<img src="${pageContext.request.contextPath}/resources/img/file.png" alt="파일" width="20px">
+		<c:choose>
+			<c:when test="${empty searchQuest}">
+			<c:forEach items="${questionList}" var="question">
+				<tr>
+					<c:if test="${question.depth == 0}">
+						<td style="text-align: left;" width="500px">
+						<c:choose>
+							<c:when test="${loginMember.userId == question.questionWriter || loginMember.userType == 'admin'}">
+								<a id="qt" href="${pageContext.request.contextPath}/support/questionDetail.su?questionNo=${question.questionNo}">${question.questionTitle}</a>
+							</c:when>
+							<c:otherwise>
+								<a id="titleLineFromOther" href="${pageContext.request.contextPath}/support/questionList.su">${question.questionTitle}</a>
+							</c:otherwise>
+						</c:choose>
+						</td>
+						<td>${question.questionWriter}</td>
+						<td>${question.createDate}</td>
+						<td>${question.count}</td>
+						<c:if test="${question.questionStatus == 0}">
+							<td style="color:red">답변대기중</td>
 						</c:if>
-					</td>
-					<td>${question.createDate}</td>
-					<td>${question.count}</td>
-					<c:if test="${question.questionStatus == 0}">
-						<td style="color:red">답변대기중</td>
+						<c:if test="${question.questionStatus == 1}">
+							<td style="color:blue">답변완료</td>
+						</c:if>
 					</c:if>
-					<c:if test="${question.questionStatus == 1}">
-						<td style="color:blue">답변완료</td>
+						<td colspan="6" class="replyLine">
+					<c:if test="${question.depth == 1}">
+						<c:choose>
+							<c:when test="${loginMember.userId == question.questionWriter || loginMember.userType == 'admin'}">
+								<a href="${pageContext.request.contextPath}/support/questionDetail.su?questionNo=${question.questionNo}">&emsp;&emsp;&emsp;&#x21AA ${question.questionTitle}</a>
+							</c:when>
+							<c:otherwise>
+								<a id="replyLineFromOther" href="javascript:void(0)">&emsp;&emsp;&emsp;&#x21AA ${question.questionTitle}</a>
+							</c:otherwise>
+						</c:choose>
 					</c:if>
-				</c:if>
-				<c:if test="${question.depth == 1}">
-					<c:choose>
-						<c:when test="${loginMember.userId == question.questionWriter || loginMember.userType == 'admin'}">
-							<td colspan="6" class="replyLine"><a href="${pageContext.request.contextPath}/support/questionDetail.su?questionNo=${question.questionNo}">&#x21AA ${question.questionTitle}</a></td>
-						</c:when>
-						<c:otherwise>
-							<td colspan="6" class="replyLine"><a id="replyLineFromOther" href="javascript:void(0)">&#x21AA ${question.questionTitle}</a></td>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-			</tr>
-		</c:forEach>
+						</td>
+				</tr>
+			</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${searchQuest}" var="question">
+				<tr>
+					<c:if test="${question.depth == 0}">
+						<td style="text-align: left;" width="500px">
+						<c:choose>
+							<c:when test="${loginMember.userId == question.questionWriter || loginMember.userType == 'admin'}">
+								<a id="qt" href="${pageContext.request.contextPath}/support/questionDetail.su?questionNo=${question.questionNo}">${question.questionTitle}</a>
+							</c:when>
+							<c:otherwise>
+								<a id="titleLineFromOther" href="${pageContext.request.contextPath}/support/questionList.su">${question.questionTitle}</a>
+							</c:otherwise>
+						</c:choose>
+						</td>
+						<td>${question.questionWriter}</td>
+						<td>${question.createDate}</td>
+						<td>${question.count}</td>
+						<c:if test="${question.questionStatus == 0}">
+							<td style="color:red">답변대기중</td>
+						</c:if>
+						<c:if test="${question.questionStatus == 1}">
+							<td style="color:blue">답변완료</td>
+						</c:if>
+					</c:if>
+						<td colspan="6" class="replyLine">
+					<c:if test="${question.depth == 1}">
+						<c:choose>
+							<c:when test="${loginMember.userId == question.questionWriter || loginMember.userType == 'admin'}">
+								<a href="${pageContext.request.contextPath}/support/questionDetail.su?questionNo=${question.questionNo}">&emsp;&emsp;&emsp;&#x21AA ${question.questionTitle}</a>
+							</c:when>
+							<c:otherwise>
+								<a id="replyLineFromOther" href="javascript:void(0)">&emsp;&emsp;&emsp;&#x21AA ${question.questionTitle}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:if>
+						</td>
+				</tr>
+			</c:forEach>
+			</c:otherwise>
+		</c:choose>
+		
 	</table>
 
 		<nav aria-label="Page navigation example">
@@ -94,6 +136,16 @@
 			</ul>
 		</nav>
 	</div>
+	<div id="search">
+		<select id="searchType">
+			<option value="questionWriter">id</option>
+			<option value="questionTitle">제목</option>
+			<option value="content">내용</option>
+			<option value="questionStatus">답변여부</option>
+		</select>
+		<input type="text" id="searchInput">
+		<input type="button" id="searchButton" value="검색">
+	</div>
 	<c:if test="${not empty loginMember.userId}">
 		<div id="listButton">
 			<button id="enrollBtn">글쓰기</button>
@@ -113,6 +165,13 @@ $(document).ready(function() {
     
     $("#titleLineFromOther").click(function() {
         alert("질문글은 질문자만 볼 수 있습니다.");
+    });
+    
+    $("#searchButton").click(function() {
+    	const searchType = document.getElementById("searchType").value;
+    	const searchInput = document.getElementById("searchInput").value;
+    	const url = "${pageContext.request.contextPath}/support/searchQuestion.su?searchType=" + searchType + "&searchInput=" + searchInput;
+    	location.href = url;
     });
 });
 </script>

@@ -18,9 +18,8 @@
 	<hr>
 		<form action="${pageContext.request.contextPath}/support/noticeUpdate.su" method="post" enctype="multipart/form-data">
 			<c:if test="${loginMember.userType == 'admin'}">
-				<div>제목 &emsp; : &emsp;</div>
-				<div>
-					<input type="text" name="noticeTitle" value="${notice.noticeTitle}" size="120"/>
+				<div id="noticeTitle">
+					<input type="text" name="noticeTitle" value="${notice.noticeTitle}" size="50"/>
 				</div>
 			</c:if>
 				<div id="content">
@@ -29,11 +28,11 @@
 							<textarea name="content" rows="50" cols="100" required>${notice.content}</textarea>
 						</c:when>
 						<c:otherwise>
-							${notice.content}
+							<textarea id="textarea" name="content" rows="50" cols="150" required readonly>${notice.content}</textarea>
 						</c:otherwise>
 					</c:choose>
 				</div>
-	<hr>			
+	<hr>
 				<div id="subInfo">
 					<div id="fileDiv">첨부파일 &emsp;:&emsp;
 						<c:choose>
@@ -44,10 +43,11 @@
 									</button>
 								</c:if>
 								<c:if test="${empty notice.originalFilename}">
-									파일없음
+									파일없음&emsp;&emsp;
 								</c:if>
-								<input id="file" type="file" name="upFile"> 
+								<input type="file" name="upFile">
 							</c:when>
+							
 							<c:otherwise>
 								<c:if test="${not empty notice.originalFilename}">
 									<button type="button" id="detailFile" class="btn btn-outline-secondary"
@@ -55,10 +55,11 @@
 									</button>
 								</c:if>
 									<c:if test="${empty notice.originalFilename}">
-										파일없음
+										파일없음&emsp;&emsp;
 									</c:if>
 								</c:otherwise>
 							</c:choose>
+							
 					</div>
 					<div id="dateDiv">작성일 &emsp;:&emsp; ${notice.createDate}</div>
 				</div>
@@ -81,6 +82,9 @@
 <script>
 	$("#deleteNotice").click(function() {
 	    location.href = '${pageContext.request.contextPath}/support/noticeDelete.su?noticeNo=${notice.noticeNo}';
+	});
+	$('.editable').each(function(){
+	    this.contentEditable = true;
 	});
 </script>
 </html>

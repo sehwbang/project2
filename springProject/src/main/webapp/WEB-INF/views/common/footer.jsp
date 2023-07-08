@@ -5,10 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footer.css?v=<%=System.currentTimeMillis()%>">
+<!--  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footer.css?v=<%=System.currentTimeMillis()%>"> -->
 </head>
 <body>
+	<!--
 	<footer>
+	
 		<p>
 	     상호명 : 빈체로<br>
 	     대표자 : 김정민<br>
@@ -26,6 +28,8 @@
      		<li><a href="https://www.instagram.com/vincero2023/">인스타그램</a></li>
 			<li><a href="https://www.youtube.com/channel/UCV61-dCRehTcS8lduckYrxw">유튜브</a></li>
     	</ul>
+   
 	</footer>
+	-->
 </body>
 </html>

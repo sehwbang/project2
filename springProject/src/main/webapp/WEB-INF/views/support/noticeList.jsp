@@ -14,7 +14,7 @@ ${loginMember.userType}
 	<jsp:param value="공지사항" name="title"/>
 </jsp:include>
 <div id="container">
-	<div id="center"><h2>- 공지사항 -</h2></div>
+	<h2>- 공지사항 -</h2>
 <table id="listTable">
 	<tr>
 		<th>글번호</th>

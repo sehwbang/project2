@@ -73,9 +73,21 @@
 		 where question_no = #{questionNo}
 	</update>
 	
+	<update id="updateQuestionWithoutFile">
+		update question
+		   set question_title = #{questionTitle},
+		   	   content = #{content}
+		 where question_no = #{questionNo}
+	</update>
+	
 	<delete id="deleteQuestion">
 		delete from question
 		 where question_no = #{questionNo}
+	</delete>
+	
+	<delete id="deleteQuestionWithReply">
+		delete from question
+		 where ref = #{ref}
 	</delete>
 	
 	<update id="updateQuestionStatus">
@@ -83,4 +95,36 @@
 		   set question_status = '1'
 		 where question_no = #{refFromReply}
 	</update>
+	
+	<select id="selectSearchQuestionId" resultMap="questionMap">
+		select *
+		  from question
+		 where question_writer = #{searchInput}
+		 order by ref desc, question_no asc
+	</select>
+	
+	<select id="selectSearchQuestionTitle" resultMap="questionMap">
+		select *
+		  from question
+		 where ref in (select ref
+				 from question
+				where question_title Like '%'||#{searchInput}||'%')
+		 order by ref desc, question_no asc
+		
+	</select>
+	
+	<select id="selectSearchQuestionContent" resultMap="questionMap">
+		select *
+		  from question
+		 where content Like '%'||#{searchInput}||'%'
+		 order by ref desc, question_no asc
+	</select>
+	
+	<select id="selectSearchQuestionStatus" resultMap="questionMap">
+		select *
+		  from question
+		 where question_status = #{searchInput}
+		 order by ref desc, question_no asc
+	</select>
+	
 </mapper>

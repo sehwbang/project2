@@ -78,7 +78,7 @@
 					</tr>
 					<tr>
 						<th></th>
-						<td colspan="2"><input name="detailAddress" id="detailAddr" value="${loginMember.detailAddress}"></td>
+						<td colspan="2"><input name="detailaddress" id="detailAddr" value="${loginMember.detailaddress}"></td>
 					</tr>
 			</table>
 

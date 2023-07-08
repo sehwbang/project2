@@ -37,7 +37,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<i>1. 회원가입 및 로그인 먼저 진행 해주세요</i>
+								<i>1. 꼭 관장님의 명의로, 회원가입 및 로그인 먼저 진행 해주세요</i>
 							</td>
 						</tr>
 						<tr>
@@ -47,7 +47,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<i>3. 모든 정보는 계약상의 정보로서 정확히 입력해주세요</i>
+								<i>3. 모든 정보는 계약상의 정보로서, 정확히 입력해주세요</i>
 							</td>
 						</tr>
 						<tr>
@@ -256,7 +256,7 @@ document.getElementById("gymDetailaddress").addEventListener("focusout", () => {
 	setTimeout(() => {
 	    const inputGymDetailaddress = document.getElementById("gymDetailaddress").value;
 	    const messageGymDetailaddress = document.getElementById("messageGymDetailaddress");
-	    const regExpGymDetailaddress = /^[-\s\p{L}\p{N}\p{S}]{3,50}$/u;
+	    const regExpGymDetailaddress = /[가-힣a-zA-Z0-9\W]{3,}/;
 		if(regExpGymDetailaddress.test(inputGymDetailaddress)) {
 		    messageGymDetailaddress.innerHTML = "<span style='color: blue;'>상세주소를 입력하셨습니다 !</span>";
 		    gymDetailaddressCheck = true;
@@ -269,6 +269,9 @@ document.getElementById("gymDetailaddress").addEventListener("focusout", () => {
 		}
 	}, 200);
 })
+
+
+
 
 function inputCheck() {
 	console.log("a");

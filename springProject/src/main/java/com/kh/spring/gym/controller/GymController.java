@@ -125,7 +125,9 @@ public class GymController {
 	}
 	
 	@GetMapping("/gymCalendar.gym")
-	public void gymCalendar() {}
+	public String gymCalendar() {
+		return "gym/gymCalendar";
+	}
 	
 	@GetMapping("/gymCalendarSelect.gym")
 	public String gymCalendarSelect(@RequestParam String y, @RequestParam String m, Model model) {
@@ -143,6 +145,8 @@ public class GymController {
 		model.addAttribute("yi", yi);
 		model.addAttribute("mi", mi);
 		model.addAttribute("di", di);
+		System.out.println(yi);
+		System.out.println(ymd);
 		model.addAttribute("ymd", ymd);
 		List<Schedule> codeList = gymService.selectCodeList(userId);
 		ArrayList<String> timeList = new ArrayList<String>();
@@ -223,7 +227,11 @@ public class GymController {
 		}
 		if(sum==totalCodes.length) {
 			model.addAttribute("msg", "일정이 취소되었습니다.");
-		} 
+		} else if(sum==0) {
+			model.addAttribute("msg", "관장 id로 로그인이 되었는지, 등록되지 않은 날을 선택한지 확인하세요.");
+		} else {
+			model.addAttribute("msg", "일정이 취소되었습니다.");
+		}
 		return "/gym/gymCalendar";
 	}
 }

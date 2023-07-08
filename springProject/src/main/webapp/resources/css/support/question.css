@@ -15,25 +15,26 @@
 
 h1 {
 	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-bottom: 25px;
+	font-weight: normal;
 }
 
 h2 {
 	margin-top: 50px;
 }
 
-#noticeTable th {
+#questionTable th {
 	text-align: right;
 	height: 50px;
 }
 
-#noticeButton {
+#questionButton {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 }
 
-#noticeButton button {
+#questionButton button {
 	width: 100px;
 	height: 70px;
 	border-width: 0px;
@@ -41,7 +42,7 @@ h2 {
 	font-family: 'EF_watermelonSalad';
 }
 
-#noticeButton button:hover {
+#questionButton button:hover {
 	background-color: black;
 	color: rgb(239,239,239);
 }
@@ -49,19 +50,23 @@ h2 {
 #listTable {
 	display: flex;
 	justify-content: center;
+	border-collapse: collapse;
+	margin-top: 30px;
 }
-
 #listTable th {
 	width: 150px;
 	font-family: 'EF_watermelonSalad';
 	font-size: 20px;
 	font-weight: normal;
-	height: 100px;
+	height: 50px;
+	color: white;
+	background-color: tomato;
 }
 
 #listTable td {
 	text-align: center;
-	height: 30px;
+	height: 40px;
+	font-size: 15px;
 }
 
 #listTable a {
@@ -70,8 +75,7 @@ h2 {
 }
 
 #detailTable {
-	text-align: right;
-	
+	margin-bottom: -50px;
 }
 
 nav {
@@ -123,11 +127,17 @@ nav li {
 	border-width: 0px;
 	border-radius: 30px;
 	font-family: 'EF_watermelonSalad';
+	
 }
 
 #detailButton button:hover {
 	background-color: black;
 	color: rgb(239,239,239);
+}
+
+#detailButton {
+	display: flex;
+	justify-content: center;
 }
 
 #detailFile {
@@ -136,5 +146,28 @@ nav li {
 
 .replyLine {
 	float: left;
-	margin-left: 300px;
 }
+
+#questionWriter {
+	border-width: 0px;
+	resize: none;
+	overflow: visible;
+}
+
+#questionWriter:focus {
+	outline: none;
+}
+
+#search {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+#search select, input {
+	margin-right: 5px;
+	padding: 6px;
+	font-family: 'EF_watermelonSalad';
+}
+
+#search 

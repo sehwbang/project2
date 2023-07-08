@@ -19,13 +19,13 @@
 			<tr>
 				<th>제목&emsp; : &emsp;</th>
 				<td>
-					<input name="questionTitle" size="100" required>
+					<input name="questionTitle" size="50" placeholder="공백 포함 30자 정도를 넘기지 마세요." required>
 				</td>
 			</tr>
 			<tr>
 				<th>작성자&emsp; : &emsp;</th>
 				<td>
-					<input name="questionWriter" value="${loginMember.userId}" readonly>
+					<input id="questionWriter" name="questionWriter" value="${loginMember.userId}" readonly>
 				</td>
 			</tr>
 			<tr>

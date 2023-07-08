@@ -14,63 +14,76 @@
 	<jsp:param value="상세보기" name="title"/>
 </jsp:include>
 <div id="container">
-	<h1>- 질문게시판게시글 -</h1>
-		<form action="${pageContext.request.contextPath}/support/questionUpdate.su" method="post" enctype="multipart/form-data">>
+	<c:if test="${question.depth == 0}"><h1>${question.questionTitle}</h1></c:if>
+	<c:if test="${question.depth == 1}"><h1>${question.questionWriter}님의 ${question.questionTitle}</h1></c:if>
+		<form action="${pageContext.request.contextPath}/support/questionUpdate.su" method="post" enctype="multipart/form-data">
 		<table id="detailTable">
 			<tr>
-				<th>제목 &emsp; : &emsp;</th>
-				<td>
-					<c:choose>
-						<c:when test="${loginMember.userId == question.questionWriter}">
-							<input type="text" name="questionTitle" value="${question.questionTitle}" size="120"/>
-						</c:when>
-						<c:otherwise>
-							${question.questionTitle}
-						</c:otherwise>
-					</c:choose>
-				</td>
+				<c:if test="${question.depth == 0}">
+					<th>제목 &emsp; : &emsp;</th>
+					<td>
+						<c:choose>
+							<c:when test="${loginMember.userId == question.questionWriter}">
+								<input type="text" name="questionTitle" value="${question.questionTitle}" size="50"/>
+							</c:when>
+							<c:otherwise>
+								${question.questionTitle}
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</c:if>
+				<c:if test="${question.depth == 1}">
+					<input type="hidden" name="questionTitle" value="${question.questionTitle}" size="50"/>
+				</c:if>
 			</tr>
 			<tr>
 				<th>작성자 &emsp; : &emsp;</th>
 				<td>${question.questionWriter}</td>
 			</tr>
 			<tr>
+				<c:if test="${question.depth == 0}">
 				<th>첨부파일 &emsp; : &emsp;</th>
-				<td>
-					<c:choose>
-						<c:when test="${loginMember.userId == question.questionWriter}">
-							<c:if test="${not empty question.originalFilename}">
-								<button type="button" id="detailFile" class="btn btn-outline-secondary"
-									onclick="location.href='${pageContext.request.contextPath}/support/fileDownloadQuestion.su?questionNo=${question.questionNo}'">${question.originalFilename}
-								</button>
-							</c:if>
-							<c:if test="${empty question.originalFilename}">
-								파일없음
-							</c:if>
-							<input type="file" name="upFile">
-						</c:when>
-						<c:otherwise>
-							<c:if test="${not empty question.originalFilename}">
-								<button type="button" id="detailFile" class="btn btn-outline-secondary"
-									onclick="location.href='${pageContext.request.contextPath}/support/fileDownloadQuestion.su?questionNo=${question.questionNo}'">${question.originalFilename}
-								</button>
-							</c:if>
-							<c:if test="${empty question.originalFilename}">
-								파일없음
-							</c:if>
-						</c:otherwise>
-					</c:choose>
-				</td>
+					<td>
+						<c:choose>
+							<c:when test="${loginMember.userId == question.questionWriter}">
+								<c:if test="${not empty question.originalFilename}">
+									<button type="button" id="detailFile" class="btn btn-outline-secondary"
+										onclick="location.href='${pageContext.request.contextPath}/support/fileDownloadQuestion.su?questionNo=${question.questionNo}'">${question.originalFilename}
+									</button>
+								</c:if>
+								<c:if test="${empty question.originalFilename}">
+									파일없음&emsp;
+								</c:if>
+								<input type="file" name="upFile">
+							</c:when>
+							<c:otherwise>
+								<c:if test="${not empty question.originalFilename}">
+									<button type="button" id="detailFile" class="btn btn-outline-secondary"
+										onclick="location.href='${pageContext.request.contextPath}/support/fileDownloadQuestion.su?questionNo=${question.questionNo}'">${question.originalFilename}
+									</button>
+								</c:if>
+								<c:if test="${empty question.originalFilename}">
+									파일없음&emsp;	
+								</c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</c:if>
 			</tr>
 			<tr>
 				<th>내용 &emsp; : &emsp;</th>
 				<td>
 					<c:choose>
 						<c:when test="${loginMember.userId == question.questionWriter}">
-							<textarea name="content" rows="50" cols="100" required>${question.content}</textarea>
+							<c:if test="${question.depth == 0}">
+								<textarea name="content" rows="50" cols="100" required>${question.content}</textarea>
+							</c:if>
+							<c:if test="${question.depth == 1}">
+								<textarea name="content" rows="50" cols="100" required readonly>${question.content}</textarea>
+							</c:if>
 						</c:when>
 						<c:otherwise>
-							${question.content}
+							<textarea name="content" rows="50" cols="100" required readonly>${question.content}</textarea>
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -102,19 +115,20 @@
 				<c:if test="${loginMember.userId == question.questionWriter}">
 					<button type="submit">수정</button>&emsp;
 					<button type="reset">취소</button>&emsp;
-					<button type="button" id="deleteQuestion">삭제</button>
+					<button type="button" id="deleteQuestion">삭제</button>&emsp;
 				</c:if>
 				<c:if test="${loginMember.userType == 'admin'}">
-					<button type="button" id="answerQuestion" onclick="location.href='${pageContext.request.contextPath}/support/questionAnswerForm.su?questionNo=${question.questionNo}&questionWriter=${question.questionWriter}'">답변하기</button>
+					<button type="button" id="answerQuestion" onclick="location.href='${pageContext.request.contextPath}/support/questionAnswerForm.su?questionNo=${question.questionNo}&questionWriter=${question.questionWriter}'">답변하기</button>&emsp;
+					<button type="button" id="deleteQuestion">삭제</button>&emsp;
 				</c:if>
 			</c:if>
 			<c:if test="${question.depth == 1}">
 				<c:if test="${loginMember.userType == 'admin'}">
 					<button type="reset">취소</button>&emsp;
-					<button type="button" id="deleteQuestion">삭제</button>
+					<button type="button" id="deleteQuestion">삭제</button>&emsp;
 				</c:if>
 			</c:if>
-			<button type="button" onclick="location.href='${pageContext.request.contextPath}/support/questionList.su'">&emsp;리스트보기</button>&emsp;
+			<button type="button" onclick="location.href='${pageContext.request.contextPath}/support/questionList.su'">리스트보기</button>&emsp;
 		</div>
 		</form>
 	</div>
@@ -122,7 +136,7 @@
 </body>
 <script>
 	$("#deleteQuestion").click(function() {
-	    location.href = '${pageContext.request.contextPath}/support/questionDelete.su?questionNo=${question.questionNo}';
+	    location.href = '${pageContext.request.contextPath}/support/questionDelete.su?questionNo=${question.questionNo}&ref=${question.ref}';
 	});
 </script>	
 </html>

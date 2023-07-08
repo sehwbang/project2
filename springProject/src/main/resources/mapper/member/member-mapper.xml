@@ -18,7 +18,7 @@
 		#{phone},
 		#{zipcode},
 		#{address},
-		#{detailAddress},
+		#{detailaddress},
 		#{userInfo},
 		default,
 		default,
@@ -50,7 +50,7 @@
 		user_email = #{userEmail},
 		zipcode = #{zipcode},
 		address = #{address},
-		detailAddress = #{detailAddress}
+		detailAddress = #{detailaddress}
 		where user_id = #{userId}
 	</update>
 

@@ -136,6 +136,7 @@ nav li {
 	border-width: 0px;
 	border-radius: 30px;
 	font-family: 'EF_watermelonSalad';
+	
 }
 
 #detailButton button:hover {
@@ -168,6 +169,7 @@ nav li {
 	border-width: 0px;
 	border-radius: 30px;
 	font-family: 'EF_watermelonSalad';
+	margin-right: 30px;
 }
 
 #fileDiv button:hover {
@@ -188,4 +190,16 @@ nav li {
 	color: rgb(239,239,239);
 }
 
+#noticeTitle {
+	margin-bottom: 30px;
+}
 
+#textarea {
+	border-width: 0;
+	resize: none;
+	overflow: visible;
+}
+
+#textarea:focus {
+	outline: none;
+}
