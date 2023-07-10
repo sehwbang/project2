@@ -87,4 +87,14 @@ public class MatchServiceImpl implements MatchService{
 		return matchDao.matchListFilterNick(searchInput, rowBounds);
 	}
 
+	@Override
+	public List<MatchList> matchListFilterDow(String dowString, RowBounds rowBounds) {
+		return matchDao.matchListFilterDow(dowString, rowBounds);
+	}
+
+	@Override
+	public int selectTotalRecordMatchListDow(String dowString) {
+		return matchDao.selectTotalRecordMatchListDow(dowString);
+	}
+
 }

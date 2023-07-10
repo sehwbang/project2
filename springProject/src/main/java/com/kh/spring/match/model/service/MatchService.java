@@ -39,4 +39,8 @@ public interface MatchService {
 	int selectTotalRecordMatchListNick(String searchInput);
 
 	List<MatchList> matchListFilterNick(String searchInput, RowBounds rowBounds);
+
+	List<MatchList> matchListFilterDow(String dowString, RowBounds rowBounds);
+
+	int selectTotalRecordMatchListDow(String dowString);
 }

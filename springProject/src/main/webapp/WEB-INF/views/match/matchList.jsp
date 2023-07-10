@@ -18,33 +18,14 @@
 		<div>
 		<select id="MatchListFilterDow" onchange="MatchListFilterDow();">
 			<option>요일</option>
-	        <c:forEach var="i" begin="0" end="6" step="1">
-	        	<c:choose>
-		        	<c:when test="${dowNow+i>7}">
-	            		<option value="${dowNow-7+i}">
-	            			<c:if test="${dowNow-7+i==1}">월요일</c:if>
-	            			<c:if test="${dowNow-7+i==2}">화요일</c:if>
-	            			<c:if test="${dowNow-7+i==3}">수요일</c:if>
-	            			<c:if test="${dowNow-7+i==4}">목요일</c:if>
-	            			<c:if test="${dowNow-7+i==5}">금요일</c:if>
-	            			<c:if test="${dowNow-7+i==6}">토요일</c:if>
-	            			<c:if test="${dowNow-7+i==7}">일요일</c:if>
-	            		</option>
-	            	</c:when>
-	            	<c:otherwise>
-	            		<option value="${dowNow+i}">
-	            			<c:if test="${dowNow+i==1}">월요일</c:if>
-	            			<c:if test="${dowNow+i==2}">화요일</c:if>
-	            			<c:if test="${dowNow+i==3}">수요일</c:if>
-	            			<c:if test="${dowNow+i==4}">목요일</c:if>
-	            			<c:if test="${dowNow+i==5}">금요일</c:if>
-	            			<c:if test="${dowNow+i==6}">토요일</c:if>
-	            			<c:if test="${dowNow+i==7}">일요일</c:if>
-	            		</option>
-	            	</c:otherwise>
-            	</c:choose>
-	       	</c:forEach>
-        </select>
+	        <option value="monday">월요일</option>
+	        <option value="tuesday">화요일</option>
+	        <option value="wednesday">수요일</option>
+	        <option value="thursday">목요일</option>
+	        <option value="friday">금요일</option>
+	        <option value="saturday">토요일</option>
+	        <option value="sunday">일요일</option>
+	    </select>
 	</div>
 	<div>
 		<select id="MatchListFilterLocation" onchange="MatchListFilterLocation();">
@@ -170,5 +151,11 @@
     	const url = "${pageContext.request.contextPath}/match/matchList.ma?searchInput=" + searchInput
     	location.href = url;
     });
+	
+	$(function () {
+	    const tmp = ${matdat};
+	    tmp.substring(6,8);
+	    console.log(tmp);
+	});
 </script>
 </html>

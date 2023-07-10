@@ -8,9 +8,11 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,11 +58,9 @@ public class MatchController {
 			              @RequestParam(defaultValue="gender") String gender,
 			              @RequestParam(defaultValue="loc") String locations,
 			              @RequestParam(defaultValue="") String searchInput,
-			              @RequestParam(defaultValue="") String dowFromSelect) {
+			              @RequestParam(defaultValue="dows") String dowFromSelect) {
 		int totalRecord = 0;
-		System.out.println(dowFromSelect+"요일");
 		
-		int dowInt = Integer.parseInt(dowFromSelect);
 		String dowString = null;
 		if(gender.equals("M") || gender.equals("F")) {
 			totalRecord = matchService.selectTotalRecordMatchListGender(gender);
@@ -78,28 +78,38 @@ public class MatchController {
 			totalRecord = matchService.selectTotalRecordMatchListLocation(locations);
 		} else if(!("".equals(searchInput))) {
 			totalRecord = matchService.selectTotalRecordMatchListNick(searchInput);
-		} else if(1 <= dowInt && dowInt <= 7) {
-			if(dowInt==1) {
+		} else if(dowFromSelect.equals("monday") ||
+				  dowFromSelect.equals("tuesday") ||
+				  dowFromSelect.equals("wednesday") ||
+				  dowFromSelect.equals("thursday") ||
+				  dowFromSelect.equals("friday") ||
+				  dowFromSelect.equals("saturday") ||
+				  dowFromSelect.equals("sunday")) {
+			if(dowFromSelect.equals("monday")) {
 				dowString = "monday";
-			} else if(dowInt==2) {
+			} else if(dowFromSelect.equals("tuesday")) {
 				dowString = "tuesday";
-			} else if(dowInt==3) {
+			} else if(dowFromSelect.equals("wednesday")) {
 				dowString = "wednesday";
-			} else if(dowInt==4) {
-				
+			} else if(dowFromSelect.equals("thursday")) {
+				dowString = "thursday";
+			} else if(dowFromSelect.equals("friday")) {
+				dowString = "friday";
+			} else if(dowFromSelect.equals("saturday")) {
+				dowString = "saturday";
+			} else {
+				dowString = "sunday";
 			}
-			
+			totalRecord = matchService.selectTotalRecordMatchListDow(dowString);
+		
 		} else {
 			totalRecord = matchService.selectTotalRecordMatchList();
-		
-			
 		}
 		
 		int limit = 10;
 		int offset = (nowPage - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		PageInfo pi = Pagination.getPageInfo(totalRecord, nowPage, limit, 3);
-		System.out.println(searchInput);
 		
 		List<MatchList> matchList = null;
 		if(gender.equals("M") || gender.equals("F")) {
@@ -118,50 +128,34 @@ public class MatchController {
 			matchList = matchService.matchListFilterLocation(locations, rowBounds);
 		} else if(!("".equals(searchInput))) {
 			matchList = matchService.matchListFilterNick(searchInput, rowBounds);
-		} else {
-		    matchList = matchService.selectMatchingList(rowBounds);
-		}
-		
-		System.out.println(matchList);
-		
-		System.out.println(nowPage);
-		System.out.println(pi);
-		String dow = "";
-		String formattedDate = "";
-		for(int i=0; i<matchList.size(); i++) {
-			String y = matchList.get(i).getMatchdate().substring(0,4);
-			String m = matchList.get(i).getMatchdate().substring(5,7);
-			String d = matchList.get(i).getMatchdate().substring(8,10);
-			
-			int yd = Integer.parseInt(y);
-			int md = Integer.parseInt(m);
-			int dd = Integer.parseInt(d);
-			
-			LocalDate date = LocalDate.of(yd, md, dd);
-			DayOfWeek dayOfWeek = date.getDayOfWeek();
-			if(dayOfWeek.getValue() == 1) {
-				dow = "월";
-			} else if (dayOfWeek.getValue() == 2) {
-				dow = "화";
-			} else if (dayOfWeek.getValue() == 3) {
-				dow = "수";
-			} else if (dayOfWeek.getValue() == 4) {
-				dow = "목";
-			} else if (dayOfWeek.getValue() == 5) {
-				dow = "금";
-			} else if (dayOfWeek.getValue() == 6) {
-				dow = "토";
-			} else if (dayOfWeek.getValue() == 7) {
-				dow = "일";
+		} else if(dowFromSelect.equals("monday") ||
+				  dowFromSelect.equals("tuesday") ||
+				  dowFromSelect.equals("wednesday") ||
+				  dowFromSelect.equals("thursday") ||
+				  dowFromSelect.equals("friday") ||
+				  dowFromSelect.equals("saturday") ||
+				  dowFromSelect.equals("sunday")) {
+			if(dowFromSelect.equals("monday")) {
+				dowString = "monday";
+			} else if(dowFromSelect.equals("tuesday")) {
+				dowString = "tuesday";
+			} else if(dowFromSelect.equals("wednesday")) {
+				dowString = "wednesday";
+			} else if(dowFromSelect.equals("thursday")) {
+				dowString = "thursday";
+			} else if(dowFromSelect.equals("friday")) {
+				dowString = "friday";
+			} else if(dowFromSelect.equals("saturday")) {
+				dowString = "saturday";
+			} else {
+				dowString = "sunday";
 			}
-			formattedDate = m + "월 " + d + "일 " + dow + "요일";
-			matchList.get(i).setMatchdate(formattedDate);
+			
+			matchList = matchService.matchListFilterDow(dowString, rowBounds);
+		} else {
+		  matchList = matchService.selectMatchingList(rowBounds);
 		}
 		
-		LocalDate currentDate = LocalDate.now();
-		DayOfWeek dayOfWeekNow = currentDate.getDayOfWeek();
-		
-		model.addAttribute("dowNow", dayOfWeekNow.getValue());
 		model.addAttribute("matchList", matchList);
 		model.addAttribute("pi", pi);
 	}

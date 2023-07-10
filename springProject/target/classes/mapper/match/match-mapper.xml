@@ -144,4 +144,24 @@
 		   and p.pro_nick Like '%' || #{searchInput} || '%'
 		 order by m.no desc
 	</select>
+	
+	<select id="matchListFilterDow" resultMap="MatchListMap">
+		select m.no, m.matchdate, m.matchtime, g.gym_address, g.gym_detailaddress, p.pro_nick, p.user_id
+		  from match m, gym g, profile p
+		 where m.gym_no = g.gym_no
+		   and m.user_id1 = p.user_id
+		   and to_char(m.matchdate, 'day') = #{dowString}
+		 order by m.no desc
+	</select>
+	
+	<select id="selectTotalRecordMatchListDow" resultType="_int">
+		select count(*)
+		  from match m, gym g, profile p
+		 where m.gym_no = g.gym_no
+		   and m.user_id1 = p.user_id
+		   and to_char(m.matchdate, 'day') = #{dowString}
+		 order by m.no desc
+	</select>
+	
+	
 </mapper>

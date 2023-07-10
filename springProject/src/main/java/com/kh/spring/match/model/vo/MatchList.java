@@ -1,5 +1,6 @@
 package com.kh.spring.match.model.vo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -16,7 +17,7 @@ import lombok.ToString;
 @ToString
 public class MatchList {
 	private int no;
-	private String matchdate;
+	private LocalDateTime matchdate;
 	private String matchtime;
 	private String gymAddress;
 	private String gymDetailaddress;
