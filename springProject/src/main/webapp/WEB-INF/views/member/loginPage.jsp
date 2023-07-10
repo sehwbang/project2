@@ -15,6 +15,7 @@
 	</script>
 </c:if>
 </head>
+${loginMember.userStatus}
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp">
 		<jsp:param value="로그인" name="title" />
@@ -80,7 +81,7 @@
 								</tr>
 								<tr>
 									<c:choose>
-										<c:when test="${loginMember.userType eq 'manager'}">
+										<c:when test="${loginMember.userType eq 'admin'}">
 											<td><button class="managerbtn" type="button"
 													onclick="location.href='${pageContext.request.contextPath}/manager/mnMainPage.mn'">관리자</button></td>
 										</c:when>

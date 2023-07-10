@@ -16,7 +16,8 @@
 <div id="upperStuff">
 	<div id="filter">
 		<div>
-		<select>
+		<select id="MatchListFilterDow" onchange="MatchListFilterDow();">
+			<option>요일</option>
 	        <c:forEach var="i" begin="0" end="6" step="1">
 	        	<c:choose>
 		        	<c:when test="${dowNow+i>7}">
@@ -148,21 +149,26 @@
 		var url = "${pageContext.request.contextPath}/match/matchReg.ma?day=";
 		window.location.href = url;
 	}
+	function MatchListFilterDow() {
+		const dowFromSelect = document.getElementById("MatchListFilterDow").value;
+		const url = "${pageContext.request.contextPath}/match/matchList.ma?dowFromSelect=" + dowFromSelect;
+	    location.href = url;
+	}
 	function MatchListFilterGender() {
 		const gender = document.getElementById("MatchListFilterGender").value;
-		const url = "${pageContext.request.contextPath}/match/matchList.ma?gender=" + gender + "&nowPage=" + 1;
+		console.log(gender);
+		const url = "${pageContext.request.contextPath}/match/matchList.ma?gender=" + gender
 	    location.href = url;
 	}
 	function MatchListFilterLocation() {
 		const locations = document.getElementById("MatchListFilterLocation").value;
-		const url = "${pageContext.request.contextPath}/match/matchList.ma?locations=" + locations + "&nowPage=" + 1;
+		const url = "${pageContext.request.contextPath}/match/matchList.ma?locations=" + locations
 	    location.href = url;
 	}
-	
 	$("#searchButton").click(function() {
     	const searchInput = document.getElementById("MatchListFilterNick").value;
-    	const url = "${pageContext.request.contextPath}/match/matchList.ma?searchInput=" + searchInput + "&nowPage=" + 1;
+    	const url = "${pageContext.request.contextPath}/match/matchList.ma?searchInput=" + searchInput
     	location.href = url;
-    }
+    });
 </script>
 </html>

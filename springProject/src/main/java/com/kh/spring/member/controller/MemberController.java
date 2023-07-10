@@ -170,6 +170,7 @@ public class MemberController {
 		member.setUserPw(encodedPassword);
 	
 		System.out.println(member);
+		
 		int result = memberService.updateMember(member);
 
 		if (result > 0) {

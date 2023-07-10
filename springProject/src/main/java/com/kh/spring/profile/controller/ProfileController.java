@@ -77,10 +77,10 @@ public class ProfileController {
 			int result2 = memberService.statusUpdate(profile.getUserId());
 			
 			member.setUserStatus(2);
-			model.addAttribute("profileMember", member);
+			model.addAttribute("userStatusFromProfile", member.getUserStatus());
 		 }
-		return "redirect:/";			
-	}		
+		return "/member/loginPage";			
+	}
 
 	
 	@GetMapping("/profileDetail.pr")

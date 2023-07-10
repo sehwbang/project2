@@ -52,8 +52,16 @@ public class MatchController {
 	private MatchDao matchDao;
 	
 	@GetMapping("/matchList.ma")
-	public void matchList(@RequestParam(defaultValue="1") int nowPage, Model model, @RequestParam(defaultValue="gender") String gender, @RequestParam(defaultValue="loc") String locations, @RequestParam(defaultValue="") String searchInput) {
+	public void matchList(@RequestParam(defaultValue="1") int nowPage, Model model,
+			              @RequestParam(defaultValue="gender") String gender,
+			              @RequestParam(defaultValue="loc") String locations,
+			              @RequestParam(defaultValue="") String searchInput,
+			              @RequestParam(defaultValue="") String dowFromSelect) {
 		int totalRecord = 0;
+		System.out.println(dowFromSelect+"요일");
+		
+		int dowInt = Integer.parseInt(dowFromSelect);
+		String dowString = null;
 		if(gender.equals("M") || gender.equals("F")) {
 			totalRecord = matchService.selectTotalRecordMatchListGender(gender);
 		} else if(locations.equals("seoul") ||
@@ -70,8 +78,21 @@ public class MatchController {
 			totalRecord = matchService.selectTotalRecordMatchListLocation(locations);
 		} else if(!("".equals(searchInput))) {
 			totalRecord = matchService.selectTotalRecordMatchListNick(searchInput);
+		} else if(1 <= dowInt && dowInt <= 7) {
+			if(dowInt==1) {
+				dowString = "monday";
+			} else if(dowInt==2) {
+				dowString = "tuesday";
+			} else if(dowInt==3) {
+				dowString = "wednesday";
+			} else if(dowInt==4) {
+				
+			}
+			
 		} else {
 			totalRecord = matchService.selectTotalRecordMatchList();
+		
+			
 		}
 		
 		int limit = 10;

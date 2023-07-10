@@ -50,7 +50,7 @@
 		user_email = #{userEmail},
 		zipcode = #{zipcode},
 		address = #{address},
-		detailAddress = #{detailaddress}
+		detailaddress = #{detailaddress}
 		where user_id = #{userId}
 	</update>
 

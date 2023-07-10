@@ -81,7 +81,6 @@
 						<td colspan="2"><input name="detailaddress" id="detailAddr" value="${loginMember.detailaddress}"></td>
 					</tr>
 			</table>
-
 			<button type="submit" class="btn btn-outline-success" onclick="inputCheck()">수정</button>
 			<button type="button" onclick="deleteMember();">탈퇴</button>
 		</form>
