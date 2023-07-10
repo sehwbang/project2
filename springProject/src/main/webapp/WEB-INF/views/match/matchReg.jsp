@@ -38,8 +38,8 @@
 <div id="nav2">
 	<div id="matching"></div>
 	<div id="matching"></div>
-	<div id="gym"><a onclick="dateFilter('');">매치 등록</a></div>
-	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchList.ma">상대방 찾기</a></div>
+	<div id="gym"><a onclick="dateFilter('');">매치등록</a></div>
+	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchList.ma">매치찾기</a></div>
 </div>
 
 <div>

@@ -7,128 +7,162 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/matchList.css?v=<%=System.currentTimeMillis()%>">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<style>
-	table {
-		width: 100%;
-	}
-	td {
-		width: 14%;
-		height: 60px;
-		text-align: center;
-	}
-</style>
-<script>
-	function redirectToToday() {
-		var url = "${pageContext.request.contextPath}/match/matchReg.ma?day=";
-		
-		window.location.href = url;
-	}
-/* $(document).ready(function check_today(indexs, weeks, dates){
-    if(dates > today_days){
-        //인덱스가 오늘의 날짜보다 크다면(미래: 일정 추가 가능)
-        weeks[indexs].style.backgroundColor = '#FFEFD5'; //CSS 불러오기
-    } else if(dates == today_days){
-         //인덱스가 오늘의 날짜와 같다면(현재: 일정 추가 가능)
-         weeks[indexs].style.backgroundColor = '#DB7093'; //CSS 불러오기
-    } else if(dates < today_days){
-        //인덱스가 오늘의 날짜보다 작다면(지나온 날: 일정 추가 불가)
-        weeks[indexs].style.backgroundColor = 'gray'; //CSS 불러오기
-    }
-} */
-/*	$(document).ready(function getDayOfWeek(){ //ex) getDayOfWeek('2022-06-13')	
-  		const sunday = new Date('2023-07-02');
- 		const sunday2 = new Date('2023-07-02');
-		console.log("날짜 : " + sunday.getDate());
-		
-		sunday2.setDate(sunday.getDate() + 7);
-		
-		console.log(sunday.getDate());
-		console.log(sunday2.getDate()); */
-/*
-		const tomorrow = 0;
-		tomorrow.setDate(today.getDate()+1);
-		console.log(tomorrow);
-		*/
-		
-/* 		function addDays(date, days) {
-			console.log(date);
-			console.log(date.getDate);
-			
-		  const sunday = new Date(date);
-		  console.log(sunday);
-		  
-		  
-		  //sunday.setDate(date.getDate() + days)
-		  return sunday;
-		}
-		
-		const sunday2 = addDays('2023-07-02', 7); */
-/* 		
-	    const week = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];   	    
-	    const num = new Date().getDay();
-	    console.log("요일 숫자로 : " + num);
-	    
-	    const dayOfWeek = week[num];
-	    console.log(dayOfWeek);
-	    
-/* 	    const date = new Date().getDate();
-	    console.log(date); 
-	    
-	    for(let i=0; i<7; i++) {
-	    	switch(dayOfWeek) {
-		    	case "sun":
-				    $("#"+i).html(date);	
-		    		break;
-		    	case "mon":
-				    $("#"+i).html(date);	
-		    		break;
-		    	case 2:
-				    $("#"+i).html(date);			    
-		    		break;
-		    	case "wed":
-				    $("#"+i).html(date);	
-		    		break;
-		    	case "thu":
-				    $("#"+i).html(date);	
-		    		break;
-		    	case "fri":
-				    $("#"+i).html(date);	
-				    break;
-		    	case "sat":
-				    $("#"+i).html(date);	
-				    break;
-	    	}
-	    }
-	
-	}); */
-	
-	
-/* 	function getYoilDate() {
-		let today = new Date();
-		console.log("날짜 : " + today);
-		
-		console.log("요일 : " + getDayOfWeek(today));
-		let yoil = today.getDay();
-		console.log("숫자로 : " + yoil)
-		return yoil;
-	};
-	
-	var value = getYoilDate()
-	$("#yoil").html(value); */
-</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<div id="nav2">
-	<div id="matching"></div>
-	<div id="matching"></div>
-	<div id="gym"><a onclick="redirectToToday();">매치 등록</a></div>
-	<div id="gym"><a href="${pageContext.request.contextPath}/match/matchList.ma">상대방 찾기</a></div>
+<div id="container">
+<div id="upperStuff">
+	<div id="filter">
+		<div>
+		<select>
+	        <c:forEach var="i" begin="0" end="6" step="1">
+	        	<c:choose>
+		        	<c:when test="${dowNow+i>7}">
+	            		<option value="${dowNow-7+i}">
+	            			<c:if test="${dowNow-7+i==1}">월요일</c:if>
+	            			<c:if test="${dowNow-7+i==2}">화요일</c:if>
+	            			<c:if test="${dowNow-7+i==3}">수요일</c:if>
+	            			<c:if test="${dowNow-7+i==4}">목요일</c:if>
+	            			<c:if test="${dowNow-7+i==5}">금요일</c:if>
+	            			<c:if test="${dowNow-7+i==6}">토요일</c:if>
+	            			<c:if test="${dowNow-7+i==7}">일요일</c:if>
+	            		</option>
+	            	</c:when>
+	            	<c:otherwise>
+	            		<option value="${dowNow+i}">
+	            			<c:if test="${dowNow+i==1}">월요일</c:if>
+	            			<c:if test="${dowNow+i==2}">화요일</c:if>
+	            			<c:if test="${dowNow+i==3}">수요일</c:if>
+	            			<c:if test="${dowNow+i==4}">목요일</c:if>
+	            			<c:if test="${dowNow+i==5}">금요일</c:if>
+	            			<c:if test="${dowNow+i==6}">토요일</c:if>
+	            			<c:if test="${dowNow+i==7}">일요일</c:if>
+	            		</option>
+	            	</c:otherwise>
+            	</c:choose>
+	       	</c:forEach>
+        </select>
+	</div>
+	<div>
+		<select id="MatchListFilterLocation" onchange="MatchListFilterLocation();">
+			<option>지역</option>
+			<option value="서울">서울</option>
+			<option value="경기">경기</option>
+			<option value="충청">충청</option>
+			<option value="대전">대전</option>
+			<option value="강원">강원</option>
+			<option value="경상">경상</option>
+			<option value="대구">대구</option>
+			<option value="부산">부산</option>
+			<option value="전라">전라</option>
+			<option value="광주">광주</option>
+			<option value="제주">제주</option>
+		</select>
+	</div>
+	<div>
+		<select id="MatchListFilterGender" onchange="MatchListFilterGender();">
+			<option>성별</option>
+			<option value="M">남자</option>
+			<option value="F">여자</option>
+		</select>
+	</div>
+	<div id="search">
+		<input id="MatchListFilterNick" type="text" placeholder="닉네임을 검색 해보세요 !">
+		<input class="buttonWithSearch" id="searchButton" type="button" value="검색">
+		<input class="buttonWithSearch" type="button" value="전체보기" onclick="location.href='${pageContext.request.contextPath}/match/matchList.ma'">
+	</div>
+	<div>
+	</div>
 </div>
-
-
+	<div id="matchButton">
+		<button onclick="redirectToToday();">매치등록</button>
+	</div>
+</div>
+<div id="game">
+	<div id="table">
+		<table>
+			<thead>
+				<tr>
+					<th width="10%">날짜</th>
+					<th width="10%">시간</th>
+					<th width="40%">장소</th>
+					<th width="20%">닉네임</th>
+					<th width="10%">프로필</th>
+					<th width="10%">도전</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${matchList}" var="matchList">
+					<tr>
+						<td>${matchList.matchdate}</td>
+						<td>${matchList.matchtime}</td>
+						<td>${matchList.gymAddress}<br>${matchList.gymDetailaddress}</td>
+						<td>${matchList.proNick}</td>
+						<td>
+							<button onclick="location.href='${pageContext.request.contextPath}/profile/profileDetail.pr?userId=${matchList.userId}'">프로필확인</button>
+						</td>
+						<td>
+							<button onclick="location.href='${pageContext.request.contextPath}/match/matchChallenge.ma?no=${matchList.no}'">매칭도전</button>
+						</td>
+					<tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>	
+</div>
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<c:if test="${pi.nowPage ne 1}">
+				<li class="page-item">
+					<a class="page-link" href="${pageContext.request.contextPath}/match/matchList.ma?nowPage=${pi.nowPage-1}" >Previous&emsp;</a>
+				</li>
+			</c:if>
+			<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+				<c:choose>
+					<c:when test="${p eq pi.nowPage}">
+						<li class="page-item active">
+							<a class="page-link" href="${pageContext.request.contextPath}/match/matchList.ma?nowPage=${p}">&emsp;${p}&emsp;</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item">
+							<a class="page-link" href="${pageContext.request.contextPath}/match/matchList.ma?nowPage=${p}">&emsp;${p}&emsp;</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${ pi.nowPage ne pi.totalPage }">
+				<li class="page-item">
+					<a class="page-link" href="${pageContext.request.contextPath}/match/matchList.ma?nowPage=${pi.nowPage+1}">Next</a>
+				</li>
+			</c:if>
+		</ul>
+	</nav>
+</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
+<script>
+	function redirectToToday() {
+		var url = "${pageContext.request.contextPath}/match/matchReg.ma?day=";
+		window.location.href = url;
+	}
+	function MatchListFilterGender() {
+		const gender = document.getElementById("MatchListFilterGender").value;
+		const url = "${pageContext.request.contextPath}/match/matchList.ma?gender=" + gender + "&nowPage=" + 1;
+	    location.href = url;
+	}
+	function MatchListFilterLocation() {
+		const locations = document.getElementById("MatchListFilterLocation").value;
+		const url = "${pageContext.request.contextPath}/match/matchList.ma?locations=" + locations + "&nowPage=" + 1;
+	    location.href = url;
+	}
+	
+	$("#searchButton").click(function() {
+    	const searchInput = document.getElementById("MatchListFilterNick").value;
+    	const url = "${pageContext.request.contextPath}/match/matchList.ma?searchInput=" + searchInput + "&nowPage=" + 1;
+    	location.href = url;
+    }
+</script>
 </html>

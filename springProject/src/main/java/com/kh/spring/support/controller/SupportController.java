@@ -69,6 +69,7 @@ public class SupportController {
 		List<Notice> noticeList = supportService.selectNoticeList(rowBounds);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pi", pi);
+		System.out.println(pi);
 	}
 	
 	@PostMapping("/noticeEnroll.su")

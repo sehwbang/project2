@@ -12,6 +12,7 @@
 		<result property="code" column="match_no" />
 	</resultMap>
 	<resultMap type="Match" id="MatchMap"></resultMap>
+	<resultMap type="MatchList" id="MatchListMap"></resultMap>
 	
 	<select id="selectScheduleList" resultMap="scheduleInfoMap">
 		SELECT S.GYM_NO, G.GYM_NAME, G.GYM_ADDRESS, G.GYM_DETAILADDRESS, S.MATCH_DATE, S.MATCH_TIME, S.CODE
@@ -76,5 +77,71 @@
 		AND M.MATCHDATE >= SYSDATE
 		AND M.DEL_YN     = 'N'
 		ORDER BY M.MATCHDATE, M.MATCHTIME -->
+	</select>
+	
+	<select id="selectTotalRecordMatchList" resultType="_int">
+		select count(*)
+		  from match
+	</select>
+	
+	<select id="selectMatchingList" resultMap="MatchListMap">
+		select m.no, m.matchdate, m.matchtime, g.gym_address, g.gym_detailaddress, p.pro_nick, p.user_id
+		  from match m, gym g, profile p
+		 where m.gym_no = g.gym_no
+		   and m.user_id1 = p.user_id
+		 order by no desc
+	</select>
+	
+	<select id="matchListFilterGender" resultMap="MatchListMap">
+		select m.no, m.matchdate, m.matchtime, g.gym_address, g.gym_detailaddress, p.pro_nick, p.user_id
+		  from match m, gym g, profile p, member r
+		 where m.gym_no = g.gym_no
+		   and m.user_id1 = p.user_id
+		   and m.user_id1 = r.user_id
+		   and r.user_gender = #{gender}
+		 order by m.no desc
+	</select>
+	
+	<select id="selectTotalRecordMatchListGender" resultType="_int">
+      	  select count(*)
+                    from match m, gym g, profile p, member r
+		            where m.gym_no = g.gym_no
+		            and m.user_id1 = p.user_id
+		            and m.user_id1 = r.user_id
+		            and r.user_gender = #{gender}
+	</select>
+	
+	<select id="selectTotalRecordMatchListLocation" resultType="_int">
+      	  select count(*)
+                    from match m, gym g, profile p
+		            where m.gym_no = g.gym_no
+		            and m.user_id1 = p.user_id
+		            and g.gym_address Like '' || #{locations} || '%'
+	</select>
+	
+	<select id="matchListFilterLocation" resultMap="MatchListMap">
+		select m.no, m.matchdate, m.matchtime, g.gym_address, g.gym_detailaddress, p.pro_nick, p.user_id
+		  from match m, gym g, profile p
+		 where m.gym_no = g.gym_no
+		   and m.user_id1 = p.user_id
+		   and g.gym_address Like '' || #{locations} || '%'
+		 order by m.no desc
+	</select>
+	
+	<select id="selectTotalRecordMatchListNick" resultType="_int">
+      	  select count(*)
+                    from match m, gym g, profile p
+		            where m.gym_no = g.gym_no
+		            and m.user_id1 = p.user_id
+		            and p.pro_nick Like '%' || #{searchInput} || '%'
+	</select>
+	
+	<select id="matchListFilterNick" resultMap="MatchListMap">
+		select m.no, m.matchdate, m.matchtime, g.gym_address, g.gym_detailaddress, p.pro_nick, p.user_id
+		  from match m, gym g, profile p
+		 where m.gym_no = g.gym_no
+		   and m.user_id1 = p.user_id
+		   and p.pro_nick Like '%' || #{searchInput} || '%'
+		 order by m.no desc
 	</select>
 </mapper>

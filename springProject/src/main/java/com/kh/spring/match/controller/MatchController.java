@@ -9,10 +9,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.kh.spring.common.model.vo.PageInfo;
+import com.kh.spring.common.template.Pagination;
 import com.kh.spring.gym.model.vo.Gym;
 import com.kh.spring.gym.model.vo.Schedule;
 import com.kh.spring.match.model.dao.MatchDao;
@@ -33,22 +37,125 @@ import com.kh.spring.match.model.service.MatchService;
 import com.kh.spring.match.model.vo.Match;
 import com.kh.spring.match.model.vo.MatchInfo;
 import com.kh.spring.match.model.vo.MatchInfoView;
+import com.kh.spring.match.model.vo.MatchList;
 import com.kh.spring.match.model.vo.MatchRegInfo;
-
+import com.kh.spring.support.model.vo.Notice;
+	
 @Controller
 @RequestMapping("/match")
 public class MatchController {
-		
+	
 	@Autowired
 	private MatchService matchService;
 	
 	@Autowired
 	private MatchDao matchDao;
 	
-	
 	@GetMapping("/matchList.ma")
-	public void matchList() { }
+	public void matchList(@RequestParam(defaultValue="1") int nowPage, Model model, @RequestParam(defaultValue="gender") String gender, @RequestParam(defaultValue="loc") String locations, @RequestParam(defaultValue="") String searchInput) {
+		int totalRecord = 0;
+		if(gender.equals("M") || gender.equals("F")) {
+			totalRecord = matchService.selectTotalRecordMatchListGender(gender);
+		} else if(locations.equals("seoul") ||
+				  locations.equals("kyunggi") ||
+				  locations.equals("충청") ||
+				  locations.equals("대전") ||
+				  locations.equals("강원") ||
+				  locations.equals("경상") ||
+				  locations.equals("대구") ||
+				  locations.equals("부산") ||
+				  locations.equals("전라") ||
+				  locations.equals("광주") ||
+				  locations.equals("제주")) {
+			totalRecord = matchService.selectTotalRecordMatchListLocation(locations);
+		} else if(!("".equals(searchInput))) {
+			totalRecord = matchService.selectTotalRecordMatchListNick(searchInput);
+		} else {
+			totalRecord = matchService.selectTotalRecordMatchList();
+		}
+		
+		int limit = 10;
+		int offset = (nowPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		PageInfo pi = Pagination.getPageInfo(totalRecord, nowPage, limit, 3);
+		System.out.println(searchInput);
+		
+		List<MatchList> matchList = null;
+		if(gender.equals("M") || gender.equals("F")) {
+			matchList = matchService.matchListFilterGender(gender, rowBounds);
+		} else if(locations.equals("서울") ||
+				  locations.equals("경기") ||
+				  locations.equals("충청") ||
+				  locations.equals("대전") ||
+				  locations.equals("강원") ||
+				  locations.equals("경상") ||
+				  locations.equals("대구") ||
+				  locations.equals("부산") ||
+				  locations.equals("전라") ||
+				  locations.equals("광주") ||
+				  locations.equals("제주")) {
+			matchList = matchService.matchListFilterLocation(locations, rowBounds);
+		} else if(!("".equals(searchInput))) {
+			matchList = matchService.matchListFilterNick(searchInput, rowBounds);
+		} else {
+		    matchList = matchService.selectMatchingList(rowBounds);
+		}
+		
+		System.out.println(matchList);
+		
+		System.out.println(nowPage);
+		System.out.println(pi);
+		String dow = "";
+		String formattedDate = "";
+		for(int i=0; i<matchList.size(); i++) {
+			String y = matchList.get(i).getMatchdate().substring(0,4);
+			String m = matchList.get(i).getMatchdate().substring(5,7);
+			String d = matchList.get(i).getMatchdate().substring(8,10);
+			
+			int yd = Integer.parseInt(y);
+			int md = Integer.parseInt(m);
+			int dd = Integer.parseInt(d);
+			
+			LocalDate date = LocalDate.of(yd, md, dd);
+			DayOfWeek dayOfWeek = date.getDayOfWeek();
+			if(dayOfWeek.getValue() == 1) {
+				dow = "월";
+			} else if (dayOfWeek.getValue() == 2) {
+				dow = "화";
+			} else if (dayOfWeek.getValue() == 3) {
+				dow = "수";
+			} else if (dayOfWeek.getValue() == 4) {
+				dow = "목";
+			} else if (dayOfWeek.getValue() == 5) {
+				dow = "금";
+			} else if (dayOfWeek.getValue() == 6) {
+				dow = "토";
+			} else if (dayOfWeek.getValue() == 7) {
+				dow = "일";
+			}
+			formattedDate = m + "월 " + d + "일 " + dow + "요일";
+			matchList.get(i).setMatchdate(formattedDate);
+		}
+		
+		LocalDate currentDate = LocalDate.now();
+		DayOfWeek dayOfWeekNow = currentDate.getDayOfWeek();
+		
+		model.addAttribute("dowNow", dayOfWeekNow.getValue());
+		model.addAttribute("matchList", matchList);
+		model.addAttribute("pi", pi);
+	}
 	
+	/*@GetMapping("/MatchListFilterGender.ma")
+	public String MatchListFilterGender(@RequestParam String gender, Model model) {
+		System.out.println(gender);
+		
+		System.out.println(matchList.get(0).getProNick());
+		model.addAttribute("matchListFilterGender", matchList);
+		return "/match/matchList";
+	}*/
+	
+	@GetMapping("/mathChallenge.ma")
+	public void matchChallenge(@RequestParam int no) {}
 
 	@RequestMapping(value="/matchReg.ma", method = RequestMethod.GET)
 	public String matchReg(HttpServletRequest request, Model model) {	
@@ -98,10 +205,6 @@ public class MatchController {
 		model.addAttribute("inSchedList", inSchedList);		
 		
 		//////////////////////////////////////////////////////////////////////
-		
-		
-		
-		 
 		
 		Match match = new Match();
 		//지도에 보여질 GYM, SCHEDULE 테이블 조인해서 조회하는 부분
