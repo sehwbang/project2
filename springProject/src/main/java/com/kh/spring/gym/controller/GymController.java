@@ -28,6 +28,7 @@ import com.kh.spring.gym.model.dao.GymDao;
 import com.kh.spring.gym.model.service.GymService;
 import com.kh.spring.gym.model.vo.Gym;
 import com.kh.spring.gym.model.vo.Schedule;
+import com.kh.spring.match.model.service.MatchService;
 import com.kh.spring.member.model.vo.Member;
 
 @Controller
@@ -37,6 +38,9 @@ public class GymController {
 	
 	@Autowired
 	private GymService gymService;
+	
+	@Autowired
+	private MatchService matchService;
 	
 	@Autowired
 	private GymDao gymDao;
@@ -223,6 +227,7 @@ public class GymController {
 			schedule.setUserId(userId);
 			schedule.setCode(totalCodes[i]);
 			int result = gymService.deleteSchedule(schedule);
+			int result2 = matchService.deleteMatch(schedule);
 			sum += result;
 		}
 		if(sum==totalCodes.length) {

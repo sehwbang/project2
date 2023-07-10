@@ -241,14 +241,13 @@ document.getElementById("userId").addEventListener("focusout", () => {
 
 	if (regExp1.test(inputId)) {
 	    idCheck = true;
-	    messageId.innerHTML = "중복체크하세요.";
 	} else if (inputId === "") {
 	    messageId.innerHTML = "필수 정보입니다.";
 	    idCheck = false;
-	} else {
+	} /* else {
 	    messageId.innerHTML = "첫글자는 반드시 영문자이며, 숫자 포함 총 6~13자로 입력하시오.";
 	    idCheck = false;
-	}
+	} */
 	}, 200);
 	})
 
@@ -503,19 +502,18 @@ document.getElementById("userPw").addEventListener("focusout", () => {
 
 	function idChecka() {
 	  $.ajax({
-	       url: "/spring/member/id.ch",
+	       url: "${pageContext.request.contextPath}/member/id.ch",
 	       type: "get",
 	       data : {ida : $("#userId").val()},
 	       dataType : "json",
 	      
 	           success(result) {
-	                 console.log(result);
-	           
+	             
 	           const {userId, available} = result;
 	           console.log(result);
 	           
 	           if(available) {
-	              
+	        	  alert("사용가능한 아이디입니다");
 	              $("#messageId").text("멋진 아이디네요 !");
 	              document.getElementById("idc").addEventListener("focusout", () => {
 	                  const inputId = document.getElementById("userId").value;
@@ -527,17 +525,18 @@ document.getElementById("userPw").addEventListener("focusout", () => {
 	                  } else if (inputId === " ") {
 	                      messageId.innerHTML = "필수 정보입니다.";
 	                      idCheck = false;
-	                  } else {
-	                      messageId.innerHTML = "첫글자는 반드시 영문자이며, 숫자 포함 총 6~13자로 입력하시오.";
-	                      idCheck = false;
-	                  }
+	                  } //else {
+	                     // messageId.innerHTML = "첫글자는 반드시 영문자이며, 숫자 포함 총 6~13자로 입력하시오.";
+	                     // idCheck = false;
+	                  //}
 	              })
 
 	              iddCheck = true;
 	              
 	              $("#idbtncheck").val("idCheck");
 	           } else {
-	              $("#messageId").text("이미 사용중이거나 탈퇴한 아이디입니다");
+	        	   alert("이미 사용이거나 탈퇴한 아이디입니다");
+	             // $("#messageId").text("이미 사용중이거나 탈퇴한 아이디입니다");
 	              iddCheck = false;
 	              $("#idbtncheck").val("idUncheck");
 	           }

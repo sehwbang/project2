@@ -22,7 +22,7 @@ public interface MatchService {
 
 	int updateMatch(Match match);
 
-	List<MatchInfo> selectMatchList(String userId1, String matchDate);
+	List<MatchInfo> selectMatchList(String userId, String matchDate);
 
 	int selectTotalRecordMatchList();
 
@@ -43,4 +43,6 @@ public interface MatchService {
 	List<MatchList> matchListFilterDow(String dowString, RowBounds rowBounds);
 
 	int selectTotalRecordMatchListDow(String dowString);
+	
+	int deleteMatch(Schedule schedule);
 }

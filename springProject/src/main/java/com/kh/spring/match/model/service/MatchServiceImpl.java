@@ -43,8 +43,8 @@ public class MatchServiceImpl implements MatchService{
 	}
 
 	@Override
-	public List<MatchInfo> selectMatchList(String userId1, String matchDate) {
-		return matchDao.selectMatchList(userId1, matchDate);
+	public List<MatchInfo> selectMatchList(String userId, String matchDate) {
+		return matchDao.selectMatchList(userId, matchDate);
 	}
 
 	@Override
@@ -95,6 +95,11 @@ public class MatchServiceImpl implements MatchService{
 	@Override
 	public int selectTotalRecordMatchListDow(String dowString) {
 		return matchDao.selectTotalRecordMatchListDow(dowString);
+	}
+	
+	@Override
+	public int deleteMatch(Schedule schedule) {
+		return matchDao.deleteMatch(schedule);
 	}
 
 }

@@ -29,4 +29,4 @@ public class Member {
 	   private int userControl;
 	   private Date userRegdate;
 	   private int userInfo;
-	}
+}

@@ -86,7 +86,7 @@
 							<button onclick="location.href='${pageContext.request.contextPath}/profile/profileDetail.pr?userId=${matchList.userId}'">프로필확인</button>
 						</td>
 						<td>
-							<button onclick="location.href='${pageContext.request.contextPath}/match/matchChallenge.ma?no=${matchList.no}'">매칭도전</button>
+							<button onclick="challenge();">매칭도전</button>
 						</td>
 					<tr>
 				</c:forEach>
@@ -126,10 +126,11 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 <script>
-	function redirectToToday() {
-		var url = "${pageContext.request.contextPath}/match/matchReg.ma?day=";
-		window.location.href = url;
-	}
+function redirectToToday() {
+    var url = "${pageContext.request.contextPath}/match/matchReg.ma?userId=${loginMember.userId}&day=";
+    
+    window.location.href = url;
+ }
 	function MatchListFilterDow() {
 		const dowFromSelect = document.getElementById("MatchListFilterDow").value;
 		const url = "${pageContext.request.contextPath}/match/matchList.ma?dowFromSelect=" + dowFromSelect;
@@ -152,10 +153,7 @@
     	location.href = url;
     });
 	
-	$(function () {
-	    const tmp = ${matdat};
-	    tmp.substring(6,8);
-	    console.log(tmp);
-	});
+	
+	
 </script>
 </html>

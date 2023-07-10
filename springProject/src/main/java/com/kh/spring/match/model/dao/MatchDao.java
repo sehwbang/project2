@@ -26,7 +26,7 @@ public interface MatchDao {
 
 	int updateMatch(Match match);
 
-	List<MatchInfo> selectMatchList(@Param("userId1")String userId1, @Param("matchdate")String matchDate);
+	List<MatchInfo> selectMatchList(@Param("userId")String userId, @Param("matchdate")String matchDate);
 
 	int selectTotalRecordMatchList();
 
@@ -47,4 +47,6 @@ public interface MatchDao {
 	List<MatchList> matchListFilterDow(String dowString, RowBounds rowBounds);
 
 	int selectTotalRecordMatchListDow(String dowString);
+	
+	int deleteMatch(Schedule schedule);
 }

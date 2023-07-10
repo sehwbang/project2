@@ -162,8 +162,9 @@ public class MemberController {
 	}
 
 	@PostMapping("/memberUpdate.me")
-	public String memberUpdate(Member member, Model model, RedirectAttributes redirectAtt) {
+	public String memberUpdate(Member member, RedirectAttributes redirectAtt) {
 		// pw암호화해서 member.userPwd에 넣기
+		
 		
 		String rawPassword = member.getUserPw();
 		String encodedPassword = passwordEncoder.encode(rawPassword);
@@ -172,7 +173,7 @@ public class MemberController {
 		System.out.println(member);
 		
 		int result = memberService.updateMember(member);
-
+		System.out.println("result :"+result);
 		if (result > 0) {
 			redirectAtt.addFlashAttribute("msg", "회원정보 수정 성공");
 		} else {
@@ -180,6 +181,8 @@ public class MemberController {
 		}
 
 		return "redirect:/member/memberInfo.me?userId=" + member.getUserId();
+		
+		
 	}
 	
 	@GetMapping("/memberInfo.me")
@@ -196,7 +199,7 @@ public class MemberController {
 		member.setUserPw(encodedPassword);
 
 		int result = memberService.pwupdateMember(member);
-
+		
 		if (result > 0) {
 			redirectAtt.addFlashAttribute("msg", "회원정보 수정 성공");
 		} else {
@@ -205,6 +208,10 @@ public class MemberController {
 
 		return "redirect:/member/memberIdInfo.me?userEmail=" + member.getUserEmail();
 	}
+
+	
+
+
 	
 	@GetMapping("/memberfindId.me")
 	public void memberfindId(String userId) {                 

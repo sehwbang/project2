@@ -104,10 +104,10 @@ public class ProfileController {
 			}
 			profile.setOriginalFilename(originalFilename);
 			profile.setChangeFilename(changeFilename);
-			System.out.println("original="+originalFilename);
-			System.out.println("change="+changeFilename);
+			//System.out.println("original="+originalFilename);
+			//System.out.println("change="+changeFilename);
 		}
-		System.out.println(profile);
+		//System.out.println(profile);
 		int result = profileService.updateProfile(profile);
 
 		if (result > 0) {
