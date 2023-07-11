@@ -79,7 +79,7 @@ public class ProfileController {
 			member.setUserStatus(2);
 			model.addAttribute("userStatusFromProfile", member.getUserStatus());
 		 }
-		return "/member/loginPage";			
+		return "/member/loginPage";
 	}
 
 	

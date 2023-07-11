@@ -23,4 +23,5 @@ public class MatchList {
 	private String gymDetailaddress;
 	private String proNick;
 	private String userId;
+	private String matchdatestring;
 }

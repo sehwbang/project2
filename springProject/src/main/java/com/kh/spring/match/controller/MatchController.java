@@ -62,12 +62,11 @@ public class MatchController {
 			              @RequestParam(defaultValue="") String searchInput,
 			              @RequestParam(defaultValue="dows") String dowFromSelect) {
 		int totalRecord = 0;
-		
 		String dowString = null;
 		if(gender.equals("M") || gender.equals("F")) {
 			totalRecord = matchService.selectTotalRecordMatchListGender(gender);
-		} else if(locations.equals("seoul") ||
-				  locations.equals("kyunggi") ||
+		} else if(locations.equals("서울") ||
+				  locations.equals("경기") ||
 				  locations.equals("충청") ||
 				  locations.equals("대전") ||
 				  locations.equals("강원") ||
@@ -102,6 +101,7 @@ public class MatchController {
 			} else {
 				dowString = "sunday";
 			}
+			
 			totalRecord = matchService.selectTotalRecordMatchListDow(dowString);
 		
 		} else {
@@ -152,24 +152,25 @@ public class MatchController {
 			} else {
 				dowString = "sunday";
 			}
-			
-			matchList = matchService.matchListFilterDow(dowString, rowBounds);
+			System.out.println(dowString);
+				matchList = matchService.matchListFilterDow(dowString, rowBounds);
+				System.out.println(matchList.size());
 		} else {
 		  matchList = matchService.selectMatchingList(rowBounds);
+		}
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M월 dd일 E요일").withLocale(Locale.forLanguageTag("ko"));
+		
+		for(int i=0; i<matchList.size(); i++) {
+			System.out.println(matchList.get(i).toString());
+			matchList.get(i).getMatchdate();
+			LocalDateTime date = matchList.get(i).getMatchdate();
+			matchList.get(i).setMatchdatestring(formatter.format(date));
 		}
 		
 		model.addAttribute("matchList", matchList);
 		model.addAttribute("pi", pi);
 	}
-	
-	/*@GetMapping("/MatchListFilterGender.ma")
-	public String MatchListFilterGender(@RequestParam String gender, Model model) {
-		System.out.println(gender);
-		
-		System.out.println(matchList.get(0).getProNick());
-		model.addAttribute("matchListFilterGender", matchList);
-		return "/match/matchList";
-	}*/
 	
 	@GetMapping("/matchChallenge.ma")
 	public void matchChallenge(@RequestParam int no) {

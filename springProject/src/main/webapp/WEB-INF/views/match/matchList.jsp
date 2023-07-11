@@ -76,9 +76,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${matchList}" var="matchList">
+				<c:forEach var="matchList" items="${matchList}">
 					<tr>
-						<td>${matchList.matchdate}</td>
+						<td>${matchList.matchdatestring}</td>
 						<td>${matchList.matchtime}</td>
 						<td>${matchList.gymAddress}<br>${matchList.gymDetailaddress}</td>
 						<td>${matchList.proNick}</td>
@@ -88,7 +88,7 @@
 						<td>
 							<button onclick="challenge();">매칭도전</button>
 						</td>
-					<tr>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
@@ -152,8 +152,5 @@ function redirectToToday() {
     	const url = "${pageContext.request.contextPath}/match/matchList.ma?searchInput=" + searchInput
     	location.href = url;
     });
-	
-	
-	
 </script>
 </html>
