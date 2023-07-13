@@ -9,8 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <!--  <script src="${pageContext.request.contextPath}/resources/js/member.js"></script> -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -21,7 +20,7 @@
 	</jsp:include>
 
 
-	<form action="/spring/member/memberEnroll.me" method="post">
+	<form action="/spring/member/memberEnroll.me" method="post" name="pass">
 		<h1>회원가입</h1>
 		<table class="container">
 			<tbody>
@@ -97,7 +96,7 @@
 					<td><input id="phone2" type="text" disabled required>
 					</td>
 					<td><input type="button" id="phoneChk2" class="doubleChk"
-						value="본인인증" ></td>
+						value="본인인증"></td>
 				</tr>
 
 				<tr>
@@ -118,7 +117,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" id="messageEmail" class="message" ></td>
+					<td colspan="2" id="messageEmail" class="message"></td>
 				</tr>
 				<tr>
 					<th></th>
@@ -133,30 +132,36 @@
 				<tr>
 					<th></th>
 					<td colspan="2"><input name="detailaddress" id="detailAddr"
-						placeholder="상세주소를 입력하세요" required></td>
-				</tr>
-				<tr>
-					<th>개인정보동의</th>
-					<td style="font-size: small">&emsp;<input type="checkBox" name="userInfo" id="userInfo"
-						checked disabled >&emsp;개인정보 동의를 완료하였습니다.</td>
+						placeholder="상세주소를 입력하세요" required> <input type="hidden"
+						name="userInfo" id="userInfo" checked readonly></td>
 
-					<td></td>
 				</tr>
 				<tr>
 					<td colspan="2" id="messageRnn" class="message"></td>
 				</tr>
+			</tbody>
 		</table>
-		</tbody>
+
 		<div class="btn">
-			<button type="submit"  onclick="inputCheck()">회원가입</button>
+			<button type="button" onclick="inputCheck()">회원가입</button>
 			&emsp;
 
 		</div>
 	</form>
-<body>
+</body>
 <script type="text/javascript">
 
-function inputCheck() {
+let idCheck = false;
+let pwCheck = false;
+let pwcCheck = false;
+let nameCheck = false;
+let emailCheck = false;
+let rnnCheck1 = false;
+let rnnCheck2 = false;
+let rnnCheck = false;
+let phoneCheck = false;
+
+function inputCheck() {	
   var userId = document.getElementById('userId').value;
   var userPw = document.getElementById('userPw').value;
   var pwc = document.getElementById('pwc').value;
@@ -166,18 +171,18 @@ function inputCheck() {
   var phone2 = document.getElementById('phone2').value;
   var userEmail = document.getElementById('userEmail').value;
   
-  alert("회원가입을 축하합니다!");
+  
   // 아이디 유효성 검사
   var userIdPattern = /^[a-zA-Z0-9]{5,13}$/;
   if (!userIdPattern.test(userId)) {
     alert('아이디는 6~13자의 영문 대소문자와 숫자로만 입력해야 합니다.');
     return false;
-  }
+  } 
 
   // 비밀번호 유효성 검사
-  var userPwPattern = /^[a-zA-Z0-9!@#$%^&*()]{8,16}$/;
+  var userPwPattern = /^[a-zA-Z0-9!@#$%^&*()]{8,15}$/;
   if (!userPwPattern.test(userPw)) {
-    alert('비밀번호는 8~16자의 영문 대소문자, 숫자, 특수문자로만 입력해야 합니다.');
+    alert('비밀번호는 8~15자의 영문 대소문자, 숫자, 특수문자로만 입력해야 합니다.');
     return false;
   }
 
@@ -228,8 +233,11 @@ function inputCheck() {
     return false;
   }
 
+  pass.submit();
   // 모든 유효성 검사 통과
-  return true;
+  /* return true;*/
+  alert("회원가입을 축하합니다!"); 
+
   
 }
 
@@ -397,7 +405,6 @@ document.getElementById("userPw").addEventListener("focusout", () => {
 	 }); */
 	 $("#phoneChk").click(function(){
 		    var phone = $("#phone").val();
-		    
 		    // 정규식 패턴
 		    var phonePattern = /^010-\d{4}-\d{4}$/;
 
@@ -405,9 +412,7 @@ document.getElementById("userPw").addEventListener("focusout", () => {
 		        alert("올바른 휴대폰 번호 형식이 아닙니다.");
 		        return;
 		    }
-
 		    // 이하 코드는 정규식 패턴이 일치하는 경우에만 실행됩니다.
-		    
 		    alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
 
 		    $.ajax({
@@ -444,7 +449,7 @@ document.getElementById("userPw").addEventListener("focusout", () => {
 
 
 	});
-	function deleteMember() {
+	/* function deleteMember() {
 		if(window.confirm("탈퇴하시겠습니까?")){
 		location.href="${pageContext.request.contextPath}/member/deleteMember.me";
 		}
@@ -452,7 +457,7 @@ document.getElementById("userPw").addEventListener("focusout", () => {
 	}
 	function nice() {
 		  alert("회원가입을 축하합니다!");
-		}
+		} */
 	function nextBlank(N, Obj, nextB) {
 	   if(document.getElementById(Obj).value.length == N) {
 	      document.getElementById(nextB).focus();
@@ -488,15 +493,6 @@ document.getElementById("userPw").addEventListener("focusout", () => {
 	    }).open();
 	}
 
-	let idCheck = false;
-	let pwCheck = false;
-	let pwcCheck = false;
-	let nameCheck = false;
-	let emailCheck = false;
-	let rnnCheck1 = false;
-	let rnnCheck2 = false;
-	let rnnCheck = false;
-	let phoneCheck = false;
 
 	
 
@@ -567,9 +563,9 @@ document.getElementById("userPw").addEventListener("focusout", () => {
 </script>
 
 
-	<div class="footer" align="center" style="padding: 50px;">
+<div class="footer" align="center" style="padding: 50px;">
 
-		<p>&copy; 2023 VINCERO. All rights reserved.</p>
-	</div>
+	<p>&copy; 2023 VINCERO. All rights reserved.</p>
+</div>
 
 </html>

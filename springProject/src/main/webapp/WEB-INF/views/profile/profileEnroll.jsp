@@ -90,15 +90,13 @@ button[type="submit"], button[type="reset"], button[type="button"] {
 	margin-top: 10px;
 	transition: background-color 0.3s;
 }
-.form {
-	
-}
+
 </style>
 </head>
 
 <body>
 	<div class="form" align="center">
-		<form action="${pageContext.request.contextPath}/profile/profileEnroll.pr" method="post" enctype="multipart/form-data">
+		<form action="${pageContext.request.contextPath}/profile/profileEnroll.pr" method="post" enctype="multipart/form-data" name="ok">
 			<table border="1" class="table1">
 				<tr>
 					<th rowspan="3">
@@ -108,9 +106,9 @@ button[type="submit"], button[type="reset"], button[type="button"] {
 						</div>
 					</th>
 					<th>닉네임</th>
-					<td><input type="hidden" id="userId" name="userId" value="${loginMember.userId}"> 
+					<td>
 						<input type="text" id="proNick" name="proNick" required> 
-						<input type="button" id="nickc" value="중복확인" onclick="nickCheck();"></td>
+						<input type="button" id="nickc" value="중복확인" onclick="checkNick();"></td>
 				</tr>
 				<tr>
 					<th>주종목</th>
@@ -185,9 +183,9 @@ button[type="submit"], button[type="reset"], button[type="button"] {
 				
 			</table>
 
-			
+			<input type="hidden" name="userId" value="${loginMember.userId}">
 			<div class="btn" align="center">
-			<button type="submit">등록</button>
+			<input type="button" onclick="pass()" value="등록">
 			&emsp;
 			<button type="reset">초기화</button>
 			</div>
@@ -196,44 +194,63 @@ button[type="submit"], button[type="reset"], button[type="button"] {
 
 </body>
 <script type="text/javascript">
-function nickCheck() {
-	  $.ajax({
-	       url: "${pageContext.request.contextPath}/profile/nick.ch",
-	       data : {proNick : $("#proNick").val()},
-	       
-         success(result) {
-	           const {proNick, available} = result;
-	           console.log("proNick" + proNick);
-	           console.log("available" + available);
-	           if(available) {
-	              
-	        	   alert("사용가능한 닉네임입니다");
-	              document.getElementById("nickcheck").addEventListener("focusout", () => {
-	                  const inputNick = document.getElementById("proNick").value;
-	                  let messageNick = document.getElementById("messageNick");
-	                  const regExp1 = /^[a-zA-Z][a-zA-Z0-9]{2,12}$/;
 
-	                  if (regExp1.test(inputNick)) {
-	                      nickCheck = true;
-	                  } else if (inputNick === " ") {
-	                	  alert("필수정보입니다");
-	                     
-	                  } 
-	              })
- 
-	              $("#nickbtncheck").val("nickCheck");
-	              
-	           } else {
-	        	   alert("이미 사용중인 닉네임입니다");
-	              nickdCheck = false;
-	              $("#nickbtncheck").val("nickUncheck");
-	           }
-      },
-      error : console.log
-      
-	   });
-}		
+var isNickChecked = false; // 닉네임 중복 확인 여부를 체크하는 변수를 추가
 
-	
+function checkNick() {
+    var nickValue = $("#proNick").val();
+
+    if (!nickValue) {
+        alert("닉네임을 입력해주세요.");
+        return;
+    }
+
+    $("#nickc").prop("disabled", true); // 중복 확인 버튼 비활성화
+
+    $.ajax({
+        url: "${pageContext.request.contextPath}/profile/nick.ch",
+        data: { proNick: nickValue },
+        beforeSend: function() {
+            // AJAX 요청을 보내기 전에 로딩 표시 등의 작업을 처리할 수 있습니다.
+        },
+        success: function(result) {
+            const { proNick, available } = result;
+            console.log("proNick" + proNick);
+            console.log("available" + available);
+            if (available) {
+                alert("사용 가능한 닉네임입니다.");
+
+                const inputNick = document.getElementById("proNick").value;
+                const regExp1 = /^[a-zA-Z0-9가-힣]{2,12}$/;
+
+                if (regExp1.test(inputNick)) {
+                    isNickChecked = true;
+                } else if (inputNick === " ") {
+                    alert("필수 정보입니다.");
+                    isNickChecked = false;
+                }
+            } else {
+                alert("이미 사용 중인 닉네임입니다.");
+                isNickChecked = false;
+            }
+        },
+        error: function() {
+            console.log("AJAX 요청 실패");
+            // 오류 처리 로직 작성 또는 알맞은 조치를 취해야 함
+        },
+        complete: function() {
+            $("#nickc").prop("disabled", false); // 중복 확인 버튼 다시 활성화
+        }
+    });
+}
+
+function pass() {
+    if (isNickChecked) {
+        document.ok.submit();
+    } else {
+        alert("닉네임 중복을 확인해주세요.");
+    }
+}
 </script>
+	
 </html>

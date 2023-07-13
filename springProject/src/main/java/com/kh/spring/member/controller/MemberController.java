@@ -66,7 +66,7 @@ public class MemberController {
 		String encodedPassword = passwordEncoder.encode(rawPassword);
 		member.setUserPw(encodedPassword);
 //		System.out.println("changePass = " + member);
-
+		
 		int result = memberService.insertMember(member);
 		return "redirect:/";
 	}
@@ -230,9 +230,10 @@ public class MemberController {
 	
 	@GetMapping("/deleteMember.me")
 	// 버튼을 통해 넘어왔기에 무조건 get post는 폼에서 post를 지정해줘야만 가능하다
-	public ModelAndView removeMember(HttpSession session, ModelAndView mv) {
+	public ModelAndView removeMember(HttpSession session, ModelAndView mv, SessionStatus status) {
 
 		Member member = (Member) session.getAttribute("loginMember");
+		
 		String userId = member.getUserId();
 		System.out.println(userId);
 			int result = memberService.deleteMember(userId);
@@ -241,6 +242,8 @@ public class MemberController {
 				 session.invalidate();
 				mv.setViewName("redirect:/");
 			}
+			if (!status.isComplete())
+				status.setComplete();
 		return mv;
 	}
 	
@@ -258,5 +261,21 @@ public class MemberController {
 
 	    return response;
 	}
-	
+    @RequestMapping("/payment.py")
+    public String payment() {
+        return "member/pay";
+    }
+    @RequestMapping("/p_bank.py")
+    public String p_bank() {
+        return "member/p_bank";
+    }
+    @RequestMapping("/p_mobile.py")
+    public String p_mobile() {
+        return "member/p_mobile";
+    }
+    @PostMapping("/p_mobilePass.py")
+	public String p_mobilePass(String userId, String userName, String userEmail, Model model) {
+    	
+		return "redirect:/";
+	}
 }

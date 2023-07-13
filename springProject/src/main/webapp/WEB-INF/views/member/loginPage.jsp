@@ -7,15 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
 <c:if test="${not empty msg}">
 	<script type="text/javascript">
 		alert('${msg}');
 	</script>
 </c:if>
 </head>
-${loginMember.userStatus}
+
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp">
 		<jsp:param value="로그인" name="title" />
@@ -31,7 +30,8 @@ ${loginMember.userStatus}
 						<tr>
 							<th>ID</th>
 							<td id="id-part"><input type="text" id="userId"
-								name="userId" value="${savedUserId}" ${savedUserId ? 'readonly' : ''}></td>
+								name="userId" value="${savedUserId}"
+								${savedUserId ? 'readonly' : ''}></td>
 							<td rowspan="2"><button class="btn" type="submit">로그인</button></td>
 						</tr>
 						<tr>
@@ -43,15 +43,16 @@ ${loginMember.userStatus}
 							<td></td>
 							<td><a
 								href="${pageContext.request.contextPath}/member/memberPersonalInfo.me"
-								style="font-size: small; text-decoration: none;">회원가입&emsp;</a>&ensp; <a
+								style="font-size: small; text-decoration: none;">회원가입&emsp;</a>&ensp;
+								<a
 								href="${pageContext.request.contextPath}/member/memberfindId.me"
 								style="font-size: small; text-decoration: none;">아이디 /</a><a
 								href="${pageContext.request.contextPath}/member/memberNewpw.me"
 								style="font-size: small; text-decoration: none;"> 비밀번호 찾기</a></td>
 
 							<td><input type="checkbox" id="saveIdCheckbox"
-								name="saveIdCheckbox" ${savedUserId ? 'checked' : ''}>&ensp;<a style="font-size: small; text-decoration: none;">ID저장</a>
-							</td>
+								name="saveIdCheckbox" ${savedUserId ? 'checked' : ''}>&ensp;<a
+								style="font-size: small; text-decoration: none;">ID저장</a></td>
 						</tr>
 					</c:if>
 					<c:if test="${not empty loginMember}">
@@ -91,12 +92,30 @@ ${loginMember.userStatus}
 										</c:when>
 									</c:choose>
 								</tr>
+								<tr>
+									<td>
+									<td><button class="paybtn" type="button"onclick="openModal()">결제</button>
+											</td>
+									<td></td>
+								</tr>
 							</table>
 						</div>
 					</c:if>
 
 				</table>
 			</form>
+			 <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <h3>결제 방법 선택</h3>
+            <div class="button-row">
+                <button onclick="location.href='${pageContext.request.contextPath}/member/p_bank.py'" class="button">계좌이체</button>
+                <button onclick="location.href='${pageContext.request.contextPath}/member/p_mobile.py'" class="button">휴대폰결제</button>
+            </div>
+        </div>
+    </div>
+
+
+
 		</div>
 	</div>
 
@@ -121,6 +140,21 @@ ${loginMember.userStatus}
 				}
 			});
 		});
+		
+	
+	    var modal = document.getElementById("paymentModal");
+
+	    function openModal() {
+	        modal.style.display = "block";
+	        document.addEventListener("click", closeModalOutside);
+	    }
+
+	    function closeModalOutside(event) {
+	        if (event.target === modal) {
+	            modal.style.display = "none";
+	            document.removeEventListener("click", closeModalOutside);
+	        }
+	    }
 	</script>
 </body>
 </html>

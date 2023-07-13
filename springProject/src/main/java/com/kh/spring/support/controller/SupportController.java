@@ -38,6 +38,11 @@ import com.kh.spring.support.model.vo.Question;
 @RequestMapping("/support")
 public class SupportController {
 	
+	@RequestMapping("/FAQ.su")
+    public String FAQ() {
+        return "support/FAQ";
+	}
+	
 	@Autowired
 	private SupportService supportService;
 	

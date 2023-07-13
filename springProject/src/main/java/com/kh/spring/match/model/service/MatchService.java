@@ -1,6 +1,8 @@
 package com.kh.spring.match.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import com.kh.spring.match.model.vo.ChallengerList;
 
 import org.apache.ibatis.session.RowBounds;
 
@@ -45,4 +47,35 @@ public interface MatchService {
 	int selectTotalRecordMatchListDow(String dowString);
 	
 	int deleteMatch(Schedule schedule);
+
+	int challengerInsertDecision(Match toCopyMatchData);
+
+	Match toCopyMatchData(int no);
+	
+	int challengerInsertDecision4(Match toCopyMatchData);
+	
+	int challengerInsert(Match toCopyMatchData);
+
+	List<MatchList> matchListReg(String userId1, RowBounds rowBounds);
+
+	int selectTotalRecordMatchListReg(String userId1);
+
+	List<MatchList> matchListChal(String userId2, RowBounds rowBounds);
+
+	int selectTotalRecordMatchListChal(String userId2);
+
+	int challengerUpdate(Match toCopyMatchData);
+
+	int challengerInsertDecision2(Match toCopyMatchData);
+
+	int challengerInsertDecision3(Match toCopyMatchData);
+
+	List<ChallengerList> toChallengerList(MatchList matchListTmp);
+
+	int regCancel(Match matchTmp);
+
+	int chalCancel(Match toCancelMatchData);
+
+	List<Match> selectListChal(String userId2);
+
 }

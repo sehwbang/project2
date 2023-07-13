@@ -97,10 +97,18 @@
 <script>
 
 	function deleteMember() {
+		var userPw = document.getElementById("userPw").value;
+		if (userPw === null || userPw === '') {
+			alert('비밀번호를 입력하세요.');
+			return;
+		}
 		if(window.confirm("탈퇴하시겠습니까?")){
 		location.href="${pageContext.request.contextPath}/member/deleteMember.me";
-		}		
+		}
+		
+		
 	}
+	
 	
 </script>
 </html>
