@@ -8,13 +8,23 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/support/vincero.css?v=<%=System.currentTimeMillis()%>">
 </head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<body>
-   <a href="${pageContext.request.contextPath}/support/support.su">빈체로소개</a>
-   <a href="${pageContext.request.contextPath}/gym/joinEnroll.gym">가맹점신청</a>
-   <a href="${pageContext.request.contextPath}/support/noticeList.su">공지게시판</a>
-   <a href="${pageContext.request.contextPath}/support/cusCenter.su">고객센터</a>
+	<body>
+	<div>
+	 <div class="link">
+	    <a href="${pageContext.request.contextPath}/support/support.su">빈체로소개</a>
+	</div>
+	<div class="link">
+	    <a href="${pageContext.request.contextPath}/gym/joinEnroll.gym">가맹점신청</a>
+	</div>
+	<div class="link">
+	    <a href="${pageContext.request.contextPath}/support/noticeList.su">공지게시판</a>
+	</div>
+	<div class="link">
+	    <a href="${pageContext.request.contextPath}/support/cusCenter.su">고객센터</a>
+	</div>
+	</div>
     <div class="logo">
-        <div>
+        <div> 
             <img class="img1" src="${pageContext.request.contextPath}/resources/img/logo.png">
         </div>
         <div>
@@ -23,7 +33,7 @@
         </div>
     </div>
     <div class="howTo">
-        <h1 style="margin-bottom: 40px;">HOW TO</h1>
+        <h1>HOW TO</h1>
         <img src="${pageContext.request.contextPath}/resources/img/flow.jpg">
     </div>
     <div class="logo">
