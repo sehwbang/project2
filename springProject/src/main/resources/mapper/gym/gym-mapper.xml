@@ -103,4 +103,14 @@
 		   	   gym_account = #{gymAccount}
 		 where gym_no = #{gymNo}
 	</update>
+	
+<!-- 	 회원 마이페이지에서 전화번호 수정 시 관장전화번호도 수정 
+	<update id="updateCoachPhone">
+		update gym
+		   set coach_phone = (
+		   	    select phone
+		   	      from member
+		   	     where user_id = #{userId})
+		 where user_id = #{userId}
+	</update> -->
 </mapper>

@@ -61,28 +61,33 @@
 				<th>매치 수</th>
 				<td>${gym.matchCount}</td>
 			</tr>
-			
+			<tr><td></td></tr>
+			<tr>
+				<td colspan="2" align="center">
+					<h3>상기의 정보변경은<br> 고객센터로 문의부탁드립니다 ☎</h3>
+				</td>
+			</tr>
 		</table>
 		
 		<div style="width: 50px; float: left;"></div>
 		
 		<table class="container" style="float:right;" id="table2">
 			<tr>
-				<th>체육관 번호</th>
-				<td>
-					<input type="text" id="gymPhone" name="gymPhone" value="${gym.gymPhone}">
-				</td>
-			</tr>
-			<tr>
 				<th>관장 이름</th>
 				<td>
-					<input type="text" id="gymCoach" name="gymCoach" value="${gym.gymCoach}">
+					<input type="hidden" id="gymCoach" name="gymCoach" value="${gym.gymCoach}">${gym.gymCoach}
 				</td>
 			</tr>
 			<tr>
 				<th>관장 번호</th>
 				<td>
-					<input type="text" id="coachPhone" name="coachPhone" value="${gym.coachPhone}">
+					<input type="hidden" id="coachPhone" name="coachPhone" value="${gym.coachPhone}">${gym.coachPhone}
+				</td>
+			</tr>
+			<tr>
+				<th>체육관 번호</th>
+				<td>
+					<input type="text" id="gymPhone" name="gymPhone" value="${gym.gymPhone}">
 				</td>
 			</tr>
 			<tr>
@@ -95,13 +100,13 @@
 			<tr>
 				<th>체육관 주소</th>
 				<td>
-					<input type="text" id="gymAddress" name="gymAddress" value="${gym.gymAddress}" readonly>
+					<input type="text" id="gymAddress" name="gymAddress" style="width: 310px;" value="${gym.gymAddress}" readonly>
 				</td>
 			</tr>
 			<tr>
 				<th>체육관 상세주소</th>
 				<td>
-					<input type="text" id="gymDetailaddress" name="gymDetailaddress" value="${gym.gymDetailaddress}" >
+					<input type="text" id="gymDetailaddress" name="gymDetailaddress" style="width: 250px;" value="${gym.gymDetailaddress}" >
 				</td>
 			</tr>
 			<tr>
@@ -118,9 +123,9 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<button type="submit">회원가입</button>
+					<button type="submit">수정하기</button>
 					&emsp;
-					<button type="reset">초기화</button>
+					<button type="reset">원래대로</button>
 					&emsp;
 					<button type="button" onclick="javascript:history.back()">뒤로가기</button>
 				</td>

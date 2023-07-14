@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/memberDetail.css">
+	href="${pageContext.request.contextPath}/resources/css/member/memberDetail.css">
 
 </head>
 <body>

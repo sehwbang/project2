@@ -25,4 +25,6 @@ public interface GymService {
 
 	Gym getGymByUserId(String userId);
 
+	int updateCoachPhone(String userId, String memberPhone);
+
 }

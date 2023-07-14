@@ -11,7 +11,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp">
-      <jsp:param value="${gym.gymCoach}관장님 안녕하세요" name="title" />
+      <jsp:param value="관장 페이지" name="title" />
   	</jsp:include>
 
 <div id="nav2">

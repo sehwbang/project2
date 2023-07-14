@@ -1,17 +1,3 @@
-@font-face {
-    font-family: 'EF_watermelonSalad';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'RixMomsBlanketR';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/RixMomsBlanketR.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
 #container {
 	font-family: 'EF_watermelonSalad';
 	background-image: url("../../img/match/ring3.jpg");

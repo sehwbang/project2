@@ -55,15 +55,17 @@
 			<th>매치 수</th>
 			<td>${gym.matchCount}</td>
 		</tr>
+		<tr><td></td></tr>
+		<tr>
+			<td colspan="2" align="center">
+				<h3>상기의 정보변경은<br> 고객센터로 문의부탁드립니다 ☎</h3>
+			</td>
+		</tr>		
 	</table>
 		
 	<div style="width: 50px; float: left;"></div>
 		
 	<table class="container" style="float:right;" id="table2">
-		<tr>
-			<th>체육관 번호</th>
-			<td>${gym.gymPhone}</td>
-		</tr>
 		<tr>
 			<th>관장 이름</th>
 			<td>${gym.gymCoach}</td>
@@ -71,6 +73,10 @@
 		<tr>
 			<th>관장 번호</th>
 			<td>${gym.coachPhone}</td>
+		</tr>
+		<tr>
+			<th>체육관 번호</th>
+			<td>${gym.gymPhone}</td>
 		</tr>
 		<tr>
 			<th>체육관 우편번호</th>
@@ -87,7 +93,7 @@
 		<tr>
 			<th>은행명</th>
 			<c:if test="${gym.gymBank == null}">
-				<td>은행명을 입력해주세요</td>
+				<td style="color: red;"> ▶ 은행명을 입력해주세요</td>
 			</c:if>
 			<c:if test="${gym.gymBank != null}">
 				<td>${gym.gymBank}</td>
@@ -96,7 +102,7 @@
 		<tr>
 			<th>계좌</th>
 			<c:if test="${gym.gymAccount == null || gym.gymAccount == 0}">
-				<td>계좌번호를 입력해주세요</td>
+			<td style="color: red;"> ▶ 계좌번호를 입력해주세요</td>
 			</c:if>
 			<c:if test="${gym.gymAccount != null and gym.gymAccount != 0}">
 				<td>${gym.gymAccount}</td>

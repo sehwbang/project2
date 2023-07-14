@@ -6,24 +6,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet"
+   href="${pageContext.request.contextPath}/resources/css/manager/manager.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp">
-      <jsp:param value="관리자 페이지" name="title" />
+      <jsp:param value="빈체로/관리자" name="title" />
   	</jsp:include>
-
-<div id="nav2">
-	<div id="gym"><a href="${pageContext.request.contextPath}/manager/mnGymList.mn">공지사항</a></div>
-	<div id="gym"></div>
-	<div id="gym"><a href="${pageContext.request.contextPath}/manager/mnGymList.mn">체육관 정보조회</a></div>
-	<div id="gym"><a href="${pageContext.request.contextPath}/manager/mnMemberList.mn">회원 정보조회</a></div>
-</div>
-
-<div id="container">
+	<nav id="menuNav">
+		<button class="menuButton" type="button" onclick="notice()">공지사항</button>
+		<button class="menuButton" type="button" onclick="gymList()">체육관 조회</button>
+		<button class="menuButton" type="button" onclick="memberList()">회원 조회</button>
+	</nav>
 	
-</div>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	관리자 페이지 입니다 
+
+<script>
+	function notice() {
+		location.href="";
+	}
+	function gymList() {
+		location.href="${pageContext.request.contextPath}/manager/mnGymList.mn";
+	}
+	function memberList() {
+		location.href="${pageContext.request.contextPath}/manager/mnMemberList.mn";
+	}
+</script>
+
 </body>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </html>

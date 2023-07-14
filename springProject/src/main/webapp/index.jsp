@@ -1,34 +1,242 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
+<meta charset="UTF-8">
+<title>빈체로</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/index.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
+<c:if test="${not empty msg}">
+	<script type="text/javascript">
+		alert('${msg}');
+	</script>
+</c:if>
 </head>
+
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="홈페이지" name="title"/>
-</jsp:include>
-<div id="billboard">
-	<div>
-		<img src="${pageContext.request.contextPath}/resources/img/match2.png" alt="match2" width="1024px" height="346px">
-		<img src="${pageContext.request.contextPath}/resources/img/slogan1.png" alt="slogan1" width="1024px" height="346px">
-		<img src="${pageContext.request.contextPath}/resources/img/event.png" alt="event" width="1024px" height="346px">
-		<img src="${pageContext.request.contextPath}/resources/img/slogan3.png" alt="slogan3" width="1024px" height="346px">
-		<img src="${pageContext.request.contextPath}/resources/img/join.png" alt="join" width="1024px" height="346px">
-		<img src="${pageContext.request.contextPath}/resources/img/slogan4.png" alt="slogan4" width="1024px" height="346px">
-		<img src="${pageContext.request.contextPath}/resources/img/league.png" alt="league" width="1024px" height="346px">
-		<img src="${pageContext.request.contextPath}/resources/img/match1.png" alt="match1" width="1024px" height="346px">
-		<img src="${pageContext.request.contextPath}/resources/img/slogan2.png" alt="slogan2" width="1024px" height="346px">
-		<img src="${pageContext.request.contextPath}/resources/img/match2.png" alt="match2" width="1024px" height="346px">
+	<!-- Header -->
+	<div id="header">
+		<ul id="member">
+			<li><img
+				src="${pageContext.request.contextPath}/resources/img/index/menuIcon120.png"
+				alt="member" width="30px" height="30px">
+				<ul>
+					<c:if test="${empty loginMember}">
+						<li><a
+							href="${pageContext.request.contextPath}/member/GoLoginPage.me">로그인</a></li>
+					</c:if>
+					<c:if test="${not empty loginMember}">
+						<li id="loginName">${loginMember.userName}님
+							<hr>
+						</li>
+						<li><a
+							href="${pageContext.request.contextPath}/member/memberLogout.me">로그아웃</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/member/memberDetail.me?userId=${loginMember.userId}">마이페이지</a></li>
+						<c:choose>
+							<c:when test="${loginMember.userStatus == 2}">
+								<li><a
+									href="${pageContext.request.contextPath}/profile/profileUpdate.pr">프로필
+										수정</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a
+									href="${pageContext.request.contextPath}/profile/profileEnroll.pr">프로필
+										등록</a></li>
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${loginMember.userType eq 'admin'}">
+								<li><a
+									href="${pageContext.request.contextPath}/manager/mnMainPage.mn">관리자</a></li>
+							</c:when>
+							<c:when test="${loginMember.userType eq 'coach'}">
+								<li><a
+									href="${pageContext.request.contextPath}/gym/gymMainPage.gym">관장</a></li>
+							</c:when>
+						</c:choose>
+					</c:if>
+				</ul></li>
+			<li id="bell"><img
+				src="${pageContext.request.contextPath}/resources/img/index/bell.png"
+				alt="member" width="30px" height="30px">
+		</ul>
+		<!-- Logo -->
+		<a href="${pageContext.request.contextPath}"><img
+			src="${pageContext.request.contextPath}/resources/img/index/logo.png"
+			alt="logo" id="logo" width="400px" height="150px"></a>
+
+		<!-- Nav -->
+		<div id="menubar">
+			<nav>
+				<ul id="menu_list">
+					<li class="titlemenu"><a class="title"
+						href="${pageContext.request.contextPath}/match/matchList.ma"><h3>매칭</h3></a>
+						<ul class="submenu_list">
+							<li><a
+								href="${pageContext.request.contextPath}/match/matchReg.ma">매치
+									등록</a></li>
+							<li><a href="#">매치 찾기</a></li>
+						</ul></li>
+					<li class="titlemenu"><a class="title"
+						href="${pageContext.request.contextPath}/ranking/rankingList.ra"><h3>랭킹</h3></a></li>
+					<li class="titlemenu"><a class="title" href=""><h3>빈체로</h3></a>
+						<ul class="submenu_list">
+							<li><a
+								href="${pageContext.request.contextPath}/support/vincero.su">빈체로
+									소개</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/support/rule.su">룰
+									소개</a></li>
+							<li><a href="#">가맹 신청</a></li>
+						</ul></li>
+					<li class="titlemenu"><a class="title"
+						href="${pageContext.request.contextPath}/support/support.su"><h3>고객센터</h3></a>
+						<ul class="submenu_list">
+							<li><a href="#">자주묻는질문</a></li>
+							<li><a href="#">등등</a></li>
+						</ul></li>
+				</ul>
+			</nav>
+		</div>
 	</div>
-</div>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+	<!-- 사이드바 -->
+	<div class="sidebar">
+		<nav class="navbar">
+			<ul id="side__list">
+				<c:if test="${empty loginMember}">
+					<li><a
+						href="${pageContext.request.contextPath}/member/GoLoginPage.me">로그인</a>
+				</c:if>
+				<c:if test="${not empty loginMember}">
+					<li id="loginName">${loginMember.userName}님
+						<ul>
+							<li><a
+								href="${pageContext.request.contextPath}/member/memberLogout.me">로그아웃</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/member/memberDetail.me?userId=${loginMember.userId}">마이페이지</a></li>
+							<c:choose>
+								<c:when test="${loginMember.userStatus == 2}">
+									<li><a
+										href="${pageContext.request.contextPath}/profile/profileUpdate.pr">프로필
+											수정</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a
+										href="${pageContext.request.contextPath}/profile/profileEnroll.pr">프로필
+											등록</a></li>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${loginMember.userType eq 'admin'}">
+									<li><a
+										href="${pageContext.request.contextPath}/manager/mnMainPage.mn">관리자</a>
+										<ul class="third">
+											<li><a
+												href="${pageContext.request.contextPath}/gym/gymForm.gym?gymNo=${gym.gymNo}">공지사항</a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/gym/gymCalendar.gym">체육관
+													정보</a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/gym/gymView.gym">회원
+													정보</a></li>
+										</ul></li>
+								</c:when>
+								<c:when test="${loginMember.userType eq 'coach'}">
+									<li><a
+										href="${pageContext.request.contextPath}/gym/gymMainPage.gym">관장</a>
+										<ul class="third">
+											<li><a
+												href="${pageContext.request.contextPath}/gym/gymForm.gym?gymNo=${gym.gymNo}">나의
+													체육관 정보</a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/gym/gymCalendar.gym">일정
+													관리</a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/gym/gymView.gym">사용자
+													통계</a></li>
+										</ul></li>
+								</c:when>
+							</c:choose>
+						</ul>
+					</li>
+				</c:if>
+				<li id="side__side"><a class="subside"
+					href="${pageContext.request.contextPath}/match/matchList.ma">매칭</a>
+					<ul id="subside__list">
+						<li id="subside__side"><a
+							href="${pageContext.request.contextPath}/match/matchReg.ma">매치
+								등록</a></li>
+						<li id="subside__side"><a href="#">매치 찾기</a></li>
+					</ul></li>
+				<li id="side__side"><a class="subside"
+					href="${pageContext.request.contextPath}/ranking/rankingList.ra">랭킹</a></li>
+				<li id="side__side"><a class="subside" href="">빈체로</a>
+					<ul id="subside__list">
+						<li><a
+							href="${pageContext.request.contextPath}/support/vincero.su">빈체로
+								소개</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/support/rule.su">룰
+								소개</a></li>
+						<li><a href="#">가맹 신청</a></li>
+					</ul></li>
+				<li id="side__side"><a class="subside"
+					href="${pageContext.request.contextPath}/support/support.su">고객센터</a>
+					<ul id="subside__list">
+						<li id="subside__side"><a href="#">자주묻는질문</a></li>
+						<li id="subside__side"><a href="#">등등</a></li>
+					</ul></li>
+			</ul>
+		</nav>
+	</div>
+
+	<script>
+		window.onscroll = scrollF();
+	    
+	    function scrollF() {
+	    	if(document.body.scrollTop > 200 || document.documentElement.scrollTop > 200){
+	        	document.getElementById('navBar').style.top = '0';
+	        }else{
+	        	document.getElementById('navBar').style.top = '-200px';
+	        }
+	</script>
+
+	<!-- 팝업창 
+	<jsp:include page="/WEB-INF/views/popup/popup.jsp" />
+
+
+	<!-- 메인 이미지 -->
+	<div id="main">
+		<div id="billboard">
+			<div class="slide">
+				<img
+					src="${pageContext.request.contextPath}/resources/img/slogan2.png"
+					alt="slogan2"> <img
+					src="${pageContext.request.contextPath}/resources/img/slogan3.png"
+					alt="slogan3"> <img
+					src="${pageContext.request.contextPath}/resources/img/league.png"
+					alt="league"> <img
+					src="${pageContext.request.contextPath}/resources/img/match1.png"
+					alt="match1"> <img
+					src="${pageContext.request.contextPath}/resources/img/join.png"
+					alt="join">
+			</div>
+		</div>
+	</div>
+
+
+
 </body>
 </html>
+
+<!-- footer영역 -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

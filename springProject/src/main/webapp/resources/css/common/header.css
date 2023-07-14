@@ -1,0 +1,258 @@
+
+/* 전체 반영 css*/
+@font-face {
+	font-family: 'KIMM_Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+* {
+	padding: 0;
+	font-family: 'KIMM_Bold';
+}
+
+ul li {
+	list-style: none;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+
+
+
+/* 헤더 */
+#header {
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+	justify-content: center;
+	padding-bottom: 15%;
+}
+
+#logo {
+	float: left;
+}
+
+.bar {
+	float: right;
+	width: 30%;
+	padding: 10px;
+	width: 600px;
+}
+
+.bar nav>ul>li {
+	padding: 0 20px;
+}
+
+.member {
+	position: relative;
+	cursor: pointer;
+}
+
+.member>ul {
+	width: 150px;
+	display: none;
+	position: absolute;
+	padding: 10px;
+	right:0;
+	z-index: 2;
+}
+
+.member>ul>li {
+	padding: 7px;
+}
+
+.member>ul>li>a {
+	color: white;
+	text-align: center;
+}
+
+.member:hover ul {
+	display: block;
+	border-radius: 5px;
+	background-color: #333333e5;
+	padding-top: 20px;
+}
+
+.member>ul>li>a:hover {
+	color: #F2A922;
+	font-weight: bold;
+}
+
+#loginName {
+	color: white;
+	padding: 10px;
+}
+
+.menubar {
+	transition: 0.3s ease-in;
+	position: relative;
+}
+
+.menubar a {
+	color: black;
+}
+
+.menubar {
+	margin: 0 auto;
+	margin-bottom: 5%;
+}
+
+#menu_list {
+	display: table;
+	list-style-type: none;
+	width: 100%;
+	text-align: center;
+}
+
+#menu_menu {
+	display: table-cell;
+	vertical-align: middle;
+	height: 50px;
+}
+
+#submenu_list {
+	margin-top: 20px;
+}
+
+.menubar>ul>li {
+	position: relative;
+}
+
+.menubar>ul>li ul {
+	width: 100%;
+	opacity: 0;
+	position: absolute;
+	transition: 0.3s 0.2s;
+}
+
+.menubar>ul>li ul li {
+	white-space: nowrap;
+	padding: 15px;
+}
+
+.menubar>ul>li:hover ul {
+	opacity: 1;
+}
+
+.menubar>ul>li>ul>li>a:hover {
+	color: orange;
+}
+
+.menubar>ul>li>ul>li {
+	padding: 15px;
+}
+
+.sidebar {
+	position: fixed; /* 스크롤을 따라오도록 지정 */
+	background-color: black;
+	width: 120px;
+	z-index: 2;
+	border-radius: 15px;
+	top: 50%;
+	left: 1%;
+	text-align: center;
+}
+
+.sidebar nav>ul>li>ul {
+	display: none;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+/* 모든 메뉴의 a에 속성값 부여 */
+.sidebar nav>ul>li>a {
+	display: block;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* 자식의 position이 absolute일 때 자식을 영역 안에 가두어 준다 */
+.sidebar nav>ul>li {
+	position: relative;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+/* 모든 메뉴가 마우스 인식 시 반응 */
+.sidebar nav>ul>li:hover {
+	background-color: #c8220f;
+}
+
+/* 1차 메뉴의 항목이 마우스 인식 시에 2차 메뉴 등장 */
+.sidebar nav>ul>li:hover ul {
+	display: block;
+	position: absolute;
+	background-color: #888;
+	top: 0; /* 2차 메뉴의 상단을 1차 메뉴의 상단에 고정 */
+	left: 100%; /* 2차 메뉴를 1차 메뉴의 너비만큼 이동 */
+	width: 100%; /* 1차 메뉴의 너비를 상속 */
+	z-index: 2;
+	text-align: center;
+}
+
+.sidebar nav>ul>li>ul>li:hover {
+	background-color: #c8220f;
+}
+
+.sidebar nav>ul>li>ul>li>ul>li:hover {
+	background-color: #c8220f;
+}
+
+.sidebar nav>ul>li>ul>li a {
+	color: white;
+	font-weight: bold;
+}
+
+.sidebar nav>ul>li>ul>li {
+	position: relative;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+/* 3차 사이드바 메뉴 */
+.sidebar nav>ul>li>ul>li .third {
+	display: none;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.sidebar nav>ul>li>ul>li>ul>li {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.sidebar nav>ul>li>ul>li:hover ul {
+	display: block;
+	position: absolute;
+	background-color: #888;
+	top: 0; /* 2차 메뉴의 상단을 1차 메뉴의 상단에 고정 */
+	left: 100%; /* 2차 메뉴를 1차 메뉴의 너비만큼 이동 */
+	width: 100%; /* 1차 메뉴의 너비를 상속 */
+	z-index: 2;
+	text-align: center;
+}
+
+.sidebar #loginName {
+	color: white;
+	border-bottom: 2px solid white;
+	padding: 15px;
+}
+
+input[type=password] {
+	font-family: '맑은 고딕', 'malgun gothic', '돋움', Dotum, sans-serif;
+}
+
+input[type=password]::placeholder {
+	font-family: '기존 적용 폰트';
+}

@@ -9,14 +9,14 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/memberDetail.css">
+	href="${pageContext.request.contextPath}/resources/css/member/member/memberDetail.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
-<body>
+<body id="">
 
 	<div id="container">
 		<form

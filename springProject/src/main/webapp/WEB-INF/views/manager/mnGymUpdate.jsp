@@ -10,7 +10,7 @@
 <script
    src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>   
 	<jsp:include page="/WEB-INF/views/common/header.jsp">
-      <jsp:param value="no.${gym.gymNo}&ensp;체육관의 정보 수정" name="title" />
+      <jsp:param value="no.${gym.gymNo} 체육관 정보 수정" name="title" />
   	</jsp:include>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">

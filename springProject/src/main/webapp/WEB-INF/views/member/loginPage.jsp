@@ -7,20 +7,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/login.css">
 <c:if test="${not empty msg}">
 	<script type="text/javascript">
 		alert('${msg}');
 	</script>
 </c:if>
+	<jsp:include page="/WEB-INF/views/common/header.jsp">
+		<jsp:param value="빈체로 - 로그인" name="title" />
+	</jsp:include>
 </head>
 
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp">
-		<jsp:param value="로그인" name="title" />
-	</jsp:include>
-
-	<div class="header" id="login-total">
+<session id="loginPage">
+	<div id="login-total">
 		<div class="container">
 			<form id="login-form"
 				action="${pageContext.request.contextPath}/member/memberLogin.me"
@@ -118,7 +118,8 @@
 
 		</div>
 	</div>
-
+</session>
+</body>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	<script type="text/javascript">
@@ -156,5 +157,3 @@
 	        }
 	    }
 	</script>
-</body>
-</html>

@@ -34,18 +34,15 @@ table {
 th {
 	width: 30%;
 	border: none;
+	text-align: center;
+	background-color: #eaeaea;
+	color: #333;
 }
 
 td {
 	width: 35%;
 	padding: 15px;
 	border: none;
-}
-
-th {
-	text-align: center;
-	background-color: #eaeaea;
-	color: #333;
 }
 
 #table2 > th {

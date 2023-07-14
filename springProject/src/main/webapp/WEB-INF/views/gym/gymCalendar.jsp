@@ -31,6 +31,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/gym/calendar.css?v=<%=System.currentTimeMillis()%>">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
@@ -98,6 +99,7 @@
 </div>
 <jsp:include page="/WEB-INF/views/gym/gymSchedule.jsp"/>
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 <script type="text/javascript">
 	function changeDate() {

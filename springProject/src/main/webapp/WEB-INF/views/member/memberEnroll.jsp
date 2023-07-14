@@ -8,17 +8,18 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/member.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	href="${pageContext.request.contextPath}/resources/css/member/member.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <!--  <script src="${pageContext.request.contextPath}/resources/js/member.js"></script> -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value="빈체로 - 회원가입" name="title" />
+</jsp:include>
 </head>
-<body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp">
-		<jsp:param value="회원가입" name="title" />
-	</jsp:include>
 
+<body>
 
 	<form action="/spring/member/memberEnroll.me" method="post" name="pass">
 		<h1>회원가입</h1>
@@ -149,6 +150,8 @@
 		</div>
 	</form>
 </body>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script type="text/javascript">
 
 let idCheck = false;
@@ -494,8 +497,6 @@ document.getElementById("userPw").addEventListener("focusout", () => {
 	}
 
 
-	
-
 	function idChecka() {
 	  $.ajax({
 	       url: "${pageContext.request.contextPath}/member/id.ch",
@@ -561,11 +562,3 @@ document.getElementById("userPw").addEventListener("focusout", () => {
 	regFrm.idbtncheck.value = "idUncheck";
 	}
 </script>
-
-
-<div class="footer" align="center" style="padding: 50px;">
-
-	<p>&copy; 2023 VINCERO. All rights reserved.</p>
-</div>
-
-</html>

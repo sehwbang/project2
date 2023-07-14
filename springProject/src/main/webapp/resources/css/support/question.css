@@ -1,16 +1,9 @@
-@font-face {
-    font-family: 'EF_watermelonSalad';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
 
 #container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	font-family: 'EF_watermelonSalad';
 }
 
 h1 {
@@ -39,7 +32,6 @@ h2 {
 	height: 70px;
 	border-width: 0px;
 	border-radius: 30px;
-	font-family: 'EF_watermelonSalad';
 }
 
 #questionButton button:hover {
@@ -55,7 +47,6 @@ h2 {
 }
 #listTable th {
 	width: 150px;
-	font-family: 'EF_watermelonSalad';
 	font-size: 20px;
 	font-weight: normal;
 	height: 50px;
@@ -99,7 +90,6 @@ nav li {
 	height: 70px;
 	border-width: 0px;
 	border-radius: 30px;
-	font-family: 'EF_watermelonSalad';
 }
 
 #listButton button:hover {
@@ -126,7 +116,6 @@ nav li {
 	height: 70px;
 	border-width: 0px;
 	border-radius: 30px;
-	font-family: 'EF_watermelonSalad';
 	
 }
 
@@ -167,7 +156,6 @@ nav li {
 #search select, input {
 	margin-right: 5px;
 	padding: 6px;
-	font-family: 'EF_watermelonSalad';
 }
 
 #search 

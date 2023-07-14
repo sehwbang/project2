@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/memberNewpw.css">
+	href="${pageContext.request.contextPath}/resources/css/member/memberNewpw.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member.js"></script>

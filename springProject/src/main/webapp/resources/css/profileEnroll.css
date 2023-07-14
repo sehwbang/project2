@@ -1,49 +1,40 @@
-#file{
-    display: none;
-}
-.container {
-	width: 600px;
-	margin: 0 auto;
-	font-family: 'Arial', sans-serif;
-	background-color: #f7f7f7;
-	border-radius: 4px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
+/*
 .table1{
-	width: 565px;
+	width: 60%;
+	border-collapse: collapse;
 }
 .table2 {
-	width: 565px;
+	width: 60%;
 }
 #win {
-    width: 35px;
+    width: 60%;
 }
 #lose {
     width: 35px;
 }
-input[id^="warn"] {
+#profileEnroll input[id^="warn"] {
     width: 40px; 
 }
 #level{
     width: 55px;
 }
-h1 {
+#profileEnroll h1 {
 	text-align: center;
 	padding: 50px;
 }
 
-table {
+#profileEnroll table {
 	text-align: center;
 	border-collapse: collapse;
 }
 
-th {
+#profileEnroll th {
 	text-align: center;
 	background-color: #eaeaea;
 	color: #333;
 }
 
-button{
+#profileEnroll button{
 	padding: 8px 16px;
     background-color: #c8220f;
     color: #fff;
@@ -53,11 +44,11 @@ button{
     transition: background-color 0.3s;
 }
 
-input[type="text"]:focus, input[type="password"]:focus, input[type="reset"]:focus {
+#profileEnroll input[type="text"]:focus, input[type="password"]:focus, input[type="reset"]:focus {
 	border-color: #c8220f;
 }
 
-input[type="button"] {
+#profileEnroll input[type="button"] {
 	padding: 8px 16px;
 	background-color: #c8220f;
 	color: #fff;
@@ -67,7 +58,7 @@ input[type="button"] {
 	transition: background-color 0.3s;
 }
 
-input[type="button"]:hover {
+#profileEnroll input[type="button"]:hover {
 	background-color: #c8220f;
 }
 
@@ -76,7 +67,6 @@ input[type="button"]:hover {
 }
 
 .message {
-	font-style: italic;
 	color: #ff0000;
 }
 
@@ -98,7 +88,7 @@ input[type="button"]:hover {
 	outline: none;
 	transition: border-color 0.3s;
 }
-textarea {
+#profileEnroll textarea {
     width: 549px;
     height: 150px;
     min-width: 549px;
@@ -108,7 +98,7 @@ textarea {
     overflow: auto;
 }
 
-button[type="submit"], button[type="reset"], button[type="goBack()"] {
+#profileEnroll button[type="submit"], button[type="reset"], button[type="goBack()"] {
 	padding: 10px 20px;
 	background-color: #c8220f;
 	color: #fff;
@@ -124,6 +114,19 @@ button[type="submit"], button[type="reset"], button[type="goBack()"] {
 	width : 750px;
 	height:200px;
 }
-warn{
+#profileEnroll warn{
 	text-align: center;
+}
+*/
+
+#file{
+    display: none;
+}
+
+.profileEnroll {
+	width: 600px;
+	margin: 0 auto;
+	background-color: #f7f7f7;
+	border-radius: 4px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }

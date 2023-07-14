@@ -59,5 +59,10 @@ public class GymServiceImpl implements GymService {
 		return gymDao.getGymByUserId(userId);
 	}
 
+	@Override
+	public int updateCoachPhone(String userId, String memberPhone) {
+		return gymDao.updateCoachPhone(userId, memberPhone);
+	}
+
 
 }

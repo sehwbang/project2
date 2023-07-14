@@ -444,6 +444,21 @@ public class SupportController {
 			return responseText;
 		}
 		
+		@GetMapping("/privacyPolicy.su")
+		   public void privacyPolicy() {
+		   }
+
+		   @GetMapping("/privacyStatement.su")
+		   public void privacyStatement() {
+		   }
+
+		   @GetMapping("/legalNotice.su")
+		   public void legalNotice() {
+		   }
+		   
+		   @GetMapping("/rule.su")
+		   public void rule() {
+		   }
 
 		
 

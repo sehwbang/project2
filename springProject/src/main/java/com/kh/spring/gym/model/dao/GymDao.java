@@ -27,4 +27,6 @@ public interface GymDao {
 	int myGymUpdate(Gym gym);
 
 	Gym getGymByUserId(String userId);
+
+	int updateCoachPhone(String userId, String memberPhone);
 }
